@@ -77,6 +77,8 @@ Java Concurrency in Practice | Brian Goetz etc | Java | 9 | Classic Java Concurr
 Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but still classic Java Concurrency book, (must) read |
 [Java Memory Model Spec] | JSE | Java | Dont ask | Its the spec, must read |
 [JMM Pragmatics] | Shipilev | Java | 9 | Very (very) good but requires a lot of time to read and understand |
+[Tenes Developer JMM Cookbook] | Tene | ? | Not fully read |
+[Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
 
 # Videos
 
@@ -126,3 +128,5 @@ Name | Recorded At | Speaker | Language/Platform | Rating | Description |
 [atomic<> Weapons, 1 of 2]: https://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Herb-Sutter-atomic-Weapons-1-of-2
 [atomic<> Weapons, 2 of 2]: https://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Herb-Sutter-atomic-Weapons-2-of-2
 [JMM Pragmatics]: https://shipilev.net/blog/2014/jmm-pragmatics/
+[Tenes Developer JMM Cookbook]: http://giltene.github.io/DeveloperJMMCookbook/
+[Doug Leas JMM Cookbook]: http://g.oswego.edu/dl/jmm/cookbook.html

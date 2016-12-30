@@ -1,5 +1,5 @@
 Networking
-===========
+==========
 
 **Under construction - currently only brainstorming**
 
@@ -11,7 +11,15 @@ Networking
 
 ## TCP
 
+* [UDP vs TCP]
+* [Great TCP-vs-UDP Debate]
+* About TCP reliability
+   + [TCP is not reliable](http://blog.h2o.ai/2013/08/tcp-is-not-reliable/)
+   + [Ultimate SO_LINGER page](https://blog.netherlabs.nl/articles/2009/01/18/the-ultimate-so_linger-page-or-why-is-my-tcp-not-reliable)
+
 ## UDP
+
+* [Great TCP-vs-UDP Debate]
 
 ## SCTP
 
@@ -24,6 +32,14 @@ Networking
 ## HTTP WS
 
 ## AMQP
+
+# Design
+
+* [64 Network DO’s and DON’Ts]
+
+# Programming
+
+* [Network Programming]
 
 # Concepts
 
@@ -46,3 +62,8 @@ Networking
 ## iwconfig
 
 ## netstat
+
+[UDP vs TCP]: https://news.ycombinator.com/item?id=13272610
+[Great TCP-vs-UDP Debate]: http://ithare.com/64-network-dos-and-donts-for-game-engines-part-iv-great-tcp-vs-udp-debate/
+[Network Programming]: http://ithare.com/network-programming-socket-peculiarities-threads-and-testing/
+[64 Network DO’s and DON’Ts]: http://ithare.com/64-network-dos-and-donts-for-game-engine-developers-part-i-client-side/
