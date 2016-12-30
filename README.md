@@ -3,6 +3,10 @@
 Knowhow collected over the last years
 
 * [Concurrency](concurrency.md)
-* [Distributed Systems](distributedsys.html)
-* [Performance](performance.html)
-* [Fault Tolerance](faulttolerance.html)
+* [Distributed Systems](distributedsys.md)
+* [Performance](performance.md)
+* [Fault Tolerance](faulttolerance.md)
+* [Java](java.md)
+* [JVM](jvm.md)
+* [OS](os.md)
+* [Linux](linux.md)
