@@ -5,10 +5,11 @@ Knowhow collected over the last years.
 **Under construction**
 
 * [Concurrency](concurrency/concurrency.md)
-* [Distributed Systems](distributedsys.md)
-* [Performance](performance.md)
-* [Fault Tolerance](faulttolerance.md)
-* [Java](java.md)
-* [JVM](jvm.md)
-* [OS](os.md)
-* [Linux](linux.md)
+* [Distributed](distributed/distributed.md)
+* [Performance](performance/performance.md)
+* [Fault Tolerance](faulttolerance/faulttolerance.md)
+* [Java](java/java.md)
+   + [JVM](java/jvm.md)
+* [OS](os/os.md)
+   + [Linux](os/linux.md)
+* [Networking](networking/networking.md)

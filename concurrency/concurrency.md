@@ -26,6 +26,11 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * Locking (Mutex, Semaphore)
 * Lock free
 
+# Java
+
+* Final keyword semantics
+* [Dealing with InterruptedException](https://www.ibm.com/developerworks/library/j-jtp05236/)
+
 # People to learn from
 
 * Gil Tene, Nitsan Wakart, Cliff Click, basically everyone from [Azul Systems](https://www.azul.com/)
