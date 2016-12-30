@@ -3,6 +3,11 @@ Concurrency
 
 **Under construction - currently only brainstorming**
 
+* [Problems](#problems)
+* [Solutions](#solutions)
+* [Literature](#literature)
+* [Videos](#videos)
+
 # Problems
 
 * Mutual Exclusion (Critical Section)
@@ -51,6 +56,10 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * Disruptor
 * Fast Flow
 * Aeron
+* Netty
+* Vertx
+* RabbitMQ
+* NodeJS?
 * Akka
 * Erlang, Clojure, Haskell
 * Learn how hardware works - its super parallel
@@ -66,7 +75,7 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * [Cliff Clicks Blog](http://www.cliffc.org/blog/)
 * [Joe Armstrongs Blog](http://armstrongonsoftware.blogspot.co.at/2006/08/concurrency-is-easy.html)
 
-# Books, Literature, etc
+# Literature
 
 Name | Author | Language/Platform | Rating | Description |
 -----|--------|-------------------|--------|-------------|
@@ -82,7 +91,6 @@ Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but s
 
 # Videos
 
-Videos are rated from 1-10, 10 is best, 
 Most videos have strong focus on performance because concurrency and performance are strongly related
 
 Name | Recorded At | Speaker | Language/Platform | Rating | Description |

@@ -13,3 +13,7 @@ Knowhow collected over the last years.
    + [Linux](os/linux.md)
 * [Hardware](hardware/hardware.md)
    + [Raspberry](hardware/raspberry.md)
+
+# Legend
+
+* Ratings are from 1 to 10, 10 is best
