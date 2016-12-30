@@ -1,6 +1,8 @@
 # Know How
 
-Knowhow collected over the last years.
+This repository collects stuff i am most interested in. It should become my big reference book.
+
+Everyone is highly welcome to contribute/improve/correct things.
 
 * [Concurrency](concurrency/concurrency.md)
 * [Distributed](distributed/distributed.md)
@@ -11,6 +13,7 @@ Knowhow collected over the last years.
    + [JVM](java/jvm.md)
 * [OS](os/os.md)
    + [Linux](os/linux.md)
+      + [Docker](os/linux_docker.md)
 * [Hardware](hardware/hardware.md)
    + [Raspberry](hardware/raspberry.md)
 
