@@ -3,6 +3,8 @@ Docker Linux
 
 Running docker on linux.
 
+* http://phusion.github.io/baseimage-docker/#intro
+
 # Use cases
 
 ## Container lifecylce
@@ -41,3 +43,9 @@ pi@raspberrypi:~ $ docker ps -q
 39242156c56b
 pi@raspberrypi:~ $ docker attach 39242156c56b
 ```
+
+# Books
+
+Name | Author | Rating | Description |
+-----|--------|--------|-------------|
+The Docker Book: Containerization is the new virtualization | James Turnbull | 8 | First book i read about docker, i liked it |

@@ -12,11 +12,12 @@ Performance
 
 ## Howto measure
 
-* Coordinated Omission
+* Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
 * Constant rate
 * Throughput at given latency
 * Latency at given throughput
-* Tooling: tcpkali, gatling, wrk
+
+See [Tooling](#tooling)
 
 # Typical performance numbers
 
@@ -89,6 +90,14 @@ Performance
 * Spatial locality
 * Temporal locality
 
+## Tooling
+
+* [JMH]
+* [Gatling]
+* [wrk2](https://github.com/giltene/wrk2)
+* [tcpkali](https://github.com/machinezone/tcpkali/blob/master/doc/tcpkali.man.md)
+* [jrt-socket-response-tool](https://www.azul.com/products/open-source-tools/jrt-socket-response-tool/)
+
 # People to learn from
 
 * Gil Tene, Nitsan Wakart, Cliff Click, basically everyone from [Azul Systems](https://www.azul.com/)
@@ -114,3 +123,7 @@ Performance
 
 # Videos
 
+[JMH]: http://openjdk.java.net/projects/code-tools/jmh/
+[Gatling]: http://gatling.io/
+[CO_USER_GROUP]: https://groups.google.com/forum/#!msg/mechanical-sympathy/icNZJejUHfE/BfDekfBEs_sJ
+[CO_PDF]: https://www.azul.com/files/HowNotToMeasureLatency_LLSummit_NYC_12Nov2013.pdf

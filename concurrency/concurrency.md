@@ -86,7 +86,7 @@ Java Concurrency in Practice | Brian Goetz etc | Java | 9 | Classic Java Concurr
 Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but still classic Java Concurrency book, (must) read |
 [Java Memory Model Spec] | JSE | Java | Dont ask | Its the spec, must read |
 [JMM Pragmatics] | Shipilev | Java | 9 | Very (very) good but requires a lot of time to read and understand |
-[Tenes Developer JMM Cookbook] | Tene | ? | Not fully read |
+[Tenes Developer JMM Cookbook] | Tene | - | Very practical, boils done to one simple matrix |
 [Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
 
 # Videos

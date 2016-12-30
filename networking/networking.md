@@ -13,9 +13,10 @@ Networking
 
 * [UDP vs TCP]
 * [Great TCP-vs-UDP Debate]
-* About TCP reliability
+* TCP reliability
    + [TCP is not reliable](http://blog.h2o.ai/2013/08/tcp-is-not-reliable/)
    + [Ultimate SO_LINGER page](https://blog.netherlabs.nl/articles/2009/01/18/the-ultimate-so_linger-page-or-why-is-my-tcp-not-reliable)
+* [About TIME-WAIT state](https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux.html#about-time-wait-state)   
 
 ## UDP
 
