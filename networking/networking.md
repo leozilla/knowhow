@@ -1,7 +1,7 @@
 Networking
 ==========
 
-**Under construction - currently only brainstorming**
+**Under construction - currently mostly brainstorming**
 
 # Protocols
 

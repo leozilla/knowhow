@@ -1,7 +1,7 @@
 Performance
 ===========
 
-**Under construction - currently only brainstorming**
+**Under construction - currently mostly brainstorming**
 
 # Performance metrics
 
@@ -12,12 +12,22 @@ Performance
 
 ## Howto measure
 
-* Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
 * Constant rate
 * Throughput at given latency
 * Latency at given throughput
+* [Latency for a set Throughput](https://vanilla-java.github.io/2016/07/20/Latency-for-a-set-Throughput.html)
+* Pitfalls
+   + Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
+   + [Why don't I get the throughput I benchmarked?](https://vanilla-java.github.io/2016/07/23/Why-dont-I-get-the-throughput-I-benchmarked.html)
 
 See [Tooling](#tooling)
+
+# Design
+
+* Batching
+   + [Batching-and-Low-Latency](https://vanilla-java.github.io/2016/07/09/Batching-and-Low-Latency.html)
+   + [How-can-batching-requests-actually-reduce-latency](http://highscalability.com/blog/2013/12/4/how-can-batching-requests-actually-reduce-latency.html)
+   + [Smart batching](https://mechanical-sympathy.blogspot.co.at/2011/10/smart-batching.html)
 
 # Typical performance numbers
 

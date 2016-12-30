@@ -1,7 +1,7 @@
 Concurrency
 ===========
 
-**Under construction - currently only brainstorming**
+**Under construction - currently mostly brainstorming**
 
 * [Problems](#problems)
 * [Solutions](#solutions)
