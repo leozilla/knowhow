@@ -4,7 +4,7 @@ Knowhow collected over the last years.
 
 **Under construction**
 
-* [Concurrency](concurrency.md)
+* [Concurrency](concurrency/concurrency.md)
 * [Distributed Systems](distributedsys.md)
 * [Performance](performance.md)
 * [Fault Tolerance](faulttolerance.md)
