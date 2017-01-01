@@ -145,15 +145,22 @@ https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explana
 
 # Videos
 
-Name | Recorded | Speaker | Rating | Description |
------| ---------|---------|--------|-------------|
-[How NOT to Measure Latency] | Strangeloop 2014 | Tene (Azul) | 10 | Must watch! |
-[LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | 9 | Classic one about the Disruptor |
-[Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | - | Watched long ago, but think it was good |
-[Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | 8 | - |
-[Taming the 9s] | Strangeloop 2014 | Weisberg (VoltDB) | - | - |
-[When to OS gets in the way] | Strangeloop 2015 | Price (LMAX) | 9 | Explains importance of thread pinning etc |  
-Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.com/watch?v=MC1EKLQ2Wmg&t=4s | Goto 2012 | Thompson | 8 | Clears up some common misconceptions about HW |
+Name | Recorded | Speaker | Platform | Rating | Description |
+-----| ---------|---------|----------|--------|-------------|
+[How NOT to Measure Latency] | Strangeloop 2014 | Tene (Azul) | - | 10 | Must watch! |
+[LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
+[Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
+[Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | - | 8 | - |
+[Taming the 9s] | Strangeloop 2014 | Weisberg (VoltDB) | Java/C++ | - | - |
+[When to OS gets in the way] | Strangeloop 2015 | Price (LMAX) | Java/OS/HW | 9 | Explains importance of thread pinning etc |  
+Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.com/watch?v=MC1EKLQ2Wmg&t=4s | Goto 2012 | Thompson | - | 8 | Clears up some common misconceptions about HW |
+[JVM Profiling pitfalls] | - | Nitsan Wakart | Java | 9 | Getting deep into profiling |
+[Performance Testing Java Applications] | Devoxx UK 2013 | Thompson | Java | 9 | Java Devs should watch this |
+[A Crash Course in Modern Hardware] | Devoxx | Cliff Click | HW,OS,JVM,Java | 8 | Really a crash course but still quite good |
+[CPU caches and why you care] | code::dive conference 2014 | Scott Meyers | HW,C++ | 9 | Classic one about caches, must watch |
+[Deep Dive Performance] | ? | Nitsan Wakart | Java | 6 | 3 talks - some good some not so good |
+[The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 9 | Nice deep dive |
+[CON1517 An Introduction to JVM Performance] | JavaOne 2015 | Rafael Winterhalter | Java | 9 | Very good and practical |
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
@@ -163,6 +170,13 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Nanotrusting the Nanotime]: https://shipilev.net/blog/2014/nanotrusting-nanotime/
 [Bad Concurrency]: http://bad-concurrency.blogspot.co.at/
 [When to OS gets in the way]: https://www.youtube.com/watch?v=-6nrhSdu--s
+[JVM Profiling pitfalls]: https://www.youtube.com/watch?v=pXV4pY42FtM&t=2880s
+[Performance Testing Java Applications]: https://www.youtube.com/watch?v=1DuMvpwWHH4&t=1s
+[A Crash Course in Modern Hardware]: https://www.youtube.com/watch?v=OFgxAFdxYAQ
+[CPU caches and why you care]: https://www.youtube.com/watch?v=WDIkqP4JbkE
+[Deep Dive Performance]: https://www.youtube.com/watch?v=1Uc3M9YK5Tg&t
+[The Illusion of Execution]: https://www.youtube.com/watch?v=rzuLbvT5354
+[CON1517 An Introduction to JVM Performance]: https://www.youtube.com/watch?v=q8-10v15sZE&t
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
