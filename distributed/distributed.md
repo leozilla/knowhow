@@ -20,6 +20,7 @@ Distributed
 
 * Network partitions = network link misconfiguration, application pauses by GC etc
 * RPC = CORBA, DCOM, .NET Remoting, gRPC, Thrift, Finagle
+* CRDTs
 
 ## Verification
 
@@ -32,6 +33,10 @@ Distributed
 ## ACID
 
 ## BASE
+
+## CQRS and Event Sourcing
+
+* Akka Persistence
 
 ## Atomic Commitment and Consensus
 
@@ -50,6 +55,7 @@ Distributed
  * Leslie Lamport - no comment
  * The Erlang Team (Joe Armstrong etc)
  * The Akka Team (Boner, Kuhn, Klang)
+ * Pat Helland (all his papers are superb)
  * Aphyr
  * Peter Bailis
  * Caitie McCaffrey
@@ -66,7 +72,12 @@ https://github.com/aphyr/distsys-class | Aphyr | - | 8+ | Aphyr's DS class |
 
 # Videos
 
-* Protocols of Interaction - https://www.infoq.com/presentations/protocols-microservices
+Name | Recorded At | Speaker | Language/Platform | Rating | Description |
+-----|-------------|---------|-------------------|--------|-------------|
+Protocols of Interaction (https://www.infoq.com/presentations/protocols-microservices) | QCon London 2015 | Todd Montgomery | - | 9 | - | 
+CRDTs Illustrated (https://www.youtube.com/watch?v=9xFfOhasiOE) | Strangeloop 2015 | Engelen | - | 8+ | Good intro to CRDTs |   
+Transactions: myths, surprises and opportunities (https://www.youtube.com/watch?v=5ZjhNTM8XU8) | Strangeloop 2015 | Kleppmann | - | 9 | Good overview and entertaining |
+The language of the system (https://www.youtube.com/watch?v=ROor6_NGIWU&t=792s) | 2012 | Hickey | Clojure | 9 | About systems integration |
 
 [There is No Now]: https://queue.acm.org/detail.cfm?id=2745385
 [What we talk about when we talk about distributed systems]: http://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html

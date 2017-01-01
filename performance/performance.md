@@ -152,6 +152,8 @@ Name | Recorded | Speaker | Rating | Description |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | - | Watched long ago, but think it was good |
 [Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | 8 | - |
 [Taming the 9s] | Strangeloop 2014 | Weisberg (VoltDB) | - | - |
+[When to OS gets in the way] | Strangeloop 2015 | Price (LMAX) | 9 | Explains importance of thread pinning etc |  
+Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.com/watch?v=MC1EKLQ2Wmg&t=4s | Goto 2012 | Thompson | 8 | Clears up some common misconceptions about HW |
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
@@ -160,6 +162,7 @@ Name | Recorded | Speaker | Rating | Description |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency]: https://www.infoq.com/presentations/LMAX
 [Nanotrusting the Nanotime]: https://shipilev.net/blog/2014/nanotrusting-nanotime/
 [Bad Concurrency]: http://bad-concurrency.blogspot.co.at/
+[When to OS gets in the way]: https://www.youtube.com/watch?v=-6nrhSdu--s
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
