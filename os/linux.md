@@ -1,6 +1,10 @@
 Linux
 =====
 
+# Readings
+
+* https://lwn.net/
+
 # Booting
 
 * fu*ked up grub? -> [bootrepair](https://help.ubuntu.com/community/Boot-Repair)
@@ -28,6 +32,8 @@ Linux
 ## dh
 
 ## tar
+
+# taskset
 
 ## Networking
 

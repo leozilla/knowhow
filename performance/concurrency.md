@@ -39,6 +39,7 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 # People to learn from
 
 * Gil Tene, Nitsan Wakart, Cliff Click, basically everyone from [Azul Systems](https://www.azul.com/)
+* Lamport, Hoare, Knuth, Dijkstra
 * Martin Thomson
 * Doug Lea
 * Brian Goetz
@@ -88,6 +89,7 @@ Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but s
 [JMM Pragmatics] | Shipilev | Java | 9 | Very (very) good but requires a lot of time to read and understand |
 [Tenes Developer JMM Cookbook] | Tene | - | Very practical, boils done to one simple matrix |
 [Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
+http://www.azulsystems.com/blog/cliff/2010-01-09-biased-locking | Cliff Click | Java | 9 | If you want to know how biased locking actual works |
 
 # Videos
 

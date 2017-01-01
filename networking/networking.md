@@ -9,6 +9,11 @@ Networking
 
 ## IP
 
+```bash
+# Discover IP addresses in certain subnet
+$ nmap 10.0.0.0/24
+```
+
 ## TCP
 
 * [UDP vs TCP]

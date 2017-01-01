@@ -44,3 +44,30 @@ Distributed
 ### Raft
 
 ### ZAB
+
+# People to learn from
+
+ * Leslie Lamport - no comment
+ * The Erlang Team (Joe Armstrong etc)
+ * The Akka Team (Boner, Kuhn, Klang)
+ * Aphyr
+ * Peter Bailis
+ * Caitie McCaffrey
+ * Martin Kleppmann
+
+# Literature
+
+Name | Author | Platform | Rating | Description |
+-----|--------|----------|--------|-------------|
+[There is No Now] | Justin Sheehy | - | 10 | Time in distributed systesm - you know |
+[What we talk about when we talk about distributed systems] | - | - | - | - |
+https://github.com/aphyr/distsys-class | Aphyr | - | 8+ | Aphyr's DS class |
+[PBS or How eventual is eventual consistency] | Bailis | - | 10 | Finally something practical about EC | 
+
+# Videos
+
+* Protocols of Interaction - https://www.infoq.com/presentations/protocols-microservices
+
+[There is No Now]: https://queue.acm.org/detail.cfm?id=2745385
+[What we talk about when we talk about distributed systems]: http://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html
+[PBS or How eventual is eventual consistency]: http://pbs.cs.berkeley.edu/#demo

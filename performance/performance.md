@@ -120,6 +120,8 @@ See [Tooling](#tooling)
 * Andrei Alexandrescu
 * Herb Sutter
 * Scott Meyers
+* sustrik (ZeroMQ inventor)
+* Brendan D. Gregg
 
 # Code to learn from
 
@@ -131,7 +133,33 @@ See [Tooling](#tooling)
 
 # Books, Literature, etc
 
+Name | Author | Platform | Rating | Description |
+-----|--------|----------|--------|-------------|
+http://www.lighterra.com/papers/modernmicroprocessors/ | Patterson | HW | 10 | Best intro to microprocessors i know |
+[Bad Concurrency] | Barker | Java/OS/HW | 9 | Michael Barkers Blog |
+[Nanotrusting the Nanotime] | Shipilev | Java- | 10 | Best description of time in java and on modern hardware |
+https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks | David Holmes | Java- | 8 | - |
+https://medium.com/@octskyward/modern-garbage-collection-911ef4f8bd8e#.a3ax4ucvz | Mike Hearn | Java/GO | 8 | A critique on the claims about Gos GC plus a good intro to modern GC |
+Your Load Generator Is Probably Lying To You - Take The Red Pill And Find Out Why | High Scalability | - | - | Talks about Coordinated Omission |
+https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explanation about CPU caches |
+
 # Videos
+
+Name | Recorded | Speaker | Rating | Description |
+-----| ---------|---------|--------|-------------|
+[How NOT to Measure Latency] | Strangeloop 2014 | Tene (Azul) | 10 | Must watch! |
+[LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | 9 | Classic one about the Disruptor |
+[Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | - | Watched long ago, but think it was good |
+[Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | 8 | - |
+[Taming the 9s] | Strangeloop 2014 | Weisberg (VoltDB) | - | - |
+
+[Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
+[Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
+[Taming the 9s]: https://www.youtube.com/watch?v=EmiIUW4splQ&index=2&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
+[How NOT to Measure Latency]: https://www.youtube.com/watch?v=lJ8ydIuPFeU
+[LMAX - How to Do 100K TPS at Less than 1ms Latency]: https://www.infoq.com/presentations/LMAX
+[Nanotrusting the Nanotime]: https://shipilev.net/blog/2014/nanotrusting-nanotime/
+[Bad Concurrency]: http://bad-concurrency.blogspot.co.at/
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/

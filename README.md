@@ -1,5 +1,7 @@
 # Know How
 
+**Work in progress** - currently copying old stuff over and organizing it, please come back in 2-4 weeks
+
 This repository collects stuff i am most interested in. It should become my big reference book.
 
 **Attention**
@@ -10,9 +12,9 @@ So basically what I want to say is: Take some stuff, especially those marked *ex
 
 Everyone is highly welcome to contribute/improve/correct things.
 
-* [Concurrency](concurrency/concurrency.md)
 * [Distributed](distributed/distributed.md)
 * [Performance](performance/performance.md)
+  + [Concurrency](performance/concurrency.md)
 * [Networking](networking/networking.md)
 * [Fault Tolerance](faulttolerance/faulttolerance.md)
 * [Java](java/java.md)
