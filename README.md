@@ -24,11 +24,11 @@ Everyone is highly welcome to contribute/improve/correct things.
       + [Docker](os/linux_docker.md)
 * [Hardware](hardware/hardware.md)
    + [Raspberry](hardware/raspberry.md)
+* [Architecture](architecture/architecture.md)
+  + [Microservices](architecture/microservices.md)
 
 # Legend
 
 * Ratings are from 1 to 10, 10 is best
-
-## Tags
-
 * *Experimental*: Stuff i just tried out or where I havent done enough experiments to back up my statements
+* Everything marked with a question mark (?) needs more investigation

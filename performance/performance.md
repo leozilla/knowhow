@@ -3,6 +3,9 @@ Performance
 
 **Under construction - currently mostly brainstorming**
 
+If you are serious about performance, performance tests can fail your build (CI or nightly at least).
+Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
+
 # Performance metrics
 
 * Throughput
@@ -43,6 +46,7 @@ See [Tooling](#tooling)
 * CPU pipeline stall
 * Roundtrip 10Gbit kernel bypass
 * Contention cost
+* QPI (Intel QuickPath Interconnect)
 
 # Java
 
@@ -86,7 +90,10 @@ See [Tooling](#tooling)
 * Power control
 * Caching, ICache, DCache
 * TLB
+* QPI (Intel QuickPath Interconnect)
 * Cache subsystem, L1,L2,L3,QPI, Bandwith, >90% of chip is cache
+
+10GBit Ethernet vs QPI 20GByte? Ethernet only 16 times slower?
 
 ## Memory layout
 
@@ -148,6 +155,7 @@ https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explana
 Name | Recorded | Speaker | Platform | Rating | Description |
 -----| ---------|---------|----------|--------|-------------|
 [How NOT to Measure Latency] | Strangeloop 2014 | Tene (Azul) | - | 10 | Must watch! |
+[The Art of Java Benchmarking](https://vimeo.com/78900556) | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
 [Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | - | 8 | - |
@@ -155,11 +163,11 @@ Name | Recorded | Speaker | Platform | Rating | Description |
 [When to OS gets in the way] | Strangeloop 2015 | Price (LMAX) | Java/OS/HW | 9 | Explains importance of thread pinning etc |  
 Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.com/watch?v=MC1EKLQ2Wmg&t=4s | Goto 2012 | Thompson | - | 8 | Clears up some common misconceptions about HW |
 [JVM Profiling pitfalls] | - | Nitsan Wakart | Java | 9 | Getting deep into profiling |
-[Performance Testing Java Applications] | Devoxx UK 2013 | Thompson | Java | 9 | Java Devs should watch this |
+[Performance Testing Java Applications] | Devoxx UK 2013 | Thompson | Java | 8 | One thing to note: Dont write your benchmark harness, use JMH! |
 [A Crash Course in Modern Hardware] | Devoxx | Cliff Click | HW,OS,JVM,Java | 8 | Really a crash course but still quite good |
 [CPU caches and why you care] | code::dive conference 2014 | Scott Meyers | HW,C++ | 9 | Classic one about caches, must watch |
 [Deep Dive Performance] | ? | Nitsan Wakart | Java | 6 | 3 talks - some good some not so good |
-[The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 9 | Nice deep dive |
+[The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 10 | Nice deep dive |
 [CON1517 An Introduction to JVM Performance] | JavaOne 2015 | Rafael Winterhalter | Java | 9 | Very good and practical |
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s

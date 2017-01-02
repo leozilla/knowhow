@@ -50,6 +50,7 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * Andrei Alexandrescu
 * Herb Sutter
 * Scott Meyers
+* Joe Duffy
 
 # Code to learn from
 
@@ -90,6 +91,8 @@ Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but s
 [Tenes Developer JMM Cookbook] | Tene | - | Very practical, boils done to one simple matrix |
 [Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
 http://www.azulsystems.com/blog/cliff/2010-01-09-biased-locking | Cliff Click | Java | 9 | If you want to know how biased locking actual works |
+http://joeduffyblog.com/2015/11/19/asynchronous-everything/ | Joe Duffy | .NET | 9 | Highly recommended |
+http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/ | Joe Duffy | .NET | 9 | |
 
 # Videos
 

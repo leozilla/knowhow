@@ -28,7 +28,7 @@ Name | Author | Rating | Description |
 
 Name | Author | Rating | Description |
 -----|--------|--------|-------------|
-Release it | Nygard | 9 | Classic one about software FT |
+Release it! | Nygard | 9 | Classic one about software FT |
 Patterns for Fault Tolerant Software | Hammer | 9 | Favorite ones about software FT |
 
 [Making reliable distributed systems in the presence of sodware errors]: http://erlang.org/download/armstrong_thesis_2003.pdf
