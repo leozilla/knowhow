@@ -1,17 +1,45 @@
 Hardware
 ========
 
- * What does "Instruction Retired" mean exactly?: https://software.intel.com/en-us/forums/intel-vtune-amplifier-xe/topic/311170
- * When pre-fetching works and when it does not: https://t.co/SBzIKrD3wS
+# Instructions
+
+Division operations are expensive (up to 92 cycles on 64bit x86) [1](https://youtu.be/1DuMvpwWHH4?t=1334)
+
+## Instructions Retired
+
+https://software.intel.com/en-us/forums/intel-vtune-amplifier-xe/topic/311170
+Ignores branch misspredictions, when stalled you are not retiring instructions, aim to maximize when reducing cache misses
 
 # Cache
 
 * https://lwn.net/Articles/252125/
 * Cache lines
 
-# Operations
+## Misses
 
-Division operations are expensive (up to 92 cycles on 64bit x86) [1](https://youtu.be/1DuMvpwWHH4?t=1334)
+L1 (Instruction, Data), L2, L3
+
+## Prefetching
+
+Prefetch = Eagerly load of data
+Adjacent cache lines
+Prefetching works best when data is alligned sequential and access patterns are predictable/sequential
+When pre-fetching works and when it does not: https://t.co/SBzIKrD3wS
+https://mechanical-sympathy.blogspot.co.at/2012/08/memory-access-patterns-are-important.html
+
+### Predictable Access Patterns
+
+ * Temporal Locality: Refering to same data within a short time span
+ * Spacial Locality: Refering to data that is close together (cohesion)
+ * Sequential Locality: Refering to data which is alligned linearly in memory (array)
+
+# Tooling
+
+perf, likwid
+
+# Groups
+
+https://groups.google.com/forum/#!forum/mechanical-sympathy
 
 # Videos
 
@@ -20,7 +48,7 @@ Name | Recorded At | Speaker | Language/Platform | Rating | Description |
 [A Crash Course in Modern Hardware] | Devoxx | Cliff Click | HW,OS,JVM,Java | 8 | Really a crash course but still quite good |
 [CPU caches and why you care] | code::dive conference 2014 | Scott Meyers | HW,C++ | 9 | Classic one about caches, must watch |
 [History of Memory Models] | MIT course | ? | Theory | ? | Not complete watched yet |
-[Caching in: understand, measure, and use your CPU Cache more effectively](https://www.youtube.com/watch?v=7QD9fQRQ_l0) | Devox 2013 | Richard Warburton | HW | 9 | Easy intro |
+[Caching in: understand, measure, and use your CPU Cache more effectively](https://youtu.be/EAUlxpdj3fY?list=WL) | JavaOne 2015 | Richard Warburton | HW | 9 | Easy intro |
 [Writing Fast Code I] | Code::dive 2015 | Andrei Alexandrescu | C++/HW | 9 | Low level |
 [Writing Fast Code 2] | Code::dive 2015 | Andrei Alexandrescu | C++/HW | 9 | Low level |
 [Fastware] | ACCU 2016 | Andrei Alexandrescu | - | - |

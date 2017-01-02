@@ -33,6 +33,10 @@ Use ```.[]*``` or ```.??*``` to get all dot files except the current and parent 
 
 ## proc
 
+## Mouting
+
+```sudo blkid``` Get UUID of partition
+
 # Commands and Tools
 
  * https://blog.serverdensity.com/80-linux-monitoring-tools-know/
@@ -57,7 +61,7 @@ Use ```.[]*``` or ```.??*``` to get all dot files except the current and parent 
 
 ## tar
 
-# taskset
+## taskset
 
 ## Networking
 

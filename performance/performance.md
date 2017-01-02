@@ -25,6 +25,7 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
 * Pitfalls
    + Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
    + [Why don't I get the throughput I benchmarked?](https://vanilla-java.github.io/2016/07/23/Why-dont-I-get-the-throughput-I-benchmarked.html)
+* [Synthetic benchmarking actually sucks](https://youtu.be/M9o1LVfGp2A?t=2901) - best data is obtained from production load 
 
 See [Tooling](#tooling)
 
@@ -64,8 +65,8 @@ See [Tooling](#tooling)
 * Object Layout, Object Header, Padding, Memory Abstraction+GC overhead
 * Profiling C1,C2,C3?
 * JMM
-* De-Optimization
-* Virtual Method Dispatch, Bimorphic, Megamorphic
+* Runtime Optimization and De-Optimization
+* Virtual Method Dispatch: Monomorphic, Bimorphic, Megamorphic call sites
 * Lock coarsening
 * Lock biasing
 * Loop unrolling
@@ -73,9 +74,91 @@ See [Tooling](#tooling)
 * Constant propagation
 * Dead code elimination
 * Tail call elimination
-* Inlining
+* On stack replacement (OSR)
+* Inlining (http://www.azulsystems.com/blog/cliff/2011-04-04-fixing-the-inlining-problem)
 * GC
 * Object allocation super cheap
+* Interface invocation ([invoke-interface-optimisations])
+* JVM optimizes common and clean code, strange code has less change to get optimized (JVM engineers most likely dont add optimizations for 200LOC methods)
+* Predictable control flow
+* Small methods
+* Appropriate typing
+
+## Call Sites
+
+See: [CON1517 An Introduction to JVM Performance] and [invoke-interface-optimisations]
+
+ * Monomorphic: Only one call site - very good optimized - static method calls are always monomorphic
+ * Bimorphic: Two possible call sites - still only one branch
+ * Megamorphic: More than two possible call sites - vtable lookup, slow
+
+Every type matters (even when calling final methods) the JVM does not check if a method is actually called.
+
+**One type good, many types bad**
+
+```java
+List<String> list = ... // either ArrayList or LinkedList
+list.size(); // a bimorphic call site
+```
+
+**Call site specialization**
+
+See: CON1517 An Introduction to JVM Performance at 23:42 https://youtu.be/q8-10v15sZE?t=1422
+
+The following is only possible if the log method is monomorphic. 
+If the JVM cannot figure that out this optimizations are not possible.
+
+Step 1:
+
+```java
+// very generic, will observe a lot of different types, hard to optimize
+static void log(Objects... args) {
+    System.out.println("Log");
+    for (Object a : args) {
+        System.out.println(a.toString()); // toString is super megamorphic
+    }
+}
+
+void logSomething() {
+    log("foo", 4, new Object()); // call site
+}
+```
+
+Step 2: Will probably be inlined to
+
+```java
+void logSomething() {
+    System.out.println("Log");
+    Object[] args = new Object[] { "foo", 4, new Object() };
+    for (Object a : args) {
+        System.out.println(a.toString());
+    }
+}
+```
+
+Step 3: Loop unrolling
+
+```java
+// reduced previously megamorphic call site to 3 monomorphic call sites
+void logSomething() {
+    System.out.println("Log");
+    System.out.println("foo".toString());
+    System.out.println(new Integer(4).toString());
+    System.out.println(new Object().toString());
+}
+```
+
+Step 4: Specialization method calles based on type
+
+```java
+// reduced previously megamorphic call site to 3 monomorphic call sites
+void logSomething() {
+    System.out.println("Log");
+    System.out.println("foo"); // specialized to String - calls overload which takes String
+    System.out.println(4); // specialized to int - calls overload which takes int
+    System.out.println(new Object()); // specialized to Object - calls overload which takes Object
+}
+```
 
 # C++
 
@@ -106,9 +189,36 @@ See [Tooling](#tooling)
 
 * Cache misses
 * Sequential
+   + Take care when iterating multi dimensional arrays see [CPU caches and why you care]
 * Arbitrary
 * Spatial locality
+   + use smaller data types ```-XX:+UseCompressedOops```
+   + avoid 'holes' in your data - keep it close together (array)
+   + make access as linear as possible
+   + prefer collections of primitive types (unfortunately not incl in JDK)
 * Temporal locality
+* arrays >> linked list, for small n arrays are even better than hashmap or other O(1) data structures
+* https://mechanical-sympathy.blogspot.co.at/2012/08/memory-access-patterns-are-important.html
+
+**Sequential predictable access**
+
+```java
+int[] someArray = ... // arrays of primitive types have no object header and are alligned sequential in memory
+for (int i = 0; i < someArray.length; i++) 
+    someArray[i]++;
+```
+
+**Unpredictable access**
+
+```java
+int[] someArray = ... // see above
+for (int i = 0; i < someArray.length; i += SKIP_NUM) 
+    someArray[i]++;
+
+List<Integer> list = new LinkedList<>();
+// add elements
+list.foreach(i -> /* .. do stuff .. */); // 1 cache miss for next node, 1 cache miss for Integer class?
+```
 
 ## Tooling
 
@@ -153,6 +263,8 @@ https://medium.com/@octskyward/modern-garbage-collection-911ef4f8bd8e#.a3ax4ucvz
 Your Load Generator Is Probably Lying To You - Take The Red Pill And Find Out Why | High Scalability | - | - | Talks about Coordinated Omission |
 https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explanation about CPU caches |
 
+https://groups.google.com/forum/#!forum/mechanical-sympathy
+
 # Videos
 
 Name | Recorded | Speaker | Platform | Rating | Description |
@@ -172,8 +284,9 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Deep Dive Performance] | ? | Nitsan Wakart | Java | 6 | 3 talks - some good some not so good |
 [The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 10 | Nice deep dive |
 [CON1517 An Introduction to JVM Performance] | JavaOne 2015 | Rafael Winterhalter | Java | 9 | Very good and practical |
-[Caching in: understand, measure, and use your CPU Cache more effectively](https://www.youtube.com/watch?v=7QD9fQRQ_l0) | Devox 2013 | Richard Warburton | HW | 9 | Easy intro |
+[Caching in: understand, measure, and use your CPU Cache more effectively](https://youtu.be/EAUlxpdj3fY?list=WL) | JavaOne 2015 | Richard Warburton | HW | 9 | Easy intro |
 [Data Oriented Design] | CppCon2014 | Mike Acton | Cpp | 8 | Designing code based on its data, very low level | 
+[Life of a Twitter JVM engineer] | Devoxx 2016 | Tony Printezis | JVM | 8+ | Mostly GC problems |
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
@@ -191,8 +304,10 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [The Illusion of Execution]: https://www.youtube.com/watch?v=rzuLbvT5354
 [CON1517 An Introduction to JVM Performance]: https://www.youtube.com/watch?v=q8-10v15sZE&t
 [Data Oriented Design]: https://www.youtube.com/watch?v=rX0ItVEVjHc&t=2303s
+[Life of a Twitter JVM engineer]: https://youtu.be/M9o1LVfGp2A
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
 [CO_USER_GROUP]: https://groups.google.com/forum/#!msg/mechanical-sympathy/icNZJejUHfE/BfDekfBEs_sJ
 [CO_PDF]: https://www.azul.com/files/HowNotToMeasureLatency_LLSummit_NYC_12Nov2013.pdf
+[invoke-interface-optimisations]: https://mechanical-sympathy.blogspot.co.at/2012/04/invoke-interface-optimisations.html

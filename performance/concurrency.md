@@ -14,7 +14,13 @@ Concurrency
 * Readers Writers
 * Producer Consumer
 
-Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
+Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency 
+
+# Concepts
+
+## Memory Barriers
+
+https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 
 * Safety
 * Liveness
@@ -87,7 +93,8 @@ Erlang and Akka Documentation | - | Erlang, Java, Scala | 9 | Very good explaina
 Java Concurrency in Practice | Brian Goetz etc | Java | 9 | Classic Java Concurrency book, must read |
 Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but still classic Java Concurrency book, (must) read |
 [Java Memory Model Spec] | JSE | Java | Dont ask | Its the spec, must read |
-[JMM Pragmatics] | Shipilev | Java | 9 | Very (very) good but requires a lot of time to read and understand |
+[JMM Pragmatics] | Shipilev | Java | 10 | Very (very) good but requires a lot of time to read and understand |
+[Close encounters of JMM kind](https://shipilev.net/blog/2016/close-encounters-of-jmm-kind/) | Shipilev | Java | 10! | Best article about the JMM |
 [Tenes Developer JMM Cookbook] | Tene | - | Very practical, boils done to one simple matrix |
 [Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
 http://www.azulsystems.com/blog/cliff/2010-01-09-biased-locking | Cliff Click | Java | 9 | If you want to know how biased locking actual works |
