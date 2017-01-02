@@ -5,17 +5,39 @@ Linux
 
 * https://lwn.net/
 
+# Streams
+
+CTRL+D: Stops current standard input entry from the terminal?
+CTRL+C: Terminate a program, signal?
+
 # Booting
 
 * fu*ked up grub? -> [bootrepair](https://help.ubuntu.com/community/Boot-Repair)
 
+# Shell
+
+## Globbing/Wildcards
+
+Substitution happens before the command is run.
+ 
+ * ```*``` match any chars
+ * ```?``` match exactly one arbitrary char
+ * to prevent globs, enclose in quotes like ```'*'```
+
 # Filesystem
 
-# proc
+## Home
+
+Configuration files called dot files .bashrc .login or directories .ssh
+Use ```.[]*``` or ```.??*``` to get all dot files except the current and parent directories. 
+
+## proc
 
 # Commands and Tools
 
  * https://blog.serverdensity.com/80-linux-monitoring-tools-know/
+ * ls, cp, mv, rm, cat, touch, cd, mkdir, rmdir
+ * grep, less, pwd, diff, file, find, head, tail, sort
 
 ## ps
 

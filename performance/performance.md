@@ -3,6 +3,9 @@ Performance
 
 **Under construction - currently mostly brainstorming**
 
+# General
+
+Good explanation about what does (premature) optimization means: https://youtu.be/1DuMvpwWHH4?t=777
 If you are serious about performance, performance tests can fail your build (CI or nightly at least).
 Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
 
@@ -154,7 +157,7 @@ https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explana
 
 Name | Recorded | Speaker | Platform | Rating | Description |
 -----| ---------|---------|----------|--------|-------------|
-[How NOT to Measure Latency] | Strangeloop 2014 | Tene (Azul) | - | 10 | Must watch! |
+[How NOT to Measure Latency] | - | Tene (Azul) | - | 10 | Must watch! |
 [The Art of Java Benchmarking](https://vimeo.com/78900556) | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
@@ -170,11 +173,12 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 10 | Nice deep dive |
 [CON1517 An Introduction to JVM Performance] | JavaOne 2015 | Rafael Winterhalter | Java | 9 | Very good and practical |
 [Caching in: understand, measure, and use your CPU Cache more effectively](https://www.youtube.com/watch?v=7QD9fQRQ_l0) | Devox 2013 | Richard Warburton | HW | 9 | Easy intro |
+[Data Oriented Design] | CppCon2014 | Mike Acton | Cpp | 8 | Designing code based on its data, very low level | 
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
 [Taming the 9s]: https://www.youtube.com/watch?v=EmiIUW4splQ&index=2&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
-[How NOT to Measure Latency]: https://www.youtube.com/watch?v=lJ8ydIuPFeU
+[How NOT to Measure Latency]: https://www.youtube.com/watch?v=0b3sR32m0nU
 [LMAX - How to Do 100K TPS at Less than 1ms Latency]: https://www.infoq.com/presentations/LMAX
 [Nanotrusting the Nanotime]: https://shipilev.net/blog/2014/nanotrusting-nanotime/
 [Bad Concurrency]: http://bad-concurrency.blogspot.co.at/
@@ -186,6 +190,7 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Deep Dive Performance]: https://www.youtube.com/watch?v=1Uc3M9YK5Tg&t
 [The Illusion of Execution]: https://www.youtube.com/watch?v=rzuLbvT5354
 [CON1517 An Introduction to JVM Performance]: https://www.youtube.com/watch?v=q8-10v15sZE&t
+[Data Oriented Design]: https://www.youtube.com/watch?v=rX0ItVEVjHc&t=2303s
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
