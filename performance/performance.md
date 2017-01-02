@@ -169,6 +169,7 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Deep Dive Performance] | ? | Nitsan Wakart | Java | 6 | 3 talks - some good some not so good |
 [The Illusion of Execution] | JFokus 2015 | Nitsan Wakart | Java | 10 | Nice deep dive |
 [CON1517 An Introduction to JVM Performance] | JavaOne 2015 | Rafael Winterhalter | Java | 9 | Very good and practical |
+[Caching in: understand, measure, and use your CPU Cache more effectively](https://www.youtube.com/watch?v=7QD9fQRQ_l0) | Devox 2013 | Richard Warburton | HW | 9 | Easy intro |
 
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
