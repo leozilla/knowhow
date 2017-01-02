@@ -42,3 +42,7 @@ Get current state of connections
 ```bash
 $ ss -tan
 ```
+
+Unix always closes all open descriptors when a process terminates. [UNP]
+
+[UNP]: http://www.unpbook.com/

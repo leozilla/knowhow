@@ -5,16 +5,14 @@ Distributed
 
 # Theory
 
-* 2 Generals problem
-* LWP Proof
+* [2 Generals problem](https://en.wikipedia.org/wiki/Two_Generals'_Problem)
+* [FLP Proof](http://www.cs.yale.edu/homes/aspnes/pinewiki/FischerLynchPaterson.html)
 * [CAP](http://henryr.github.io/cap-faq/)
 * [A critique of the CAP theorem](https://www.cl.cam.ac.uk/research/dtg/www/files/publications/public/mk428/cap-critique.pdf)
 * [Fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
-* End to end argument for systems design
+* [End to end argument in systems design](http://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)
 * [Stop calling databases CP or AP](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html)
 * Dynamo paper
-* Consistency Models
-   + Eventual Consistency
 
 # Practice
 
@@ -30,7 +28,37 @@ Distributed
 
 ## Consistency Models
 
+![ConsistencyTree](img/family-tree.jpg)
+![Consistency](img/family.jpg)
+![IsolationLevels](img/isolation-levels.png)
+
+See: 
+
+ * Tannenbaums Distributed Systems
+ * https://aphyr.com/posts/313-strong-consistency-models
+ * http://www.bailis.org/blog/linearizability-versus-serializability/
+ * http://www.bailis.org/blog/when-does-consistency-require-coordination/
+ * http://www.bailis.org/blog/understanding-weak-isolation-is-a-serious-problem/
+ * https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html
+ * https://arxiv.org/pdf/1302.0309.pdf
+
+Currently a mix of ANSI DB and distributed models, a lot more work todo here:
+
+ * (Strict) Linearizability (cache coherency protocols provide us strict consistency in our single process concurrent programs)
+ * Sequential Consistency
+ * Causual Consistency
+ * Processor Consistency
+ * PRAM/FIFO Consistency
+ * Read your writes Consistency
+ * Serializable
+ * Repeatable read
+ * Read committed
+ * Dirty read
+ * Eventual Consistency (not really defined well, http://www.bailis.org/papers/eventual-queue2013.pdf)
+
 ## ACID
+
+ * http://www.bailis.org/blog/when-is-acid-acid-rarely/
 
 ## BASE
 
