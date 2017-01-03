@@ -26,6 +26,7 @@ Everyone is highly welcome to contribute/improve/correct things.
    + [Raspberry](hardware/raspberry.md)
 * [Architecture](architecture/architecture.md)
   + [Microservices](architecture/microservices.md)
+* [Design](design/design.md)
 
 # Legend
 

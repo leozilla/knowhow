@@ -48,22 +48,34 @@ See: [Caching In: Understand, Measure, and Use Your CPU Cache More Effectively](
    + page size is adjustable (often requires reboot when changed)
      + JVM flag: ```-XX:+UseLargePages```
      + linux: ```cat /proc/meminfo```
+ 
+**Readings**
+
+   + [Hitting the Memory Wall](http://www.eecs.ucf.edu/~lboloni/Teaching/EEL5708_2006/slides/wulf94.pdf)
+   + [What Every Programmer Should Know About Memory](http://david.jobet.free.fr/wiclear-blog/images/cpumemory.pdf)
 
 # Cache
 
+* L1 (Instruction, Data), L2, L3 (https://www.scss.tcd.ie/Jeremy.Jones/CS3021/5%20caches.pdf)
+* Cache lines 64 bytes
 * https://lwn.net/Articles/252125/
-* Cache lines
+* http://igoro.com/archive/gallery-of-processor-cache-effects/
+* Old but concepts still apply: http://arstechnica.com/gadgets/2002/07/caching/2/
 * https://mechanical-sympathy.blogspot.co.at/2013/02/cpu-cache-flushing-fallacy.html
+* Store Buffers are used as the first optimization [1](https://www.youtube.com/watch?v=OFgxAFdxYAQ) for reducing write back latency
+* Store Forwarding causes the loads to return the value in the store buffer, if present [1](http://gvsmirnov.ru/blog/tech/2014/02/10/jmm-under-the-hood.html#store-buffers)
 
 ## Coherency
 
  * https://www.cs.auckland.ac.nz/~jmor159/363/html/cache_coh.html
  * http://gvsmirnov.ru/blog/tech/2014/02/10/jmm-under-the-hood.html
  * https://www.burnison.ca/articles/perceiving-the-effects-of-cache-coherency-in-spin-locks
+ * [Memory Barriers: a Hardware View for Software Hackers](http://www.rdrop.com/users/paulmck/scalability/paper/whymb.2010.07.23a.pdf)
 
 ## Misses
 
-L1 (Instruction, Data), L2, L3
+ * 3 kinds of misses [1](http://arstechnica.com/gadgets/2002/07/caching/2/)
+   + Compulsory miss: Desired data was never in the cache and therefor must be paged in
 
 ## Prefetching
 

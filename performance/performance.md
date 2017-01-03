@@ -16,7 +16,7 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
 * Service Time
 * Response Time
 
-## Howto measure
+## Benchmarking
 
 * Constant rate
 * Throughput at given latency
@@ -30,8 +30,8 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
    + [The Art of Java Benchmarking]
    + [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
    + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
-   
 
+See [Microbenchmarking](microbench.md)
 See [Tooling](#tooling)
 
 # Design

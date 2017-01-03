@@ -42,12 +42,13 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 * Final keyword semantics
 * [Dealing with InterruptedException](https://www.ibm.com/developerworks/library/j-jtp05236/)
 * http://g.oswego.edu/dl/concurrency-interest/
+* lazySet for not immediately flushing store buffers
 
 ## JMM
 
  * Java [synchronization actions](https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html#jls-17.4.2): 
-   + ```volatile``` r/w, 
-   + Locking and unlocking a monitor:  ```synchronized``` enter/exit, 
+   + ```volatile``` r/w
+   + Locking and unlocking a monitor:  ```synchronized``` enter/exit 
    + Actions that start a thread or detect that a thread has terminated: ```Thread.start```, ```Thread.interrupted```, ```Thread.isInterrupted```, ```Thread.isALive```, ```Thread.join```
    + The (synthetic) first and last action of a thread
  * CPU level: lock
