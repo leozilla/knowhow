@@ -3,7 +3,7 @@ Microbenchmarks
 
 # Java
 
-All microbenchmarks are writting using JMH.
+All microbenchmarks are writting using [JMH].
 
 The no-op benchmark.
 
@@ -36,6 +36,9 @@ Benchmark                Mode  Cnt           Score          Error  Units
 MyBenchmark.testMethod  thrpt  200  4337584455.651 ± 31219828.361  ops/s
 ```
 
-## JMH
+## [JMH]
+ 
+ * [Samples](http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/) 
 
+[JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [home-ws]: env/home-ws

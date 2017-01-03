@@ -16,23 +16,7 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
 * Service Time
 * Response Time
 
-## Benchmarking
-
-* Constant rate
-* Throughput at given latency
-* Latency at given throughput
-* [Latency for a set Throughput](https://vanilla-java.github.io/2016/07/20/Latency-for-a-set-Throughput.html)
-* Pitfalls
-   + Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
-   + [Why don't I get the throughput I benchmarked?](https://vanilla-java.github.io/2016/07/23/Why-dont-I-get-the-throughput-I-benchmarked.html)
-* [Synthetic benchmarking actually sucks](https://youtu.be/M9o1LVfGp2A?t=2901) - best data is obtained from production load 
-* Always use [JMH] for micro benchmarks, always!
-   + [The Art of Java Benchmarking]
-   + [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
-   + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
-
-See [Microbenchmarking](microbench.md)
-See [Tooling](#tooling)
+# [Benchmarks](benchmarks.md)
 
 # Design
 
@@ -43,6 +27,10 @@ See [Tooling](#tooling)
 
 # Typical performance numbers
 
+* Numbers every programmer should know
+  + https://gist.github.com/jboner/2841832
+  + http://highscalability.com/blog/2013/1/15/more-numbers-every-awesome-programmer-must-know.html
+  + https://people.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 * Register access
 * L1 access
 * L2 access

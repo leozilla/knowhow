@@ -56,6 +56,10 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
    + http://gvsmirnov.ru/blog/tech/2014/02/10/jmm-under-the-hood.html
    + https://mechanical-sympathy.blogspot.co.at/2013/02/cpu-cache-flushing-fallacy.html
 
+## Testing
+
+ * [jcstress](http://openjdk.java.net/projects/code-tools/jcstress/) best learned via [Close encounters of JMM kind]
+
 # .NET
 
  * http://igoro.com/archive/volatile-keyword-in-c-memory-model-explained/
@@ -112,7 +116,7 @@ Java Concurrency in Practice | Brian Goetz etc | Java | 9 | Classic Java Concurr
 Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but still classic Java Concurrency book, (must) read |
 [Java Memory Model Spec] | JSE | Java | Dont ask | Its the spec, must read |
 [JMM Pragmatics] | Shipilev | Java | 10 | Very (very) good but requires a lot of time to read and understand |
-[Close encounters of JMM kind](https://shipilev.net/blog/2016/close-encounters-of-jmm-kind/) | Shipilev | Java | 10! | Best article about the JMM |
+[Close encounters of JMM kind] | Shipilev | Java | 10! | Best article about the JMM |
 [Tenes Developer JMM Cookbook] | Tene | - | Very practical, boils done to one simple matrix |
 [Doug Leas JMM Cookbook] | Lea | ? | Not fully read |
 http://www.azulsystems.com/blog/cliff/2010-01-09-biased-locking | Cliff Click | Java | 9 | If you want to know how biased locking actual works |
@@ -168,3 +172,4 @@ Name | Recorded At | Speaker | Language/Platform | Rating | Description |
 [JMM Pragmatics]: https://shipilev.net/blog/2014/jmm-pragmatics/
 [Tenes Developer JMM Cookbook]: http://giltene.github.io/DeveloperJMMCookbook/
 [Doug Leas JMM Cookbook]: http://g.oswego.edu/dl/jmm/cookbook.html
+[Close encounters of JMM kind]: https://shipilev.net/blog/2016/close-encounters-of-jmm-kind/
