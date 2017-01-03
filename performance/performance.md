@@ -26,6 +26,11 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
    + Coordinated Omission: [CO_USER_GROUP], [CO_PDF]
    + [Why don't I get the throughput I benchmarked?](https://vanilla-java.github.io/2016/07/23/Why-dont-I-get-the-throughput-I-benchmarked.html)
 * [Synthetic benchmarking actually sucks](https://youtu.be/M9o1LVfGp2A?t=2901) - best data is obtained from production load 
+* Always use [JMH] for micro benchmarks, always!
+   + [The Art of Java Benchmarking]
+   + [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
+   + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
+   
 
 See [Tooling](#tooling)
 
@@ -65,24 +70,51 @@ See [Tooling](#tooling)
 * Object Layout, Object Header, Padding, Memory Abstraction+GC overhead
 * Profiling C1,C2,C3?
 * JMM
-* Runtime Optimization and De-Optimization
-* Virtual Method Dispatch: Monomorphic, Bimorphic, Megamorphic call sites
-* Lock coarsening
-* Lock biasing
-* Loop unrolling
-* Escape analysis
-* Constant propagation
-* Dead code elimination
-* Tail call elimination
-* On stack replacement (OSR)
-* Inlining (http://www.azulsystems.com/blog/cliff/2011-04-04-fixing-the-inlining-problem)
-* GC
-* Object allocation super cheap
-* Interface invocation ([invoke-interface-optimisations])
-* JVM optimizes common and clean code, strange code has less change to get optimized (JVM engineers most likely dont add optimizations for 200LOC methods)
-* Predictable control flow
-* Small methods
-* Appropriate typing
+* GC (Object allocation super cheap just one or two pointer move)
+
+## Optimizations
+
+OpenJDK: https://wiki.openjdk.java.net/display/HotSpot/PerformanceTechniques
+
+ * Profiling based C1 (client),C2 (server),C3?
+ * Optimization and De-Optimization at runtime
+ * Virtual Method Dispatch: Monomorphic, Bimorphic, Megamorphic call sites
+ * Lock coarsening
+ * Lock biasing
+ * Loop unrolling
+ * Escape analysis
+ * Constant propagation
+ * Dead code elimination
+ * Tail call elimination
+ * On stack replacement (OSR)
+ * Class Hierarchy Analysis (CHA)
+ * Inlining
+    + https://wiki.openjdk.java.net/display/HotSpot/Inlining
+    + http://www.azulsystems.com/blog/cliff/2011-04-04-fixing-the-inlining-problem
+ * Interface invocation ([invoke-interface-optimisations])
+
+Optimizations work best when:
+
+ * JVM optimizes common and clean code, strange or unconventional code has less change to get optimized (JVM engineers dont plan for this)
+ * Predictable control flow
+ * Small methods
+ * Specialized types (dont use Object if you can)
+ 
+## Flags
+
+ * Bigger Page Sizes: ```-XX:+UseLargePages``` potential speedup 10-30%
+ * Compressed Ops ```-XX:+UseCompressedOops``` on by default, can save significant amount of memory
+ * Prevent False Sharing in GC Card Tables ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
+
+## Safepoints
+
+Point in execution where it is save to observe a threads state. All threads must be at a safe point to perform GC (at least in hotspot).
+
+## GC
+
+ * Context switch between mutator and GC (not guaranteed to be scheduled back on same core)
+ * False Sharing in GC Card Tables
+   + Try ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
 
 ## Call Sites
 
@@ -160,16 +192,22 @@ void logSomething() {
 }
 ```
 
-# C++
-
 # OS
 
 * Kernel threads
 * Scheduling
+  + http://www.javamex.com/tutorials/threads/thread_scheduling_java.shtml
 * Thread pinning
 * Time sync
 * Sockets, Filedescriptors
 * System calls, user mode, kernel/priviledged mode
+* Context Switch http://www.javamex.com/tutorials/threads/context_switch.shtml
+  + Benchmarks
+    + http://blog.tsunanet.net/2010/11/how-long-does-it-take-to-make-context.html
+    + http://lmbench.sourceforge.net/cgi-bin/man?keyword=lmbench&section=8
+  + Thread
+  + Process
+  + Virtual OS (Hypervisor)
 
 # Hardware
 
@@ -181,9 +219,11 @@ void logSomething() {
 
 10GBit Ethernet vs QPI 20GByte? Ethernet only 16 times slower?
 
-## Memory layout
+## Memory layout/allignment
 
 * Cache lines 64 byte?
+* http://www.insightfullogic.com/2013/Jan/03/slab-guaranteed-heap-alignment-jvm/
+* http://psy-lob-saw.blogspot.co.at/2013/01/direct-memory-alignment-in-java.html
 
 ## Memory access patterns
 
@@ -240,8 +280,9 @@ list.foreach(i -> /* .. do stuff .. */); // 1 cache miss for next node, 1 cache 
 * Andrei Alexandrescu
 * Herb Sutter
 * Scott Meyers
-* sustrik (ZeroMQ inventor)
-* Brendan D. Gregg
+* sustrik (ZeroMQ inventor) (http://250bpm.com/)
+* Brendan D. Gregg (http://www.brendangregg.com)
+* Richard Warburton (http://www.insightfullogic.com/)
 
 # Code to learn from
 
@@ -270,7 +311,7 @@ https://groups.google.com/forum/#!forum/mechanical-sympathy
 Name | Recorded | Speaker | Platform | Rating | Description |
 -----| ---------|---------|----------|--------|-------------|
 [How NOT to Measure Latency] | - | Tene (Azul) | - | 10 | Must watch! |
-[The Art of Java Benchmarking](https://vimeo.com/78900556) | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
+[The Art of Java Benchmarking] | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
 [Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | - | 8 | - |
@@ -288,6 +329,7 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Data Oriented Design] | CppCon2014 | Mike Acton | Cpp | 8 | Designing code based on its data, very low level | 
 [Life of a Twitter JVM engineer] | Devoxx 2016 | Tony Printezis | JVM | 8+ | Mostly GC problems |
 
+[The Art of Java Benchmarking]: https://vimeo.com/78900556
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
 [Benchmarking: You're Doing It Wrong]: https://www.youtube.com/watch?v=XmImGiVuJno&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A
 [Taming the 9s]: https://www.youtube.com/watch?v=EmiIUW4splQ&index=2&list=PLljcY9k9tmL8k8oGzKcKL2D0AeDIi-V_A

@@ -24,6 +24,12 @@ Substitution happens before the command is run.
  * ```?``` match exactly one arbitrary char
  * to prevent globs, enclose in quotes like ```'*'```
 
+# Memory
+
+```bash
+cat /proc/meminfo
+```
+
 # Filesystem
 
 ## Home

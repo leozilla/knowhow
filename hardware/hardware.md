@@ -10,10 +10,56 @@ Division operations are expensive (up to 92 cycles on 64bit x86) [1](https://you
 https://software.intel.com/en-us/forums/intel-vtune-amplifier-xe/topic/311170
 Ignores branch misspredictions, when stalled you are not retiring instructions, aim to maximize when reducing cache misses
 
+# Scheduling
+
+## Context Switching
+
+ * Direct Cost
+   + Save old process state
+   + Schedule new process
+   + Load new process state
+ * Indirect cost
+   + TLB reload (new process)
+   + CPU Pipeline flush
+   + Cache Interference (pollution)
+   + Temporal Locality
+ * [Quantifying The Cost of Context Switch](http://www.cs.rochester.edu/u/cli/research/switch.pdf) numbers outdated but principle still applies
+   + Direct cost nearly constant time 3 micros
+   + Indirect cost up to 1500 micros
+   + Indirect cost dominate direct cost if working set > L2 cache
+ * Benchmarks
+   + http://blog.tsunanet.net/2010/11/how-long-does-it-take-to-make-context.html
+   + http://lmbench.sourceforge.net/cgi-bin/man?keyword=lmbench&section=8
+
+# Memory
+
+See: [Caching In: Understand, Measure, and Use Your CPU Cache More Effectively](https://www.youtube.com/watch?v=EAUlxpdj3fY&index=4&list=WL)
+
+ * TLAB (page table cache)
+   + multi level (TLB for L1, L2, L3)
+   + measurable via CPU perf counters (miss/hit rate, walk duration - how long lookup takes)
+   + on older hardware flushed on process context switch
+   + on newer hardware ASI (Address Space Identifier) is added to not flush all TLBs
+ * Page Table (virtual to physical memory address)
+   + OS managed
+   + page fault when address not in memory (need to bring in from disk)
+ * Page Size
+   + tradeoff when using big pages: less pages + quick lookups vs wasted memory space + more disk paging
+   + page size is adjustable (often requires reboot when changed)
+     + JVM flag: ```-XX:+UseLargePages```
+     + linux: ```cat /proc/meminfo```
+
 # Cache
 
 * https://lwn.net/Articles/252125/
 * Cache lines
+* https://mechanical-sympathy.blogspot.co.at/2013/02/cpu-cache-flushing-fallacy.html
+
+## Coherency
+
+ * https://www.cs.auckland.ac.nz/~jmor159/363/html/cache_coh.html
+ * http://gvsmirnov.ru/blog/tech/2014/02/10/jmm-under-the-hood.html
+ * https://www.burnison.ca/articles/perceiving-the-effects-of-cache-coherency-in-spin-locks
 
 ## Misses
 
@@ -27,7 +73,7 @@ Prefetching works best when data is alligned sequential and access patterns are 
 When pre-fetching works and when it does not: https://t.co/SBzIKrD3wS
 https://mechanical-sympathy.blogspot.co.at/2012/08/memory-access-patterns-are-important.html
 
-### Predictable Access Patterns
+## Predictable Access Patterns
 
  * Temporal Locality: Refering to same data within a short time span
  * Spacial Locality: Refering to data that is close together (cohesion)
@@ -35,7 +81,7 @@ https://mechanical-sympathy.blogspot.co.at/2012/08/memory-access-patterns-are-im
 
 # Tooling
 
-perf, likwid
+perf, likwid, [lmbench](http://lmbench.sourceforge.net/)
 
 # Groups
 
