@@ -16,4 +16,4 @@ $ JETTY_PID=`ps -f -C java | grep jetty | awk '{ print $2 }'`
 $ bin/perf-java-flames $JETTY_PID
 ```
 
-![First FlameGraph](../../../img/first_flamegraph.svg)
+![First FlameGraph](first_flamegraph.svg)
