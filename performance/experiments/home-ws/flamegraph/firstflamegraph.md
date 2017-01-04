@@ -16,4 +16,4 @@ $ JETTY_PID=`ps -f -C java | grep jetty | awk '{ print $2 }'`
 $ bin/perf-java-flames $JETTY_PID
 ```
 First FlameGraph (click to zoom):
-![First FlameGraph](first_flamegraph.svg)
+[![First FlameGraph](https://cdn.rawgit.com/leozilla/knowhow/master/performance/experiments/home-ws/flamegraph/first_flamegraph.svg)](https://cdn.rawgit.com/leozilla/knowhow/master/performance/experiments/home-ws/flamegraph/first_flamegraph.svg)
