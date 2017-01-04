@@ -17,3 +17,7 @@ $ bin/perf-java-flames $JETTY_PID
 ```
 
 ![First FlameGraph](first_flamegraph.svg)
+
+<a href="first_flamegraph.svg">
+  <img src="first_flamegraph.svg" width="100%" height="100%">
+</a>
