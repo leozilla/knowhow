@@ -4,7 +4,7 @@ See: [Flame Graphs](../../../performance.md#flame-graphs)
 
 Java app must be started with ```-XX:+PreserveFramePointer``` (expect up to ~2% performance degradation)
 
-```
+```bash
 $ cd ~/tools
 $ git clone https://github.com/brendangregg/FlameGraph
 $ git clone https://github.com/jrudolph/perf-map-agent
