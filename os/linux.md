@@ -14,6 +14,10 @@ CTRL+C: Terminate a program, signal?
 
 * fu*ked up grub? -> [bootrepair](https://help.ubuntu.com/community/Boot-Repair)
 
+# Terminals
+
+ * http://superuser.com/questions/421463/why-does-ctrl-v-not-paste-in-bash-linux-shell
+
 # Shell
 
 ## Globbing/Wildcards

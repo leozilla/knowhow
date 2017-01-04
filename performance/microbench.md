@@ -1,9 +1,25 @@
 Microbenchmarks
 ===============
 
+ * measure effects in the range of nanoseconds (not microseconds)
+ * not necessarily bad, it depends how we use them. You should not jump to conclusion too fast.
+
 # Java
 
-All microbenchmarks are writting using [JMH].
+All microbenchmarks are writting using [JMH](http://openjdk.java.net/projects/code-tools/jmh/).
+
+ * [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
+ * [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
+
+## JMH
+ 
+ * [Samples](http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/) 
+ * [The Art of Java Benchmarking] Oredev 2013
+ * [JMH the lesser of two evils] Devoxx 2013
+
+**Attention**
+
+ * Sources and sinks must be unpredictable, use Blackhole or return values for sinks, sources/params should NOT be final
 
 The no-op benchmark.
 
@@ -36,9 +52,6 @@ Benchmark                Mode  Cnt           Score          Error  Units
 MyBenchmark.testMethod  thrpt  200  4337584455.651 ± 31219828.361  ops/s
 ```
 
-## [JMH]
- 
- * [Samples](http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/) 
-
-[JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [home-ws]: env/home-ws
+[JMH the lesser of two evils]: https://www.youtube.com/watch?v=VaWgOCDBxYw&t=518s
+[The Art of Java Benchmarking]: https://vimeo.com/78900556

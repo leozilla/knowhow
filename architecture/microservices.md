@@ -7,26 +7,32 @@ Microservices are nothing new, [modularization](https://www.cs.umd.edu/class/spr
 is considered a good design practice since the 70s.
 
 Microservices are the next step after SOA in the evolution of software architecture. 
-Without the next level of [tooling](#tooling) and performance this architecture would not be possible.
+Without the next level of [tooling](#tooling) this architecture would not be possible.
+
+Microservices and modern software development is all about fast feedback cycles (Agile) and quick time to market.
 
 # Differences to SOA
 
 The main benefits and differences to 'just' SOA:
 
-## A Microservice must be independently deployable
+## Easier to scale in terms of dev teams
+ 
+Small teams usually own a service and should be able to test,release and deploy the service as independent as possible.
+No lock step updates of the whole system should ever be necessary.
 
-Microservices and modern software development is all about fast feedback cycles (Agile).
+## Independently deployable
+
 If you cannot deploy a new version of a service independently of the rest of your system, you loose most benefits of this architecture.
 I would even go as far as saying that you should not buy into this architecture if you cannot satisfy this point.
 
-## A Microservice must define strict boundaries
+## Define strict boundaries
 
 Boundaries should usually not allow sharing of mutable state. Messaging is a very natural way of achieving this separation.
-REST is also a form of messaging.
+REST is also a form of messaging although it differs in its execution (usually blocking thread model).
 This would also be possible with modularization concepts of modern platforms (.NET, JVM) 
 but it seems that the average developer is not able to use them correctly therefor we now have to cope with distribution :-(
 
-## A Microservice must have well defined interfaces
+## Have well defined interfaces
 
 # Considerations
 

@@ -17,6 +17,7 @@ Everyone is highly welcome to contribute/improve/correct things.
   + [Concurrency](performance/concurrency.md)
   + [Benchmarks](performance/benchmarks.md)
      + [Microbenchmark](performance/microbench.md)
+  + [Monitoring](performance/monitoring.md)   
 * [Networking](networking/networking.md)
 * [Fault Tolerance](faulttolerance/faulttolerance.md)
 * [Java](java/java.md)

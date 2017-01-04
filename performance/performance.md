@@ -300,6 +300,7 @@ Name | Recorded | Speaker | Platform | Rating | Description |
 -----| ---------|---------|----------|--------|-------------|
 [How NOT to Measure Latency] | - | Tene (Azul) | - | 10 | Must watch! |
 [The Art of Java Benchmarking] | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
+[JMH the lesser of two evils] | Devoxx 2013 | Shipilev | Java | 9 | Similar to [The Art of Java Benchmarking] |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
 [Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | - | 8 | - |
@@ -316,6 +317,9 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Caching in: understand, measure, and use your CPU Cache more effectively](https://youtu.be/EAUlxpdj3fY?list=WL) | JavaOne 2015 | Richard Warburton | HW | 9 | Easy intro |
 [Data Oriented Design] | CppCon2014 | Mike Acton | Cpp | 8 | Designing code based on its data, very low level | 
 [Life of a Twitter JVM engineer] | Devoxx 2016 | Tony Printezis | JVM | 8+ | Mostly GC problems |
+[Writing Fast Code I] | Code::dive 2015 | Andrei Alexandrescu | C++/HW | 9 | Low level |
+[Writing Fast Code 2] | Code::dive 2015 | Andrei Alexandrescu | C++/HW | 9 | Low level |
+[Optimization Tips - Mo' Hustle Mo' Problems] | CooCon 2014 |  Andrei Alexandrescu | 8 | Very low level |
 
 [The Art of Java Benchmarking]: https://vimeo.com/78900556
 [Java at the Cutting Edge: Stuff I Learned about Performance]: https://www.youtube.com/watch?v=uKoZgIdVZQ4&t=402s
@@ -335,6 +339,10 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [CON1517 An Introduction to JVM Performance]: https://www.youtube.com/watch?v=q8-10v15sZE&t
 [Data Oriented Design]: https://www.youtube.com/watch?v=rX0ItVEVjHc&t=2303s
 [Life of a Twitter JVM engineer]: https://youtu.be/M9o1LVfGp2A
+[JMH the lesser of two evils]: https://www.youtube.com/watch?v=VaWgOCDBxYw&t=518s
+[Writing Fast Code I]: https://www.youtube.com/watch?v=vrfYLlR8X8k
+[Writing Fast Code 2]: https://youtu.be/9tvbz8CSI8M
+[Optimization Tips - Mo' Hustle Mo' Problems]: https://youtu.be/Qq_WaiwzOtI
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
