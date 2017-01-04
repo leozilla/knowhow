@@ -182,6 +182,17 @@ void logSomething() {
 }
 ```
 
+## Flame Graphs
+
+ * http://techblog.netflix.com/2015/07/java-in-flames.html
+ * http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Java
+ * [My first flame graph](experiments/home-ws/flamegraph/firstflamegraph.md)
+
+# Profilers
+
+ 1. System profilers: like Linux perf, which shows system code paths (eg, JVM GC, syscalls, TCP), but not Java methods
+ 2. JVM profilers: like hprof, LJP, and commercial profilers. These show Java methods, but usually not system code paths
+
 # OS
 
 * Kernel threads

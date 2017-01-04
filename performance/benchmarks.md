@@ -20,7 +20,7 @@ Benchmark
 
 Mainly Shipilevs ([JMH the lesser of two evils], [The Art of Java Benchmarking]) and Alexandrescu ([Writing Fast Code I], [Writing Fast Code II]) thoughts.
 
-### Benchmarks are experiments
+### Benchmarks are [experiments](experiments)
 
 * Computer Science: Functional requirements, often very abstract
 * Software (Performance) Engineering: Exploring complex interactions between hardware, software and data. Based on empirical evidence (real/natural science)

@@ -28,6 +28,14 @@ Substitution happens before the command is run.
  * ```?``` match exactly one arbitrary char
  * to prevent globs, enclose in quotes like ```'*'```
 
+## Assignment
+
+Assign the return value of a shell command to a variable
+
+```bash
+$ JETT=$(ps -f -C java | grep jetty | awk '{ print $2 }')
+```
+
 # Memory
 
 ```bash
@@ -52,26 +60,43 @@ Use ```.[]*``` or ```.??*``` to get all dot files except the current and parent 
  * https://blog.serverdensity.com/80-linux-monitoring-tools-know/
  * ls, cp, mv, rm, cat, touch, cd, mkdir, rmdir
  * grep, less, pwd, diff, file, find, head, tail, sort
+ * top,fg,bg
+ 
+## Processes
 
-## ps
+### ps
 
-## top
+Find PID of all java processes where jetty is included in the command line.
 
-## grep
+```bash
+$ ps -f -C java | grep jetty | awk '{ print $2 }'
+```
 
-## tail
+### top
 
-## awk
+### taskset
 
-## sed
+### fg
 
-## df
+Continues a stopped job by running it in the foreground
 
-## dh
+## Common
 
-## tar
+### grep
 
-## taskset
+### tail
+
+### awk
+
+### sed
+
+## Filesystem
+
+### df
+
+### dh
+
+### tar
 
 ## Networking
 
@@ -90,4 +115,24 @@ pi@raspberrypi:~ $ cat /proc/sys/net/ipv4/ip_local_port_range
 32768   60999
 ```
 
+## Performance
+
+### Perf Events
+
+ * ```perf list``` list all possible event types
+ * ```perf stats``` counts events (uses efficient in kernel counter)
+ * ```perf record``` samples events (higher overhead relative to the rate of events), use -g to include call graph/stack trace
+ * ```perf report``` report from a perf.data file
+ * ```perf script``` dump a perf.data file as text
+
+### Flame Graphs
+
+ * http://techblog.netflix.com/2015/07/java-in-flames.html
+ * http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Java
+
+See:
+
+ * https://www.youtube.com/watch?v=_Ik8oiQvWgo&t=727s
+ * Getting symbols: http://www.brendangregg.com/perf.html#symbols
+ 
 [UNP]: http://www.unpbook.com/

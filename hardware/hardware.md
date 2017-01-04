@@ -10,6 +10,10 @@ Division operations are expensive (up to 92 cycles on 64bit x86) [1](https://you
 https://software.intel.com/en-us/forums/intel-vtune-amplifier-xe/topic/311170
 Ignores branch misspredictions, when stalled you are not retiring instructions, aim to maximize when reducing cache misses
 
+## Stack
+
+ * [Understanding the Stack](https://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Mips/stack.html)
+
 # Scheduling
 
 ## Context Switching
