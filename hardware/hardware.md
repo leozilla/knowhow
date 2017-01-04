@@ -93,7 +93,7 @@ https://mechanical-sympathy.blogspot.co.at/2012/08/memory-access-patterns-are-im
 
 # Tooling
 
-perf, likwid, [lmbench](http://lmbench.sourceforge.net/)
+perf, likwid, [lmbench](http://lmbench.sourceforge.net/), [toplev](https://github.com/andikleen/pmu-tools/wiki/toplev-manual)
 
 # Groups
 

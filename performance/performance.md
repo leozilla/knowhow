@@ -98,6 +98,8 @@ Optimizations work best when:
 
 Point in execution where it is save to observe a threads state. All threads must be at a safe point to perform GC (at least in hotspot).
 
+ * http://epickrram.blogspot.co.at/2015/08/jvm-guaranteed-safepoints.html
+ 
 ## GC
 
  * Context switch between mutator and GC (not guaranteed to be scheduled back on same core)
@@ -196,6 +198,8 @@ void logSomething() {
   + Thread
   + Process
   + Virtual OS (Hypervisor)
+* Jitter
+  + http://epickrram.blogspot.co.at/2015/09/reducing-system-jitter.html, http://epickrram.blogspot.co.at/2015/11/reducing-system-jitter-part-2.html
 
 # Hardware
 
