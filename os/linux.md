@@ -61,6 +61,8 @@ $ head < /proc/cpuinfo
 $ head lscpu # more common
 ```
 
+ * https://peteris.rocks/blog/pipes-as-input-output-files/
+ 
 ## Assignment and Variables
 
 ```$$``` a shell variable that evaluated to the current shells pid
@@ -73,20 +75,35 @@ $ JETT=$(ps -f -C java | grep jetty | awk '{ print $2 }')
 
 # Memory
 
+ * [How much memory is my process using?](https://jvns.ca/blog/2016/12/03/how-much-memory-is-my-process-using-/)
+   + https://peteris.rocks/blog/htop/#virt-vsz-virtual-image
+ 
 ```bash
 cat /proc/meminfo
 ```
 
 # Filesystem
 
+## Hierarchy
+
 ![Hierarchy](http://www.blackmoreops.com/wp-content/uploads/2015/06/Linux-file-system-hierarchy-v2.0-2480px-blackMORE-Ops.png)
 
-## Home
+### bin
+
+Includes most unix commands like ```ls```, ```cp```. Mostly binary but also shell scripts.
+
+### etc
+
+Core system config directory (pronounces EHT-see)
+
+### home
 
 Configuration files called dot files .bashrc .login or directories .ssh
 Use ```.[]*``` or ```.??*``` to get all dot files except the current and parent directories. 
 
-## proc
+### proc
+
+System statistics and kernel internal stuff.
 
 ## Mouting
 
@@ -119,6 +136,73 @@ Links can also point to other links (chained sym links).
 ```bash
 $ ln -s target linkname
 ```
+
+# Devices
+
+The kernel presents many of the device I/O interfaces to user processes as files. 
+Sometimes called *device nodes*.
+
+Not all devices have device files because device I/O interfaces are not appropriate in all cases. 
+For example, network interfaces don’t have device files.
+
+The kernel assigns devices in the order in which they are found, 
+so a device may have a different name between reboots.
+
+**Block**
+
+Programs access data from a block device in fixed chunks, the total size
+is fixed and easy to index, processes have random access to any block in the device.
+
+**Character**
+
+Character devices work with data streams and don’t have a size.
+
+**Pipe**
+
+Named pipes are like character devices, 
+with another process at the other end of the I/O stream instead of a kernel driver.
+
+**Socket**
+
+Represent Unix domain sockets.
+
+**Find the name of a device**
+
+ * query ```udevd``` using ```udevadm```
+ * look in /sys
+ * guess the name from output of ```dmesg```
+ * for a disk device that is already visible, check output of ```mount```
+ * run ```cat /proc/devices``` to see block and char devices for which system currently has drivers. Correlate with ```/dev``` using major number.
+
+## sysfs
+
+To provide a uniform view for attached devices based on their actual hardware attributes.
+
+Base path for devices is /sys/devices
+
+```bash
+$ udevadm info --query=all --name=/dev/sda
+```
+
+## dd
+
+Read from an input file or stream and write to an output file or stream, possibly doing some encoding.
+dd copies data in blocks of a fixed size.
+
+Write raspberry image to sd card in junks of 4MB
+```bash
+$ dd if=2016-11-25-raspbian-jessie.img of=/dev/sdd bs=4M
+```
+
+## Harddisks
+
+```/dev/sda```, ```/dev/sdb``` represent entire disks,  ```/dev/sda1``` and ```/dev/sda2```, are the partitions.
+
+## Terminals
+
+Terminals are devices for moving characters between a user process and an I/O device.
+
+## udev
 
 # Commands and Tools
 
@@ -167,6 +251,8 @@ $ pgrep -n java
 ```
 
 ### top
+
+ * https://peteris.rocks/blog/htop
 
 ### kill
 
