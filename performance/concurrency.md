@@ -32,10 +32,16 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 * Littles Law
 * Queing Theory
 
-# Solutions
+# Models & Solutions
 
+* Actor
+* Thread
+* Events, Event Loop
+* CSP
 * Locking (Mutex, Semaphore)
 * Lock free
+* [Beyond Threads And Callbacks](http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html)
+* [Why Events Are A Bad Idea (for high-concurrency servers)](https://people.eecs.berkeley.edu/~brewer/papers/threads-hotos-2003.pdf)
 
 # Java
 
@@ -122,6 +128,7 @@ Concurrent Programming in Java | Doug Lea etc | Java | 8 | Little outdated but s
 http://www.azulsystems.com/blog/cliff/2010-01-09-biased-locking | Cliff Click | Java | 9 | If you want to know how biased locking actual works |
 http://joeduffyblog.com/2015/11/19/asynchronous-everything/ | Joe Duffy | .NET | 9 | Highly recommended |
 http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/ | Joe Duffy | .NET | 9 | |
+http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html | HighScalability | - | - | - |
 
 # Videos
 
