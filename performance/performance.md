@@ -186,6 +186,7 @@ void logSomething() {
 
  * http://techblog.netflix.com/2015/07/java-in-flames.html
  * http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Java
+ * http://www.slideshare.net/brendangregg/java-performance-analysis-on-linux-with-flame-graphs
  * [My first flame graph](experiments/home-ws/flamegraph/firstflamegraph.md)
 
 # Profilers

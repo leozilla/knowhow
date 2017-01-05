@@ -72,6 +72,14 @@ Find PID of all java processes where jetty is included in the command line.
 $ ps -f -C java | grep jetty | awk '{ print $2 }'
 ```
 
+### pgrep
+
+Find process id of last started java process
+
+```bash
+$ pgrep -n java
+```
+
 ### top
 
 ### taskset
