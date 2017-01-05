@@ -40,3 +40,4 @@ Up to 100 connections and 1k req/sec, seems that we hit saturation
 # Conclusions
 
 Seems that we hit saturation at about 800 req/sec.
+It looks strange to see such a rapid performance degradation, most likely we miss something here.

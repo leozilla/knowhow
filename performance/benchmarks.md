@@ -16,6 +16,27 @@ Benchmark
     + [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
     + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
 
+# Setup
+
+See: [Performance Methodology I], [Performance Methodology II]
+
+A **proper test environment**:
+
+ * Relevant: reproduces the phenomena (production like, relevant data volume and veracity)
+ * Isolated: leaves out unwanted effects
+ * Measurable: provides metrics
+ * Reliable: produces consistent result (usage patterns)
+ 
+## Steps
+
+ 1. Install + configure app to same specs as production
+ 2. Setup monitoring
+ 3. Kill everything on the system which is not running in production or better yet test on production system (not necessarily in production)
+ 4. Spike test to ensure correctness
+ 5. Actual test
+ 6. Collect and validate data
+ 7. Repeat
+
 # Guidelines and Problems
 
 Mainly Shipilevs ([JMH the lesser of two evils], [The Art of Java Benchmarking]) and Alexandrescu ([Writing Fast Code I], [Writing Fast Code II]) thoughts.
@@ -59,6 +80,11 @@ Without a baseline you dont have anything to compare against.
 
 ### Use constant rates? Use percentiles. Forget the mean
 
+### Bandwitdh vs. Latency
+
+Low latency cannot be achieved at very high bandwidth
+Very high bandwidth means you need to sacrifice latency
+
 ### Warmup
 
 Most benchmarks require warmup. Waiting for transient responses to settle down (JIT, OS scheduling, ...)
@@ -85,3 +111,5 @@ Most benchmarks require warmup. Waiting for transient responses to settle down (
 [Gatling]: http://gatling.io/
 [CO_USER_GROUP]: https://groups.google.com/forum/#!msg/mechanical-sympathy/icNZJejUHfE/BfDekfBEs_sJ
 [CO_PDF]: https://www.azul.com/files/HowNotToMeasureLatency_LLSummit_NYC_12Nov2013.pdf
+[Performance Methodology I]: https://www.youtube.com/watch?v=Zw_z7pjis7k
+[Performance Methodology II]: https://www.youtube.com/watch?v=eDTTxYCGsKc

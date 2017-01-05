@@ -317,6 +317,8 @@ Name | Recorded | Speaker | Platform | Rating | Description |
 [How NOT to Measure Latency] | - | Tene (Azul) | - | 10 | Must watch! |
 [The Art of Java Benchmarking] | Oredev 2013 | Shipilev | Java | 10 | Must watch! for everyone benchmarking java |
 [JMH the lesser of two evils] | Devoxx 2013 | Shipilev | Java | 9 | Similar to [The Art of Java Benchmarking] |
+[Performance Methodology I] | Devoxx 2012 | Shipliv & Pepperdine | Java+ | 10 | Very good |
+[Performance Methodology II] | Devoxx 2012 | Shipliv & Pepperdine | Java+ | 10 | Very good |
 [LMAX - How to Do 100K TPS at Less than 1ms Latency] | QCon SF 2010 | Barker & Thompson (LMAX) | Java | 9 | Classic one about the Disruptor |
 [Java at the Cutting Edge: Stuff I Learned about Performance] | JVM Users Aukland | Barker (LMAX) | Java | - | Watched long ago, but think it was good |
 [Benchmarking: You're Doing It Wrong] | Strangeloop 2014 | Greenberg (Google) | - | 8 | - |
@@ -359,6 +361,8 @@ Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' - https://www.youtube.
 [Writing Fast Code I]: https://www.youtube.com/watch?v=vrfYLlR8X8k
 [Writing Fast Code 2]: https://youtu.be/9tvbz8CSI8M
 [Optimization Tips - Mo' Hustle Mo' Problems]: https://youtu.be/Qq_WaiwzOtI
+[Performance Methodology I]: https://www.youtube.com/watch?v=Zw_z7pjis7k
+[Performance Methodology II]: https://www.youtube.com/watch?v=eDTTxYCGsKc
 
 [JMH]: http://openjdk.java.net/projects/code-tools/jmh/
 [Gatling]: http://gatling.io/
