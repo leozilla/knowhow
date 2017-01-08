@@ -27,7 +27,7 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 
 # Laws
 
-* Amdahls Law
+* [Amdahls Law](law/amdahls.md)
 * USL
 * Littles Law
 * Queing Theory

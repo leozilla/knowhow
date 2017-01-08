@@ -20,6 +20,7 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
 
 # Design
 
+* [Amdahls Law](law/amdahls.md)
 * Batching
    + [Batching-and-Low-Latency](https://vanilla-java.github.io/2016/07/09/Batching-and-Low-Latency.html)
    + [How-can-batching-requests-actually-reduce-latency](http://highscalability.com/blog/2013/12/4/how-can-batching-requests-actually-reduce-latency.html)
@@ -271,6 +272,7 @@ list.foreach(i -> /* .. do stuff .. */); // 1 cache miss for next node, 1 cache 
 * [wrk2](https://github.com/giltene/wrk2)
 * [tcpkali](https://github.com/machinezone/tcpkali/blob/master/doc/tcpkali.man.md)
 * [jrt-socket-response-tool](https://www.azul.com/products/open-source-tools/jrt-socket-response-tool/)
+* top: CPU should be split into instructions retired and memory stalls
 
 # People to learn from
 
