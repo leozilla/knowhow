@@ -73,6 +73,10 @@ Assign the return value of a shell command to a variable
 $ JETT=$(ps -f -C java | grep jetty | awk '{ print $2 }')
 ```
 
+## Arguments
+
+ * http://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+
 # Memory
 
  * [How much memory is my process using?](https://jvns.ca/blog/2016/12/03/how-much-memory-is-my-process-using-/)
