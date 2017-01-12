@@ -8,6 +8,8 @@ Performance
 Good explanation about what does (premature) optimization means: https://youtu.be/1DuMvpwWHH4?t=777
 If you are serious about performance, performance tests can fail your build (CI or nightly at least).
 Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
+Benefits of low allocation rates, higher cache utilization: https://youtu.be/vZngvuXk7PM?t=758
+Average Latency * Throughput https://t.co/DR7Od7IrRb at 28:14
 
 # Performance metrics
 
@@ -46,12 +48,73 @@ Division operations are expensive (up to 92 cycles on 64bit x86) and therefore s
 * Contention cost
 * QPI (Intel QuickPath Interconnect)
 
+https://www.youtube.com/watch?v=vZngvuXk7PM
+
+data passing | latency | light over a fibre | throughput |
+-------------|---------|--------------------|------------|
+Methodcall | inlined 0 real: 50 nx | 10m | 20,000,000/sec |
+Shared memory | 200ns | 40m | 5,000,000/sec |
+Sysv shared memory | 2micros | 400m | 500,000/sec | 
+Low latency network | 8micros | 1.6km | 125,000/sec |
+Typical LAN | 30micros | 6km | 30,000/sec |
+Typical data grid | 800micros | 160km | 1,250/sec |
+4G request latency | 55ms | 11,000km | 18/sec |
+
+# Methoddology
+
+https://youtu.be/Zw_z7pjis7k?list=WL&t=3214
+
+ 1. What prevents app to go faster: Monitoring
+ 2. Where it resides: Profiling
+ 3. How to change it stop messing with perf
+ 
+# Response Time IPC
+
+Deplyoment factors affecting response time: https://youtu.be/gsJztZkhQUQ?list=WL&t=2160
+
+Key takeaway is: dedicated resource assignment and affinity
+
+HW configuration:
+ * multiple network cards, latency can be improved by affinitizing traffic to particular card and directing to specific processors
+ * connection via inifiniBand or fiber optic instead of ethernet
+ 
+Native OS:
+ * within single OS image: take advantage of loopback traffic optimizations
+ * across multiple OS images: careful about traffic routing
+ 
+Virtual OS:
+ * good to affinitize VM to cores instead of free floating
+ * be careful about IO across virtual OS images
+ 
+Process level:
+ * affinitized to a socket delivers more consistent response time
+
+ 10. Reduce communication as much as possible
+ 9. Send data in big chunks
+ 8. Combine messages in batches
+ 7. If you care about througput, use an async model
+ 6. If you care about consistency, you have to use sync commit protocols
+ 5. Re-use resources (connection channels, threads, etc) do not create new ones for each message
+ 4. Check and log errors
+ 3. Use frameworks when appropriate (gives consistency)
+ 2. Profile and tune
+ 1. Dont believe it when someone says "it will never happen"
+
 # Java
 
 * Indirections = cache misses -> arrays rock
 * Async APIs needed
 * JDK NIO still too much blocking, garbage for selector key set
 * JNI expensive especially from C back to Java, caching JMethodIds helps etc
+
+## Pauses
+
+https://youtu.be/vZngvuXk7PM?t=795
+
+Causes for pauses
+ * IO delays (seeks and writes)
+ * OS interrupts (5ms is not uncommon, most of the pauses are from the OS)
+ * Lock contention
 
 # JVM
 
@@ -95,6 +158,8 @@ Optimizations work best when:
  * Compressed Ops ```-XX:+UseCompressedOops``` on by default, can save significant amount of memory
  * Prevent False Sharing in GC Card Tables ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
 
+Inline JVM options (https://youtu.be/vZngvuXk7PM?t=1533) -XX:MaxBCEAEstimateSize=450 -XX:FreqInlineSize=425
+
 ## Safepoints
 
 Point in execution where it is save to observe a threads state. All threads must be at a safe point to perform GC (at least in hotspot).
@@ -106,6 +171,10 @@ Point in execution where it is save to observe a threads state. All threads must
  * Context switch between mutator and GC (not guaranteed to be scheduled back on same core)
  * False Sharing in GC Card Tables
    + Try ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
+
+Method references create garbage? WTF (https://youtu.be/vZngvuXk7PM?t=956)
+8 fields, capturing lambdas is often the limit for Escape analysis (https://youtu.be/vZngvuXk7PM?t=1959)
+Enums and Lambda trick (https://youtu.be/vZngvuXk7PM?t=2166)
 
 ## Call Sites
 
