@@ -358,6 +358,11 @@ pi@raspberrypi:~ $ cat /proc/sys/net/ipv4/ip_local_port_range
 
 ## Performance
 
+ * http://highscalability.com/blog/2015/5/27/a-toolkit-to-measure-basic-system-performance-and-os-jitter.html
+ * http://highscalability.com/blog/2015/4/8/the-black-magic-of-systematically-reducing-linux-os-jitter.html
+ * https://www.kernel.org/doc/Documentation/kernel-per-CPU-kthreads.txt
+ * https://www.researchgate.net/publication/258406264_Exploratory_Study_on_the_Linux_OS_Jitter
+ 
 ### Perf Events
 
  * ```perf list``` list all possible event types

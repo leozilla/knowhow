@@ -213,6 +213,10 @@ void logSomething() {
   + Virtual OS (Hypervisor)
 * Jitter
   + http://epickrram.blogspot.co.at/2015/09/reducing-system-jitter.html, http://epickrram.blogspot.co.at/2015/11/reducing-system-jitter-part-2.html
+  + https://www.researchgate.net/publication/258406264_Exploratory_Study_on_the_Linux_OS_Jitter
+  + http://highscalability.com/blog/2015/5/27/a-toolkit-to-measure-basic-system-performance-and-os-jitter.html
+  + http://highscalability.com/blog/2015/4/8/the-black-magic-of-systematically-reducing-linux-os-jitter.html
+  + https://www.kernel.org/doc/Documentation/kernel-per-CPU-kthreads.txt
 
 # Hardware
 
@@ -273,6 +277,7 @@ list.foreach(i -> /* .. do stuff .. */); // 1 cache miss for next node, 1 cache 
 * [tcpkali](https://github.com/machinezone/tcpkali/blob/master/doc/tcpkali.man.md)
 * [jrt-socket-response-tool](https://www.azul.com/products/open-source-tools/jrt-socket-response-tool/)
 * top: CPU should be split into instructions retired and memory stalls
+* http://highscalability.com/blog/2015/5/27/a-toolkit-to-measure-basic-system-performance-and-os-jitter.html
 
 # People to learn from
 
