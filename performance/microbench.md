@@ -3,6 +3,7 @@ Microbenchmarks
 
  * measure effects in the range of nanoseconds (not microseconds)
  * not necessarily bad, it depends how we use them. You should not jump to conclusion too fast.
+ * division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
 
 # Java
 
