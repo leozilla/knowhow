@@ -150,3 +150,10 @@ Causes for pauses
  * IO delays (seeks and writes)
  * OS interrupts (5ms is not uncommon, most of the pauses are from the OS)
  * Lock contention
+ 
+# Videos
+
+Name | Recorded | Speaker | Rating | Description |
+-----| ---------|---------|--------|-------------|
+[JVM Mechanics](https://www.youtube.com/watch?v=E9i9NJeXGmM) | Silicon Valley JUG 2015 | Azul | 9 |  | 
+ 

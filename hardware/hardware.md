@@ -52,6 +52,8 @@ See: [Caching In: Understand, Measure, and Use Your CPU Cache More Effectively](
    + page size is adjustable (often requires reboot when changed)
      + JVM flag: ```-XX:+UseLargePages```
      + linux: ```cat /proc/meminfo```
+ * http://minnie.tuhs.org/CompArch/Lectures/week06.html
+ * http://landley.net/writing/memory-faq.txt
  
 **Readings**
 

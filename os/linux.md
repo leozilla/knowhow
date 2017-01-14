@@ -81,10 +81,25 @@ $ JETT=$(ps -f -C java | grep jetty | awk '{ print $2 }')
 
  * [How much memory is my process using?](https://jvns.ca/blog/2016/12/03/how-much-memory-is-my-process-using-/)
    + https://peteris.rocks/blog/htop/#virt-vsz-virtual-image
+ * http://landley.net/writing/memory-faq.txt
  
 ```bash
 cat /proc/meminfo
 ```
+
+http://www.linuxjournal.com/article/10678
+
+The filesystem cache, program code and shared libraries have a filesystem source, 
+so the RAM associated with any of them can be reused for another purpose at any time. 
+Should they be needed again, Linux can just read them back in from disk.
+
+Program data and stack space are a different story. 
+These are placed in anonymous pages, so named because they have no named filesystem source. 
+Once modified, an anonymous page must remain in RAM for the duration of the program unless there is secondary storage to write it to. 
+The secondary storage used for these modified anonymous pages is what we call swap space.
+
+The problem with this is twofold. First, programs often ask for more memory than they use. 
+The most common case is during a process fork, where an entire process is duplicated using copy-on-write anonymous pages.
 
 # Filesystem
 
@@ -207,6 +222,10 @@ $ dd if=2016-11-25-raspbian-jessie.img of=/dev/sdd bs=4M
 Terminals are devices for moving characters between a user process and an I/O device.
 
 ## udev
+
+# Networking
+
+ * [NAPI](https://wiki.linuxfoundation.org/networking/napi)
 
 # Commands and Tools
 
