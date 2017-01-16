@@ -37,6 +37,7 @@ OpenJDK: https://wiki.openjdk.java.net/display/HotSpot/PerformanceTechniques
  * [Type Sharpening](https://youtu.be/9yzZ4d3xueU?list=WL&t=1341)
  * Loop unrolling
  * Escape analysis
+ * Reads and Writes can be eliminated [1](https://www.infoq.com/presentations/JVM-Mechanics)
  * Constant propagation
  * Dead code elimination
  * Tail call elimination
@@ -53,6 +54,11 @@ Optimizations work best when:
  * Predictable control flow
  * Small methods
  * Specialized types (dont use Object if you can)
+ 
+Optimizations which are not necessary to do by hand (https://www.infoq.com/presentations/JVM-Mechanics): 
+
+ * creating temporary variables because you want to reduce memory access -> not necessary JIT does it for you
+ * simplify math by hand -> not necessary JIT does it for you
  
 ## Flags
 
