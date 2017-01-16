@@ -9,6 +9,7 @@ Performance
 
 # General
 
+Performance is usually not composable!
 Good explanation about what does (premature) optimization means: https://youtu.be/1DuMvpwWHH4?t=777
 If you are serious about performance, performance tests can fail your build (CI or nightly at least).
 Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)

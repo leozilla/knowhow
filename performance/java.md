@@ -18,17 +18,29 @@ Java
 
 OpenJDK: https://wiki.openjdk.java.net/display/HotSpot/PerformanceTechniques
 
- * Profiling based C1 (client),C2 (server),C3?
- * Optimization and De-Optimization at runtime
+ * Tiered compilation
+   + C0: Interpreted code
+   + C1: Simple C1 compiled (client)
+   + C2: Limited C1 compiled (client)
+   + C3: Full C1 compiled (client)
+   + C4: C2 complied (server)
+ * Optimization and De-Optimization at runtime (makes use of OSR)
  * Virtual Method Dispatch: Monomorphic, Bimorphic, Megamorphic call sites
- * Lock coarsening
+ * Lock elision
+   + [1](https://youtu.be/9yzZ4d3xueU?list=WL&t=1314)
+   + [2](http://www.ibm.com/developerworks/library/j-jtp10185/index.html)
+ * Lock coarsening [1](http://www.ibm.com/developerworks/library/j-jtp10185/index.html)
  * Lock biasing
+ * Adaptive locking [1](http://www.ibm.com/developerworks/library/j-jtp10185/index.html)
+ * Inlining
+ * [Scalar Replacement](https://www.youtube.com/watch?v=9yzZ4d3xueU&list=WL&index=3)
+ * [Type Sharpening](https://youtu.be/9yzZ4d3xueU?list=WL&t=1341)
  * Loop unrolling
  * Escape analysis
  * Constant propagation
  * Dead code elimination
  * Tail call elimination
- * On stack replacement (OSR)
+ * On stack replacement (OSR) [1](https://youtu.be/9yzZ4d3xueU?list=WL&t=1375)
  * Class Hierarchy Analysis (CHA)
  * Inlining
     + https://wiki.openjdk.java.net/display/HotSpot/Inlining
@@ -47,6 +59,7 @@ Optimizations work best when:
  * Bigger Page Sizes: ```-XX:+UseLargePages``` potential speedup 10-30%
  * Compressed Ops ```-XX:+UseCompressedOops``` on by default, can save significant amount of memory
  * Prevent False Sharing in GC Card Tables ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
+ * Check compilations ```-XX:+PrintCompilation```
 
 Inline JVM options (https://youtu.be/vZngvuXk7PM?t=1533) -XX:MaxBCEAEstimateSize=450 -XX:FreqInlineSize=425
 
@@ -55,6 +68,14 @@ Inline JVM options (https://youtu.be/vZngvuXk7PM?t=1533) -XX:MaxBCEAEstimateSize
 Point in execution where it is save to observe a threads state. All threads must be at a safe point to perform GC (at least in hotspot).
 
  * http://epickrram.blogspot.co.at/2015/08/jvm-guaranteed-safepoints.html
+ 
+## Memory
+ 
+![MemoryLayout](http://www.pointsoftware.ch/wp-content/uploads/2012/11/Cookbook_JVMArguments_2_MemoryModel.png)
+ 
+### Heap
+
+### Off-Heap
  
 ## GC
 
@@ -156,4 +177,4 @@ Causes for pauses
 Name | Recorded | Speaker | Rating | Description |
 -----| ---------|---------|--------|-------------|
 [JVM Mechanics](https://www.youtube.com/watch?v=E9i9NJeXGmM) | Silicon Valley JUG 2015 | Azul | 9 |  | 
- 
+[JVM Mechanics 2](https://www.infoq.com/presentations/JVM-Mechanics) | QCon 2012 | Jil Tene | | |

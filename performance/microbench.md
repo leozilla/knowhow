@@ -53,6 +53,10 @@ Benchmark                Mode  Cnt           Score          Error  Units
 MyBenchmark.testMethod  thrpt  200  4337584455.651 ± 31219828.361  ops/s
 ```
 
+# Videos
+
+ * https://shipilev.net/talks/jvmls-July2014-benchmarking.mp4
+
 [home-ws]: env/home-ws
 [JMH the lesser of two evils]: https://www.youtube.com/watch?v=VaWgOCDBxYw&t=518s
 [The Art of Java Benchmarking]: https://vimeo.com/78900556
