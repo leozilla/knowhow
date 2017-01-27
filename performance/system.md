@@ -53,6 +53,17 @@ https://youtu.be/FJW8nGV4jxY?t=2436
  * Flame graphs: https://www.youtube.com/watch?v=BHA65BqlqSk
  * ip route get ipAddr -> give ip address and it tells where it goes
  
+# Tools
+
+ * top
+ * htop
+ * atop
+ * dstat
+ * vmstat
+ * iostat
+ * netstat
+ * ifstat
+
 # Benchmarking
  
 Results are often misleading: you benchmark A, but actually stress B and conclude you measured C

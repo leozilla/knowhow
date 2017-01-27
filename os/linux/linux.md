@@ -156,6 +156,19 @@ Links can also point to other links (chained sym links).
 $ ln -s target linkname
 ```
 
+## Files
+
+```bash
+# find largest files
+$ find -type f -exec du -SH {} + | sort -rh | head -n 5
+
+# find largest directories
+$ du -Sh | sort -rh | head -5
+
+# find oldest files
+$ find -type f -printf '%T+ %p\n' | sort | head -n 10
+```
+
 # Devices
 
 The kernel presents many of the device I/O interfaces to user processes as files. 
@@ -364,6 +377,7 @@ Get current state of connections
 
 ```bash
 $ ss -tan
+$ netstat -anpe --tcp
 ```
 
 Unix always closes all open descriptors when a process terminates. [UNP]
