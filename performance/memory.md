@@ -1,6 +1,24 @@
 Memory Performance
 ==================
 
+# Paging
+
+Demand paging touching a piece of memory may physically block to perform IO.
+
+> I would much rather have the OS kill programs when it is close to the limit, 
+and continue running reliably, than to deal with a paging madness"
+
+Joe Duffy: [Asynchronous Everything]
+
+# GC
+
+> But I’d say the prime directive was to avoid superfluous allocations like the plague. 
+> Even short-lived ones. There is a mantra that permeated .NET in the early days: Gen0 collections are free. 
+> Unfortunately, this shaped a lot of .NET’s library code, and is utter hogwash. 
+> Gen0 collections introduce pauses, dirty the cache, and introduce beat frequency issues in a highly concurrent system.
+
+Joe Duffy: [Asynchronous Everything]
+
 # Memory layout/allignment
 
 * Cache lines 64 byte?
@@ -41,3 +59,5 @@ List<Integer> list = new LinkedList<>();
 // add elements
 list.foreach(i -> /* .. do stuff .. */); // 1 cache miss for next node, 1 cache miss for Integer class?
 ```
+
+[Asynchronous Everything]: http://joeduffyblog.com/2015/11/19/asynchronous-everything/

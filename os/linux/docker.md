@@ -49,3 +49,11 @@ pi@raspberrypi:~ $ docker attach 39242156c56b
 Name | Author | Rating | Description |
 -----|--------|--------|-------------|
 The Docker Book: Containerization is the new virtualization | James Turnbull | 8 | First book i read about docker, i liked it |
+
+# Videos
+
+Name | Speaker | Conference | Rating | Description |
+-----|---------|------------|--------|-------------|
+[Docker and the JVM, a good idea?] | Chris Batey | Devvox Poland 2016 | 9 | Common pitfalls about cgroups, quite nice |
+
+[Docker and the JVM, a good idea?]: https://www.youtube.com/watch?v=Vt4G-pHXfs4

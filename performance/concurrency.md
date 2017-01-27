@@ -18,12 +18,9 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 
 # Concepts
 
-## Memory Barriers
-
-https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
-
 * Safety
 * Liveness
+* [Execution Model](http://joeduffyblog.com/2015/11/19/asynchronous-everything/)
 
 # Laws
 
@@ -42,6 +39,12 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 * Lock free
 * [Beyond Threads And Callbacks](http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html)
 * [Why Events Are A Bad Idea (for high-concurrency servers)](https://people.eecs.berkeley.edu/~brewer/papers/threads-hotos-2003.pdf)
+
+# Implementation
+
+## Memory Barriers
+
+https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 
 # Java
 
