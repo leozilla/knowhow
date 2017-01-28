@@ -286,6 +286,12 @@ Find process id of last started java process
 $ pgrep -n java
 ```
 
+Find process which contain "jetty" in their command line
+
+```bash
+$ pgrep -f jetty
+```
+
 ### top
 
  * https://peteris.rocks/blog/htop
@@ -321,6 +327,16 @@ $ kill -9 pid
 ```
 
  * http://bencane.com/2014/04/01/understanding-the-kill-command-and-how-to-terminate-processes-in-linux
+
+### pidstat
+
+```bash
+# show context switches of process $PID every 1 second
+$ pidstat -w -p $PID 1
+
+# show context switches of process $PID and its children (usefull for java) every 1 second
+$ pidstat -w -t -p $PID 1
+```
 
 ### taskset
 

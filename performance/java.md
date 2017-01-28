@@ -85,6 +85,7 @@ Point in execution where it is save to observe a threads state. All threads must
  
 ## GC
 
+ * Tune Eden space in a way that short lived objects dont get promoted to old gen (https://www.youtube.com/watch?v=DFub1L3gzGo&index=4&list=WL)
  * Context switch between mutator and GC (not guaranteed to be scheduled back on same core)
  * False Sharing in GC Card Tables
    + Try ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
@@ -92,6 +93,11 @@ Point in execution where it is save to observe a threads state. All threads must
 Method references create garbage? WTF (https://youtu.be/vZngvuXk7PM?t=956)
 8 fields, capturing lambdas is often the limit for Escape analysis (https://youtu.be/vZngvuXk7PM?t=1959)
 Enums and Lambda trick (https://youtu.be/vZngvuXk7PM?t=2166)
+
+```bash
+# show gc stats for VM every second
+$ jstat -gc $PID 1000
+```
 
 ## Call Sites
 
