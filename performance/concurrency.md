@@ -21,6 +21,8 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * Safety
 * Liveness
 * [Execution Model](http://joeduffyblog.com/2015/11/19/asynchronous-everything/)
+* Process:
+* Thread: A stream of executable code within a process that has the ability to be scheduled [1](http://www.informit.com/articles/article.aspx?p=169479)
 
 # Laws
 
@@ -29,18 +31,48 @@ Starvation free, Fairness, Obstruction free, False Sharing, Cache Coherency
 * Littles Law
 * Queing Theory
 
-# Models & Solutions
+# Models
 
-* Actor
-* Thread
-* Events, Event Loop
-* CSP
-* Locking (Mutex, Semaphore)
-* Lock free
-* [Beyond Threads And Callbacks](http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html)
-* [Why Events Are A Bad Idea (for high-concurrency servers)](https://people.eecs.berkeley.edu/~brewer/papers/threads-hotos-2003.pdf)
+## Thread based
+
+ * Thread per Request [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#thread)
+ * Process per Request (old UNIX style) [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#mp)
+ * Request dispatch to Thread Pool [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#mt)
+
+[Considerations](http://berb.github.io/diploma-thesis/original/042_serverarch.html#scalemt)
+
+## Event based
+
+ * Event Model, Event Loop
+ 
+[Considerations](http://berb.github.io/diploma-thesis/original/042_serverarch.html#scaleev)
+ 
+## Combination
+
+### SEDA [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#seda)
+
+> If I were to design SEDA today, I would decouple stages (i.e., code modules) from queues and thread pools (i.e., concurrency boundaries)
+
+Matt Welsh: [Retrospective on SEDA](http://matt-welsh.blogspot.co.at/2010/07/retrospective-on-seda.html)
+
+ * Actor
+ * CSP
 
 # Implementation
+
+ * Locking (Mutex, Semaphore)
+ * Lock free
+
+## Thread Models
+
+ * http://www.cs.indiana.edu/classes/b534-plal/ClassNotes/thread-design-patterns4.pdf
+ * [Beyond Threads And Callbacks](http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html)
+ * [Why Events Are A Bad Idea (for high-concurrency servers)](https://people.eecs.berkeley.edu/~brewer/papers/threads-hotos-2003.pdf): imo outdated for really high number of concurrent connections
+
+## Patterns
+
+ * Reactor [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#reactor)
+ * Proactor [1](http://berb.github.io/diploma-thesis/original/042_serverarch.html#proactor)
 
 ## Memory Barriers
 
