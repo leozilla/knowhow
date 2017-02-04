@@ -24,6 +24,9 @@ Joe Duffy: [Asynchronous Everything]
 * Cache lines 64 byte?
 * http://www.insightfullogic.com/2013/Jan/03/slab-guaranteed-heap-alignment-jvm/
 * http://psy-lob-saw.blogspot.co.at/2013/01/direct-memory-alignment-in-java.html
+* Main advantages from C/C++ over memory managed languages like Java/C# (https://youtu.be/ju2xsbJ07ug?t=553)
+  + Dead reckoning
+  + Streaming (prefetch) of arrays and structs
 
 # Memory access patterns
 
