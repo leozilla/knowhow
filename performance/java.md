@@ -24,6 +24,8 @@ OpenJDK: https://wiki.openjdk.java.net/display/HotSpot/PerformanceTechniques
    + C2: Limited C1 compiled (client)
    + C3: Full C1 compiled (client)
    + C4: C2 complied (server)
+ * Code Cache [Video Visualization](https://youtu.be/XeTgtS3xdcc?list=WL)
+   + [JitWatch](https://github.com/AdoptOpenJDK/jitwatch)
  * Optimization and De-Optimization at runtime (makes use of OSR)
  * Virtual Method Dispatch: Monomorphic, Bimorphic, Megamorphic call sites
  * Lock elision
@@ -60,12 +62,23 @@ Optimizations which are not necessary to do by hand (https://www.infoq.com/prese
  * creating temporary variables because you want to reduce memory access -> not necessary JIT does it for you
  * simplify math by hand -> not necessary JIT does it for you
  
+## Inlining
+
+Most important is *MaxInlineSize*
+
+ * MaxInlineSize: https://youtu.be/teYzwaWmi-8?list=WL&t=1351
+ 
 ## Flags
 
  * Bigger Page Sizes: ```-XX:+UseLargePages``` potential speedup 10-30%
  * Compressed Ops ```-XX:+UseCompressedOops``` on by default, can save significant amount of memory
  * Prevent False Sharing in GC Card Tables ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
  * Check compilations ```-XX:+PrintCompilation```
+ * ```-XX:+DebugNonSafepoints``` for profiling everything
+ * ```-XX:+PrintGCDetails``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
+ * ```-XX:+PrintGCApplicationStoppedTime``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
+ * ```-XX:+PrintSafepointStatistics``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
+ * ```-XX:+PrintSafepointStatisticsCount=1``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
 
 Inline JVM options (https://youtu.be/vZngvuXk7PM?t=1533) -XX:MaxBCEAEstimateSize=450 -XX:FreqInlineSize=425
 
@@ -74,6 +87,20 @@ Inline JVM options (https://youtu.be/vZngvuXk7PM?t=1533) -XX:MaxBCEAEstimateSize
 Point in execution where it is save to observe a threads state. All threads must be at a safe point to perform GC (at least in hotspot).
 
  * http://epickrram.blogspot.co.at/2015/08/jvm-guaranteed-safepoints.html
+
+## Profiling
+
+ * Dont use hprof (proposal to remove it)
+ * VisualVM is a bit better than hprof
+ * Best profilers
+   + Jave Mission Control / Java Flight Recorder
+   + Honest profiler (richard warburton)
+   + Lightweight Java Profiler (google)
+   + jHiccup
+ 
+### Java Mission Control
+
+ * ```-XX:+DebugNonSafepoints``` for sampling at any location
  
 ## Memory
  
@@ -89,6 +116,7 @@ Point in execution where it is save to observe a threads state. All threads must
  * Context switch between mutator and GC (not guaranteed to be scheduled back on same core)
  * False Sharing in GC Card Tables
    + Try ```-XX:+UseConCardMark``` Use with care: 15% sequential slowdown
+ * GC Stop Time does not include Time to Safepoint (time to get all threads stopping)
 
 Method references create garbage? WTF (https://youtu.be/vZngvuXk7PM?t=956)
 8 fields, capturing lambdas is often the limit for Escape analysis (https://youtu.be/vZngvuXk7PM?t=1959)
@@ -179,10 +207,24 @@ void logSomething() {
 
 https://youtu.be/vZngvuXk7PM?t=795
 
-Causes for pauses
+Tools:
+ * jHiccup [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2568)
+
+Causes for pauses:
  * IO delays (seeks and writes)
  * OS interrupts (5ms is not uncommon, most of the pauses are from the OS)
  * Lock contention
+ * Switching between locking modes [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2266)
+ * De-optimizing code [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2266)
+
+Flags to print statistics about pauses:
+
+ * ```-XX:+PrintSafepointStatistics``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
+ * ```-XX:+PrintSafepointStatisticsCount=1``` [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2167)
+
+# Literature
+
+ * http://jeremymanson.blogspot.co.at/2010/07/why-many-profilers-have-serious.html
  
 # Videos
 
@@ -190,3 +232,4 @@ Name | Recorded | Speaker | Rating | Description |
 -----| ---------|---------|--------|-------------|
 [JVM Mechanics](https://www.youtube.com/watch?v=E9i9NJeXGmM) | Silicon Valley JUG 2015 | Azul | 9 |  | 
 [JVM Mechanics 2](https://www.infoq.com/presentations/JVM-Mechanics) | QCon 2012 | Jil Tene | | |
+[How to Lie (to Yourself) about Performance](https://youtu.be/teYzwaWmi-8?list=WL) | Devoxx Poland 2016 | Douglas Hawkins | 8 | JIT, CO, Sampling Bias |

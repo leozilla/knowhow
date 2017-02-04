@@ -88,6 +88,7 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 * Herb Sutter
 * Scott Meyers
 * Joe Duffy
+* http://jeremymanson.blogspot.co.at/
 
 # Code to learn from
 

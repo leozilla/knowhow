@@ -15,6 +15,7 @@ If you are serious about performance, performance tests can fail your build (CI 
 Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
 Benefits of low allocation rates, higher cache utilization: https://youtu.be/vZngvuXk7PM?t=758
 Average Latency * Throughput https://t.co/DR7Od7IrRb at 28:14
+Big lie: "Normal" Distributions [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2408)
 
 # Performance metrics
 
@@ -145,6 +146,8 @@ Causes for pauses
 * [jrt-socket-response-tool](https://www.azul.com/products/open-source-tools/jrt-socket-response-tool/)
 * top: CPU should be split into instructions retired and memory stalls
 * http://highscalability.com/blog/2015/5/27/a-toolkit-to-measure-basic-system-performance-and-os-jitter.html
+* HdrHistogram
+  + http://kamon.io/core/metrics/instruments/
 
 # People to learn from
 
@@ -161,6 +164,7 @@ Causes for pauses
 * sustrik (ZeroMQ inventor) (http://250bpm.com/)
 * Brendan D. Gregg (http://www.brendangregg.com)
 * Richard Warburton (http://www.insightfullogic.com/)
+* https://blog.codecentric.de/
 
 # Code to learn from
 
