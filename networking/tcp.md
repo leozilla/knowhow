@@ -54,5 +54,14 @@ FIN sent in each direction and each FIN acked by the other end (4 messages in to
 * [Great TCP-vs-UDP Debate]
 * [About TIME-WAIT state](https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux.html#about-time-wait-state)   
 
+## Tools
+
+### Netstat
+
+Show send and receive queue size and Pid/Program name.
+```bash
+$ netstat --tcp -p
+```
+
 [UDP vs TCP]: https://news.ycombinator.com/item?id=13272610
 [Great TCP-vs-UDP Debate]: http://ithare.com/64-network-dos-and-donts-for-game-engines-part-iv-great-tcp-vs-udp-debate/

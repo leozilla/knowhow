@@ -99,7 +99,7 @@ https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
 
 ## Testing
 
- * [jcstress](http://openjdk.java.net/projects/code-tools/jcstress/) best learned via [Close encounters of JMM kind]
+ * [jcstress](http://openjdk.java.net/projects/code-tools/jcstress/) best learned via [Close encounters of JMM kind], see [Experiments](experiments/home-ws/concurrency/jcstress.md)
 
 # .NET
 
