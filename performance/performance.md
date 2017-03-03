@@ -15,12 +15,17 @@ Performance
 # General
 
 Performance is usually not composable!
+Functions contain more branches, there is more risk of confusing the optimizer
 Good explanation about what does (premature) optimization means: https://youtu.be/1DuMvpwWHH4?t=777
 If you are serious about performance, performance tests can fail your build (CI or nightly at least).
 Division operations are expensive (up to 92 cycles on 64bit x86) and therefore should not be done in microbenchmarks [1](https://youtu.be/1DuMvpwWHH4?t=1334)
 Benefits of low allocation rates, higher cache utilization: https://youtu.be/vZngvuXk7PM?t=758
 Average Latency * Throughput https://t.co/DR7Od7IrRb at 28:14
 Big lie: "Normal" Distributions [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2408)
+
+Exceptions: This might be surprising to some people, since undoubtedly everyone has heard that “exceptions are slow.” 
+It turns out that they don’t have to be. 
+And, when done right, they get error handling code and data off hot paths which increases I-cache and TLB performance.
 
 # Performance metrics
 

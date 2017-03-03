@@ -13,6 +13,7 @@ Distributed
 * [End to end argument in systems design](http://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)
 * [Stop calling databases CP or AP](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html)
 * Dynamo paper
+* [Live beyond distributed transactions 2nd edition](https://queue.acm.org/detail.cfm?id=3025012)
 
 # Practice
 
