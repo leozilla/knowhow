@@ -68,6 +68,7 @@ Matt Welsh: [Retrospective on SEDA](http://matt-welsh.blogspot.co.at/2010/07/ret
  * http://www.cs.indiana.edu/classes/b534-plal/ClassNotes/thread-design-patterns4.pdf
  * [Beyond Threads And Callbacks](http://highscalability.com/blog/2013/3/18/beyond-threads-and-callbacks-application-architecture-pros-a.html)
  * [Why Events Are A Bad Idea (for high-concurrency servers)](https://people.eecs.berkeley.edu/~brewer/papers/threads-hotos-2003.pdf): imo outdated for really high number of concurrent connections
+ * Mars rover uses message passing (https://youtu.be/3SdSKZFoUa8?list=WL&t=533)
 
 ## Patterns
 
