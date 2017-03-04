@@ -164,7 +164,32 @@ In Miori
  * 90-something% of the typical uses of exceptions in .NET and Java became preconditions. ArgumentNullException, ArgumentOutOfRangeException, and related types and, more importantly, the manual checks and throws were gone
 
 **Recoverable Errors: Type-Directed Exceptions**
+Examples:
+ * File or Network I/O
+ * Validating user data (web form submission -> should be as specific as possible to reduce errors)
 
+Usually don’t want to trigger abandonment. The program expects it from time to time.
+An exception, as with error codes, is just a different kind of return value! Its part of the contract.
+**If you look at most APIs that fail, they have a single failure mode anyway (once all bug failure modes are done with abandonment): IO failed, parsing failed, etc**
+And many recovery actions a developer tends to write don’t actually depend on the specifics of what exactly failed when, say, doing an IO.
+Most of the information in modern exceptions are not actually there for programmatic use; instead, they are for diagnostics.
+In java ```catch (FooException)``` is essentially hiding a dynamic type test.
+Intended best practices of handling errors as locally as possible.
+
+In Midori:
+ * had kind of checked exceptions, ```throws``` keyword and ```try``` expression
+ * 90-something% of the functions in our system could not throw exceptions!
+ * Exceptions thrown by a function became part of its signature, just as parameters and return values are.
+ * Difference to Javas checked exceptions
+   + The fact that the lion’s share of errors were expressed using abandonment meant most APIs didn’t throw.
+   + The fact that we encouraged a single mode of failure simplified the entire system greatly. Also easy to go from multi failure mode to single and back again.
+ * if you tried to catch something that wasn’t declared as being thrown, we could give you an error about dead code
+
+**Aborts**
+Like uncatchable exceptions until a defined point.
+
+**Keepers**
+Like default exceptions handlers.
 
 **Principles i established over the last 10 years**
 
