@@ -36,6 +36,8 @@ but it seems that the average developer is not able to use them correctly theref
 
 # Considerations
 
+Feature Toggles: [1](https://youtu.be/txY0m9c5M9E?t=2293)
+
 ## Deployment
 ## Versioning
 ## Monitoring
