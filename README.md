@@ -32,6 +32,7 @@ Everyone is highly welcome to contribute/improve/correct things.
 * [OS](os/os.md)
    + [Linux](os/linux/linux.md)
       + [Docker](os/linux/docker.md)
+* [Tools](tools/tools.ms)
 * [Hardware](hardware/hardware.md)
    + [Raspberry](hardware/raspberry.md)
 * [Architecture](architecture/architecture.md)
