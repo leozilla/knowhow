@@ -3,7 +3,8 @@ Tools
 
 # jq
 
-http://webgeodatavore.com/jq-json-manipulation-command-line-with-geojson.html
+ * http://webgeodatavore.com/jq-json-manipulation-command-line-with-geojson.html
+ * https://www.reddit.com/r/commandline/comments/3z9jff/jq_examples/
 
 Examples make use of: stacks.json.gz
 
