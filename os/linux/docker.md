@@ -44,6 +44,15 @@ pi@raspberrypi:~ $ docker ps -q
 pi@raspberrypi:~ $ docker attach 39242156c56b
 ```
 
+### Images
+
+Show image layers
+
+```bash
+$ docker history foo-containerid
+```
+
+
 # Books
 
 Name | Author | Rating | Description |
