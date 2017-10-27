@@ -28,13 +28,15 @@ I would even go as far as saying that you should not buy into this architecture 
 ## Define strict boundaries
 
 Boundaries should usually not allow sharing of mutable state. Messaging is a very natural way of achieving this separation.
-REST is also a form of messaging although it differs in its execution (usually blocking thread model).
+HTTP (REST) is also a form of messaging as every other network protocol is.
 This would also be possible with modularization concepts of modern platforms (.NET, JVM) 
 but it seems that the average developer is not able to use them correctly therefor we now have to cope with distribution :-(
 
 ## Have well defined interfaces
 
 # Considerations
+
+Feature Toggles: [1](https://youtu.be/txY0m9c5M9E?t=2293)
 
 ## Deployment
 ## Versioning

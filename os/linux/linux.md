@@ -424,6 +424,7 @@ pi@raspberrypi:~ $ cat /proc/sys/net/ipv4/ip_local_port_range
 
  * http://techblog.netflix.com/2015/07/java-in-flames.html
  * http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Java
+ * Containerized: http://blog.alicegoldfuss.com/making-flamegraphs-with-containerized-java/
 
 See:
 

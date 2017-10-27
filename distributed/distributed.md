@@ -45,7 +45,7 @@ See:
 
 Currently a mix of ANSI DB and distributed models, a lot more work todo here:
 
- * (Strict) Linearizability (cache coherency protocols provide us strict consistency in our single process concurrent programs)
+ * (Strict) Linearizability (cache coherency protocols provide us strict consistency in our single process but multi threaded concurrent programs)
  * Sequential Consistency
  * Causual Consistency
  * Processor Consistency
@@ -56,6 +56,7 @@ Currently a mix of ANSI DB and distributed models, a lot more work todo here:
  * Read committed
  * Dirty read
  * Eventual Consistency (not really defined well, http://www.bailis.org/papers/eventual-queue2013.pdf)
+ * Consistency in CAP is not the C in ACID it is Linearizability
 
 ## ACID
 

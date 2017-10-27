@@ -130,6 +130,7 @@ Causes for pauses
  * http://techblog.netflix.com/2015/07/java-in-flames.html
  * http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Java
  * http://www.slideshare.net/brendangregg/java-performance-analysis-on-linux-with-flame-graphs
+ * Containerized: http://blog.alicegoldfuss.com/making-flamegraphs-with-containerized-java/
  * [My first flame graph](experiments/home-ws/flamegraph/firstflamegraph.md)
 
 # Profilers

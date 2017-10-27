@@ -25,6 +25,7 @@ Named error handling although it includes fault tolerance, fault prevention, err
 * Stability Patterns
 * http://highscalability.com/blog/2013/2/27/42-monster-problems-that-attack-as-loads-increase.html
 * [Rust Error Handling](https://doc.rust-lang.org/book/error-handling.html)
+* [Zen of erlang](http://ferd.ca/the-zen-of-erlang.html)
 
 ## What is an Error
 
@@ -77,6 +78,7 @@ Sadly, the most commonplace model – unchecked exceptions – is the worst you 
 For these reasons, most reliable systems use return codes instead of exceptions. They make it possible to locally reason about and decide how best to react to error conditions.
 [The trouble with checked Exceptions](http://www.artima.com/intv/handcuffs.html)
 [Exception Safety](https://en.wikipedia.org/wiki/Exception_safety)
+[Mars Rover C++ Exceptions](https://youtu.be/3SdSKZFoUa8?list=WL&t=2304)
 
 For robust systems programs, don’t use exceptions.
 
@@ -107,7 +109,87 @@ The resulting model seems to be the worst of both worlds. It doesn’t help you 
 
 ## Bugs Aren’t Recoverable Errors
 
- * Recoverable error: 
+**Recoverable error**: markup text being parsed, user input from a website, or a transient network connection failure.
+In these cases, programs are expected to recover. Predictable and, frequently, planned situation, despite being called an “error.”
+
+**Unrecoverable error aka bug**: Logic is wrong.
+Such problems often aren’t even detected promptly; it takes a while until “secondary effects” are observed indirectly, 
+at which point significant damage to the program’s state might have occurred.
+All data structures reachable by this code are now suspect.
+Depending on the isolation guarantees of your language, perhaps the entire process is tainted.
+
+You usually don’t hear of languages suggesting two different techniques for error handling.
+
+**Abandonment**
+In Midori bugs cause abandonment = fail fast.
+C# has Environment.FailFast; C++ has std::terminate; Go has panic; Rust has panic!
+The scope of this context depends on the system –
+for example, C# and C++ terminate the process, Go the current Goroutine, and Rust the current thread, optionally with a panic handler attached to salvage the process.
+Haskel: It cannot be handled or fixed at runtime, it can only be fixed by its developer. Thus there should be no according return code, but instead there should be asserts.
+Abandoning fine grained mutable shared memory scopes (threads, coroutines) is suspect unless your system somehow makes guarantees about the scope of the potential damage done.
+Proceeding in the face of a bug is dangerous when you’re trying to build a robust system.
+"Process" state is transient by design. In a well designed system it can be thrown away and recreated on a whim.
+Corrupted persistet state must be dealt differently.
+Regularly journaling and checkpointing precious persistent state to allow abandonment.
+In Modiri all unannotated over/underflows were considered bugs and led to abandonment. 9 times out of 10, this approach helped to avoid a problem
+
+**Building reliable systems**
+The error model must make errors transparent and easy to deal with.
+Architect your system so that the whole remains functional even when individual pieces fail, and then teach your system to recover those failing pieces gracefully
+Isolation is critical.
+
+> The unavoidable price of reliability is simplicity. (C. Hoare).
+
+Pointing out those connections with the messier outside world. 
+Foundation of cheap and ever-present isolation. [Zen of erlang](http://ferd.ca/the-zen-of-erlang.html)
+Repeated error checking when manually allocating memory it’s error prone and leads to huge amounts of frequently untested code-paths. 
+And when code-paths are untested, they usually don’t work.
+Developers in general do a terrible job making their software work properly right at the edge of resource exhaustion.
+
+**Assertions**
+Trigger abandonment. Release or debug only.
+It’s better to find a bug at runtime than to proceed in the face of one.
+[The Power of Ten -Rules for Developing Safety Critical Code](http://pixelscommander.com/wp-content/uploads/2014/12/P10.pdf)
+
+**Contracts**
+Preconditions and postconditions.
+This is most often used to validate arguments. Sometimes it’s used to validate the state of the target object.
+A contract was as important as a method’s return and argument types. Just an extension of the type system.
+Self-describes the contract of the API in a way that documents itself and is easy to understand by callers.
+Contracts should be part of the signature and not the implementation.
+In Miori
+ * by default checked at runtime. If a compiler could prove truth or falsehood at compile-time, it was free to elide runtime checks or issue a compile-time error
+ * contracts and assertions were proven side-effect free.
+ * If any of these contracts are found to be false at runtime, abandonment occurs
+ * 90-something% of the typical uses of exceptions in .NET and Java became preconditions. ArgumentNullException, ArgumentOutOfRangeException, and related types and, more importantly, the manual checks and throws were gone
+
+**Recoverable Errors: Type-Directed Exceptions**
+Examples:
+ * File or Network I/O
+ * Validating user data (web form submission -> should be as specific as possible to reduce errors)
+
+Usually don’t want to trigger abandonment. The program expects it from time to time.
+An exception, as with error codes, is just a different kind of return value! Its part of the contract.
+**If you look at most APIs that fail, they have a single failure mode anyway (once all bug failure modes are done with abandonment): IO failed, parsing failed, etc**
+And many recovery actions a developer tends to write don’t actually depend on the specifics of what exactly failed when, say, doing an IO.
+Most of the information in modern exceptions are not actually there for programmatic use; instead, they are for diagnostics.
+In java ```catch (FooException)``` is essentially hiding a dynamic type test.
+Intended best practices of handling errors as locally as possible.
+
+In Midori:
+ * had kind of checked exceptions, ```throws``` keyword and ```try``` expression
+ * 90-something% of the functions in our system could not throw exceptions!
+ * Exceptions thrown by a function became part of its signature, just as parameters and return values are.
+ * Difference to Javas checked exceptions
+   + The fact that the lion’s share of errors were expressed using abandonment meant most APIs didn’t throw.
+   + The fact that we encouraged a single mode of failure simplified the entire system greatly. Also easy to go from multi failure mode to single and back again.
+ * if you tried to catch something that wasn’t declared as being thrown, we could give you an error about dead code
+
+**Aborts**
+Like uncatchable exceptions until a defined point.
+
+**Keepers**
+Like default exceptions handlers.
 
 **Principles i established over the last 10 years**
 

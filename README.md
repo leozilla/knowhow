@@ -3,6 +3,7 @@
 **Work in progress** - currently copying old stuff over and organizing it, please come back in 2-4 weeks
 
 This repository collects stuff i am most interested in. It should become my big reference book.
+For another very comprehensive list of awesomeness check out: https://github.com/sindresorhus/awesome
 
 **Attention**
 
@@ -31,6 +32,7 @@ Everyone is highly welcome to contribute/improve/correct things.
 * [OS](os/os.md)
    + [Linux](os/linux/linux.md)
       + [Docker](os/linux/docker.md)
+* [Tools](tools/tools.md)
 * [Hardware](hardware/hardware.md)
    + [Raspberry](hardware/raspberry.md)
 * [Architecture](architecture/architecture.md)
