@@ -76,7 +76,7 @@ Typical LAN | 30micros | 6km | 30,000/sec |
 Typical data grid | 800micros | 160km | 1,250/sec |
 4G request latency | 55ms | 11,000km | 18/sec |
 
-# Methoddology
+# Methodology
 
 https://youtu.be/Zw_z7pjis7k?list=WL&t=3214
 
@@ -196,6 +196,7 @@ https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks | David Holm
 https://medium.com/@octskyward/modern-garbage-collection-911ef4f8bd8e#.a3ax4ucvz | Mike Hearn | Java/GO | 8 | A critique on the claims about Gos GC plus a good intro to modern GC |
 Your Load Generator Is Probably Lying To You - Take The Red Pill And Find Out Why | High Scalability | - | - | Talks about Coordinated Omission |
 https://lwn.net/Articles/252125/ | - | - | - | Easy to get but very long explanation about CPU caches |
+[Not all operations are equal](http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/) | - | - | - | |
 
 https://groups.google.com/forum/#!forum/mechanical-sympathy
 
