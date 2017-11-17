@@ -14,6 +14,7 @@ So basically what I want to say is: Take some stuff, especially those marked *ex
 Everyone is highly welcome to contribute/improve/correct things.
 
 * [Distributed](distributed/distributed.md)
+  + [Kubernetes](distributed/k8s.md)
 * [Performance](performance/performance.md)
   + [Concurrency](performance/concurrency.md)
   + [Benchmarks](performance/benchmarks.md)
