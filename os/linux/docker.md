@@ -5,35 +5,20 @@ Running docker on linux.
 
 * http://phusion.github.io/baseimage-docker/#intro
 
-# Use cases
-
-## Container lifecylce
-
-### Starting a stopped container
-
-```bash
-$ docker start foo-containerid
-```
-
-### Kill or stop the last started container
-
-```bash
-$ docker kill `docker ps -lq`
-```
-
-### Attaching bash to a running container
-
-Allows to attach multiple shells
-
-```bash
-$ docker exec -it foo-containerid /bin/bash
-```
-
-Can only attach one shell
-
-```bash
-$ docker attach foo-containerid
-```
+| Command | Description |
+|---------|-------------|
+| ```$ docker run --rm CONTAINER_ID``` | After running the container deletes it and its associated file system when container exits |
+| ```$ docker ps -a```                 | Get a list of all containers including stopped ones |
+| ```$ docker inspect CONTAINER_ID``` | Get all info about container |
+| ```$ docker inspect --format {{.NetworkSettings.IPAddress}} CONTAINER_ID``` | Inspect with Go template |
+| ```$ docker diff CONTAINER_ID``` | Shows modified files in container |
+| ```$ docker logs CONTAINER_ID``` | List of everything thats happened inside the container |
+| ```$ docker rm CONTAINER_ID``` | Delete a container |
+| ```$ docker start CONTAINER_ID```                 | Starting a stopped container |
+| ```$ docker kill `docker ps -lq` ``` | Kill the last started container |
+| ```$ docker exec -it CONTAINER_ID /bin/bash``` | Interactively execute a command in the container |
+| ```$ docker rm -v $(docker ps -aq -f status=exited)``` | Delete all stopped containers and their volumes which are not used by other containers |
+| ```$ docker history CONTAINER_ID``` | Show image layers |
 
 ```bash
 pi@raspberrypi:~ $ docker ps
@@ -44,14 +29,11 @@ pi@raspberrypi:~ $ docker ps -q
 pi@raspberrypi:~ $ docker attach 39242156c56b
 ```
 
-### Images
+Because unnecessary layers bloat images (and the AUFS filesystem has a hard limit of
+127 layers), many Dockerfiles try to minimize the number of layers by specifying several 
+UNIX commands in a single RUN instruction
 
-Show image layers
-
-```bash
-$ docker history foo-containerid
-```
-
+A container exits when its main process exits.
 
 # Books
 
