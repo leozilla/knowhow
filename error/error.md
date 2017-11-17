@@ -79,6 +79,7 @@ For these reasons, most reliable systems use return codes instead of exceptions.
 [The trouble with checked Exceptions](http://www.artima.com/intv/handcuffs.html)
 [Exception Safety](https://en.wikipedia.org/wiki/Exception_safety)
 [Mars Rover C++ Exceptions](https://youtu.be/3SdSKZFoUa8?list=WL&t=2304)
+[Google C++ Guide](https://youtu.be/NOCElcMcFik?list=WL&t=1221)
 
 For robust systems programs, don’t use exceptions.
 
