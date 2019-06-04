@@ -7,18 +7,24 @@ Running docker on linux.
 
 | Command | Description |
 |---------|-------------|
+| ```$ docker build --no-cache -t mytag .``` | Rebuild w/o cache |
 | ```$ docker run --rm CONTAINER_ID``` | After running the container deletes it and its associated file system when container exits |
 | ```$ docker ps -a```                 | Get a list of all containers including stopped ones |
 | ```$ docker inspect CONTAINER_ID``` | Get all info about container |
 | ```$ docker inspect --format {{.NetworkSettings.IPAddress}} CONTAINER_ID``` | Inspect with Go template |
 | ```$ docker diff CONTAINER_ID``` | Shows modified files in container |
 | ```$ docker logs CONTAINER_ID``` | List of everything thats happened inside the container |
-| ```$ docker rm CONTAINER_ID``` | Delete a container |
 | ```$ docker start CONTAINER_ID```                 | Starting a stopped container |
 | ```$ docker kill `docker ps -lq` ``` | Kill the last started container |
 | ```$ docker exec -it CONTAINER_ID /bin/bash``` | Interactively execute a command in the container |
-| ```$ docker rm -v $(docker ps -aq -f status=exited)``` | Delete all stopped containers and their volumes which are not used by other containers |
+| ```$ docker container stop $(docker container ls -a -q)``` | Stop all containers |
 | ```$ docker history CONTAINER_ID``` | Show image layers |
+| ```$ docker rm CONTAINER_ID``` | Delete a container |
+| ```$ docker rm $(docker ps -a -q)``` | Delete all stopped containers |
+| ```$ docker rm -v $(docker ps -aq -f status=exited)``` | Delete all stopped containers and their volumes which are not used by other containers |
+| ```$ docker rmi $(docker images -f “dangling=true" -q) && docker images prune -a``` | Remove dangling images |
+| ```$ docker images --no-trunc --format '{{.ID}}' | xargs docker rmi``` | Remove cached docker layers |
+| ```$ docker container stop $(docker container ls -a -q) && docker system prune -a -f --volumes``` | Complete Docker system clean |
 
 ```bash
 pi@raspberrypi:~ $ docker ps
