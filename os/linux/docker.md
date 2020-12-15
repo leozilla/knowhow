@@ -37,9 +37,17 @@ pi@raspberrypi:~ $ docker attach 39242156c56b
 
 Because unnecessary layers bloat images (and the AUFS filesystem has a hard limit of
 127 layers), many Dockerfiles try to minimize the number of layers by specifying several 
-UNIX commands in a single RUN instruction
+UNIX commands in a single `RUN` instruction.
 
 A container exits when its main process exits.
+
+ - keep images explicitly versioned and reference them by version instead of `latest`
+ - make it possible to reference the git commit of a running container, possibly by using the git hash as the image version
+ - make sure your processes in the container return the correct exit code
+
+[Best practices (docker)]: https://docs.docker.com/develop/dev-best-practices/
+[Best practices (google)]: https://cloud.google.com/solutions/best-practices-for-building-containers
+[Performance Improvements]: https://stackify.com/docker-performance-improvement-tips-and-tricks/
 
 # Books
 

@@ -1,6 +1,4 @@
-# Know How
-
-**Work in progress** - currently copying old stuff over and organizing it, please come back in 2-4 weeks
+# Know How **Work in progress**
 
 This repository collects stuff i am most interested in. It should become my big reference book.
 For another very comprehensive list of awesomeness check out: https://github.com/sindresorhus/awesome
@@ -28,8 +26,8 @@ Everyone is highly welcome to contribute/improve/correct things.
    + [UDP](networking/udp.md)
    + [IP](networking/ip.md)
 * [Error Handling](error/error.md)
-* [Java](java/java.md)
-   + [JVM](java/jvm.md)
+* [Java](lang/java/java.md)
+   + [JVM](lang/java/jvm.md)
 * [OS](os/os.md)
    + [Linux](os/linux/linux.md)
       + [Docker](os/linux/docker.md)
