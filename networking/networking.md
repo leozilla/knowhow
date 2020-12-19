@@ -1,8 +1,6 @@
 Networking
 ==========
 
-**Under construction - currently mostly brainstorming**
-
 # General
 
 Usually there is a distinction between client and server and the fact that the client always initiates a requests 
@@ -74,6 +72,42 @@ length of record written by sender is preserved/passed to receiver.
 
 ## Firewall
 
+## SSH Tunnels
+
+[Examples](https://www.ssh.com/ssh/tunneling/example)
+
+### Reverse tunnel
+
+How to make `db.mycompany.com:5432` go to my home computer's `localhost:3000`?
+
+Assuming you connect from home to `db`, you need a reverse tunnel.
+```
+ssh -R 5432:localhost:3000 db.mycompany.com
+```
+This will enable processes running at `db` to connect to `localhost:8080` and actually speak to your home computer at port 3000.
+
+### HTTP proxy with ssh
+
+If at home, I cannot access `http://s3.mycompany.com`, but `db` at work can access `s3`, 
+how to make the home computer able to access `http://s3.mycompany.com`?
+
+The best way to create a http proxy with ssh is with socks.
+```
+ssh -D 8888 db.company.com
+```
+Go to your browser connection settings and enable proxy connection, choose socks4/5 and host: localhost, port 8888. 
+Then just type `http://s3.mycompany.com` in the browser.
+
+### Local port forward
+
+If at home, I cannot access `db.mycompany.com`, but `web` server at work can, how to make it possible to access `db.mycompany.com` also using ssh tunnel.
+```
+ssh -L 3333:db.mycompany.com:3306 web.mycompany.com
+```
+This means that you will be able to connect at `localhost:3333` from your home computer and everything will be forwarded to `db.mycompany.com:3306` 
+as if the connection was made by `web.mycompany.com`. 
+Host `db` will see `web` as the client connecting, so you need to login with the same username and password you use when working from `web`.
+
 ## Proxy
 
 ### Anonymous proxy
@@ -99,6 +133,10 @@ Typical use cases:
  * A reverse proxy can reduce load on its origin servers by caching static content and dynamic content, known as web acceleration.
 
 ## Bridge
+
+## Load Balancer
+
+Most commonly deployed when a site needs multiple servers because the volume of requests is too much for a single server to handle efficiently.
 
 # Tooling
 

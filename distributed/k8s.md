@@ -103,6 +103,8 @@ A PDB limits the number of Pods of a replicated application that are down simult
  * A Pod's awareness of its address is the same as how other resources see the address. 
    The host's address doesn't mask it.
 
+The `kubelet` manages the hosts file for each container of the Pod to prevent Docker from modifying the file after the containers have already been started.
+
 ## Workload Resources
 
 ### Deployments
@@ -236,6 +238,14 @@ Are DNS queries received/processed: Edit `coredns` config and add the `log` plug
 
 [Known issues](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/#known-issues)
 
+#### Ingress
+
+A `defaultBackend` is often configured in an Ingress controller to service any requests that do not match a path in the spec.
+
+__Name based virtual hosting__: Routing based on the HTTP `Host` header.
+
+Use _Readiness probes_ for health checking backends.
+
 # Best Practices
 
 It is not necessary to use multiple namespaces just to separate slightly different resources, such as different versions of the same software: 
@@ -246,6 +256,56 @@ It is generally discouraged to make label selector updates and it is suggested t
 [Common Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/)
 
 https://www.openservicebrokerapi.org/
+
+# Configuration
+
+## Best Practices
+
+ * Configuration files should be stored in version control before being pushed to the cluster.
+ * Put object descriptions in annotations, to allow better introspection.
+ * Define and use labels that identify semantic attributes of your application or Deployment, such as
+   `{ app: myapp, tier: frontend, phase: test, deployment: v3 }`
+ * To make sure the container always uses the same version of the image, you can specify its digest
+ * [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/kubernetes-api/labels-annotations-taints/)
+
+## Config Maps
+
+Mounted ConfigMaps are updated automatically.
+ConfigMaps consumed as environment variables are not updated automatically and require a pod restart.
+
+## Pod Priority and Preemption
+
+Pods can have priority. Priority indicates the importance of a Pod relative to other Pods. 
+If a Pod cannot be scheduled, the scheduler tries to preempt (evict) lower priority Pods to make scheduling of the pending Pod possible.
+
+# Scheduling
+
+In a cluster, Nodes that meet the scheduling requirements for a Pod are called feasible nodes.
+The scheduler finds feasible Nodes for a Pod and then runs a set of functions to score the feasible Nodes and 
+picks a Node with the highest score among the feasible ones to run the Pod.
+
+_Node affinity_: a property of Pods that _attracts_ them to a set of nodes (either as a preference or a hard requirement).
+_Taints_: the opposite of node affinity -- they allow a node to repel a set of pods.
+_Tolerations:_ applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+
+## Assigning Pods to Nodes
+
+You can constrain a Pod to only be able to run on particular Node(s), or to prefer to run on particular nodes. 
+There are several ways to do this, and the recommended approaches all use label selectors to make the selection.
+`nodeSelector` is the simplest recommended form of node selection constraint.
+
+Prefer [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/kubernetes-api/labels-annotations-taints/)
+
+## Eviction Policy
+
+The `kubelet` proactively monitors for and prevents total starvation of a compute resource. 
+In those cases, the `kubelet` can reclaim the starved resource by failing one or more Pods.
+
+# Storage
+
+## Volumes
+
+
 
 # Administration
 
