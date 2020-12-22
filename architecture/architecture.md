@@ -18,6 +18,7 @@ Very rough and imprecise overview:
  7. Streaming
  8. Batch Job
  9. MVC (UI)
+ 10. DDD - https://docs.google.com/drawings/d/1E_hx5B4czRVFVhGJbrbPDlb_JFxJC8fYB86OMzZuAhg
 
 # Integration
 

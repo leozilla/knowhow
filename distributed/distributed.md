@@ -12,6 +12,7 @@ Distributed
 * [Fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
 * [End to end argument in systems design](http://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)
 * [Stop calling databases CP or AP](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html)
+* [Problems with CAP](https://dbmsmusings.blogspot.com/2010/04/problems-with-cap-and-yahoos-little.html) 
 * Dynamo paper
 * [Live beyond distributed transactions 2nd edition](https://queue.acm.org/detail.cfm?id=3025012)
 
@@ -32,6 +33,33 @@ Distributed
 ![ConsistencyTree](img/family-tree.jpg)
 ![Consistency](img/family.jpg)
 ![IsolationLevels](img/isolation-levels.png)
+
+### Strict/Strong Serializability
+
+Combining serializability and linearizability yields strict serializability: transaction behavior is equivalent to some serial execution, 
+and the serial order corresponds to real time. 
+For example, say I begin and commit transaction T1, which writes to item x, and you later begin and commit transaction T2, which reads from x. 
+A database providing strict serializability for these transactions will place T1 before T2 in the serial ordering, and T2 will read T1’s write. 
+A database providing serializability (but not strict serializability) could order T2 before T1.2
+
+### Linearizability
+
+In plain English, under linearizability, writes should appear to be instantaneous. 
+Imprecisely, once a write completes, all later reads (where “later” is defined by wall-clock start time) should return the value of that write 
+or the value of a later write. Once a read returns a particular value, all later reads should return that value or the value of a later write.
+
+Linearizability for read and write operations is synonymous with the term “atomic consistency” and is the “C,” or “consistency,” 
+in Gilbert and Lynch’s proof of the CAP Theorem. We say linearizability is composable (or “local”) because, 
+if operations on each object in a system are linearizable, then all operations in the system are linearizable.
+
+### Serializability
+
+It guarantees that the execution of a set of transactions (usually containing read and write operations) 
+over multiple items is equivalent to some serial execution (total ordering) of the transactions.
+
+Serializability is the traditional “I,” or isolation, in ACID. 
+If users’ transactions each preserve application correctness (“C,” or consistency, in ACID), a serializable execution also preserves correctness. 
+Therefore, serializability is a mechanism for guaranteeing database correctness.
 
 See: 
 
