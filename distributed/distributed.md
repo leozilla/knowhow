@@ -61,6 +61,8 @@ Serializability is the traditional “I,” or isolation, in ACID.
 If users’ transactions each preserve application correctness (“C,” or consistency, in ACID), a serializable execution also preserves correctness. 
 Therefore, serializability is a mechanism for guaranteeing database correctness.
 
+### More models
+
 See: 
 
  * Tannenbaums Distributed Systems
@@ -78,9 +80,11 @@ Currently a mix of ANSI DB and distributed models, a lot more work todo here:
  * Causual Consistency
  * Processor Consistency
  * PRAM/FIFO Consistency
- * Read your writes Consistency
  * Serializable
- * Repeatable read
+ * Repeatable read, snapshot isolation
+ * read your writes
+ * monotonic reads
+ * consistent prefix reads  
  * Read committed
  * Dirty read
  * Eventual Consistency (not really defined well, http://www.bailis.org/papers/eventual-queue2013.pdf)
@@ -95,6 +99,29 @@ Currently a mix of ANSI DB and distributed models, a lot more work todo here:
 ## CQRS and Event Sourcing
 
 * Akka Persistence
+
+## Replication
+
+ - Single leader
+    - sync or async
+ - Multi leader
+    - sync or async
+ - Leaderless
+    - Read repair and anti-entropy
+    - Quorums for reading and writing
+
+### Conflict resolution
+
+ - Conflict avoidance
+ - Converging toward a consistent state
+    - last write wins: higher timestamp or uuid
+    - merge values
+    - record conflict and resolve later
+ - Custom conflict resolution logic
+ - Auto conflict resolution
+   - CRDTs
+   - Mergeable persistent data structures
+   - operational transformation: Google Docs 
 
 ## Atomic Commitment and Consensus
 
