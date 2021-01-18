@@ -10,8 +10,9 @@ Running docker on linux.
 | ```$ docker build --no-cache -t mytag .``` | Rebuild w/o cache |
 | ```$ docker run --rm CONTAINER_ID``` | After running the container deletes it and its associated file system when container exits |
 | ```$ docker ps -a```                 | Get a list of all containers including stopped ones |
+| ```$ docker ps -f name=^k8s_nginx* -q``` | Get only the container id of the container(s) matching the name filter. |
 | ```$ docker inspect CONTAINER_ID``` | Get all info about container |
-| ```$ docker inspect --format {{.NetworkSettings.IPAddress}} CONTAINER_ID``` | Inspect with Go template |
+| ```$ docker inspect --format {{.NetworkSettings.IPAddress}} CONTAINER_ID``` | Inspect with Go template | 
 | ```$ docker diff CONTAINER_ID``` | Shows modified files in container |
 | ```$ docker logs CONTAINER_ID``` | List of everything thats happened inside the container |
 | ```$ docker start CONTAINER_ID```                 | Starting a stopped container |
@@ -25,6 +26,13 @@ Running docker on linux.
 | ```$ docker rmi $(docker images -f “dangling=true" -q) && docker images prune -a``` | Remove dangling images |
 | ```$ docker images --no-trunc --format '{{.ID}}' | xargs docker rmi``` | Remove cached docker layers |
 | ```$ docker container stop $(docker container ls -a -q) && docker system prune -a -f --volumes``` | Complete Docker system clean |
+
+Advanced commands:
+
+```bash
+# List IP addresses of all containers
+docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##'
+```
 
 ```bash
 pi@raspberrypi:~ $ docker ps

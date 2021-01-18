@@ -6,14 +6,17 @@ Kubernetes
 | ```$ kubectl diff -f service/```            | Show what changes would be applied to live objects |
 | ```$ kubectl get componentstatuses```            | Show status of the Kuberentes components |
 | ```$ kubectl get nodes     ```                   | List kubernetes nodes |       
+| ```$ kubectl get nodes -o wide``` | Detailed output of all nodes |
 | ```$ kubectl describe nodes MyNode```            | Describe the node with name MyNode |
 | ```$ kubectl config set-context my-context --namespace=mystuff``` | Creates (but does not use) the context ```my-context``` which uses the namespace ```mystuff``` per default |
 | ```$ kubectl config use-context my-context``` | Uses the context ```my-context``` |
 | ```$ kubectl describe <resource-name> <obj-name>``` | Describes an object of a given resource type |
 | ```$ kubectl get pods``` | Get all pods in the current namespace |
+| ```$ kubectl get pods -A -o wide``` | Detailed output of all pods in all namespaces |
 | ```$ kubectl get pods --show-labels``` | Get all pods in the current namespace and show their labels |
 | ```$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}``` | Gets only the pod IP from the pod ```my-pod``` |
 | ```$ kubectl get pods --field-selector status.phase=Running``` | Get all pods where status.phase equals Running |
+| ```$ kubectl get svc -A -o wide``` | Detailed output of all services in all namespaces |
 | ```$ kubectl apply -f obj.yaml``` | Creates the object(s) in the given yaml file |
 | ```$ kubectl edit <resource-name> <obj-name>``` | Interactively edits the object of the given resource type |
 | ```$ kubectl delete -f obj.yaml``` | Deletes the object(s) in the given yaml file |
