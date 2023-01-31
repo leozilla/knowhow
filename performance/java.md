@@ -116,14 +116,23 @@ Sources of memory consumption:
 - JIT compiler
 - Threads
 
+Footprint = sum of
+- heap
+- code cache
+- GC and compiler structures
+- metaspace
+- symbol tables
+- thread stacks
+- direct buffers
+- mapped files
+- native libraries
+- malloc/allocator overhead
+- ...
+
 JVM reserved/committed memory is basically what the OS calls virtual/resident memory. 
 
 *reserved*: memory the JVM has already reserved and is allowed to use (but might not be able to use if sys runs oo physical memory) 
 *committed*: memory the JVM claims to use atm
-
-Memory can be allocated in 2 ways:
-- via system allocator: per default `malloc`
-- allocated directly from the OS via `mmap`
 
 ### Heap
 
@@ -145,9 +154,20 @@ GC memory overhead:
 - Mark stacks
 - Remembered set (probably the biggest one) - cannot be sized directly but only indirectly via ```-XX:G1HeapRegionSize```
 
-### Off-Heap
+```sun.nio.ch.Util$BufferCache``` is the cache for direct ByteBuffer's used for example when working with heap ByteBuffers.
 
-### Class metadata
+### JVM native memory
+
+Memory pools (probably incomplete list):
+- metaspace
+- code cache
+- (compressed) class space
+
+Memory can be allocated in 2 ways:
+- via system allocator: per default `malloc`
+- allocated directly from the OS via [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html)
+
+#### Class metadata
 
 Metaspace:
 - classes
@@ -158,15 +178,44 @@ Metaspace:
 
 Metaspace is unlimited by default.
 
+#### JIT compilation
+
+Code cache:
+- controlled by ```-XX:InitialCodeCacheSize``` and ```-XX:ReservedCodeCacheSize```
+- size depends on which compiler is used (C1 or C2), default = *ReservedCodeCacheSize* * 5
+
+#### Thread memory
+
+Default thread stack size is 1MB controlled via ```-Xss```
+
+#### Symbols
+
+- *SymbolTable*: names, signatures, etc
+- *StringTable*: interned strings
+
+### Off-Heap/Direct memory
+
+Allocated via:
+- `ByteBuffer` - limit configured via ```-XX:MaxDirectMemorySize```, collected after GC
+- `FileChannel.map` - no limit, and also not counted in native memory tracking
+
+```sun.nio.ch.Util$BufferCache``` is the cache for direct ByteBuffer's used for example when working with heap ByteBuffers.
+This cache is thread local, which can become a problem with lots of threads.
+Size can be limited via ```-Djdk.nio.maxCachedBufferSize=N```.
+
+Standard allocator is typically `malloc` but `malloc` handles fragmentation badly which can cause inefficient/excessive memory usage.
+Consider switching the allocator: [jemalloc](https://jemalloc.net/), [tcmalloc](https://github.com/google/tcmalloc), [mimalloc](https://github.com/microsoft/mimalloc)
+
 ### Important config params
 
 * Let JVM respect cgroup limits ```-XX:UseContainerSupport```
 * Set initial heap size as a percentage of total memory ```-XX:InitialRAMPercentage=N```
 * Set maximum heap size as a percentage of total memory ```-XX:MaxRAMPercentage=N```
 * Allocate physical memory immediately ```-XX:+AlwaysPreTouch``` - interessting for low latency sensitive apps
-* ```-XX:-DisableExplicitGC```
+* Dont use ```-XX:-DisableExplicitGC```, instead use ```-XX:-ExplicitGCInvokesConcurrent``` on HotSpot
 * Limit metasapce size via ```-XX:MaxMetaspaceSize=N```, ```-XX:CompressedClassSpaceSize```, ```-XX:MinMetaspaceFreeRatio=N``` and ```-XX:MaxMetaspaceFreeRatio=N```
 * ```-XX:MetaspaceSize=N``` defines the high water mark when GC should run on metaspace
+* ```-Xss``` to set thread stack size
 
 ### Tools
 
@@ -183,7 +232,11 @@ See: https://docs.oracle.com/javase/8/docs/technotes/guides/vm/nmt-8.html
 Analyzing metaspace and class loading issues  
 ```jcmd PID VM.classloader_stats```
 ```jcmd PID GC.class_stats```
- 
+
+Analyzing JVM internal symbol tables  
+```jcmd PID VM.stringtable```
+```jcmd PID VM.symboltable```
+
 ## GC
 
  * Tune Eden space in a way that short lived objects dont get promoted to old gen (https://www.youtube.com/watch?v=DFub1L3gzGo&index=4&list=WL)
