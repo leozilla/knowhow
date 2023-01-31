@@ -1,33 +1,35 @@
 Kubernetes
 ==========
 
-| Command | Description |
-|---------|-------------|
-| ```$ kubectl diff -f service/```            | Show what changes would be applied to live objects |
-| ```$ kubectl get componentstatuses```            | Show status of the Kuberentes components |
-| ```$ kubectl get nodes     ```                   | List kubernetes nodes |       
-| ```$ kubectl get nodes -o wide``` | Detailed output of all nodes |
-| ```$ kubectl describe nodes MyNode```            | Describe the node with name MyNode |
-| ```$ kubectl config set-context my-context --namespace=mystuff``` | Creates (but does not use) the context ```my-context``` which uses the namespace ```mystuff``` per default |
-| ```$ kubectl config use-context my-context``` | Uses the context ```my-context``` |
-| ```$ kubectl describe <resource-name> <obj-name>``` | Describes an object of a given resource type |
-| ```$ kubectl get pods``` | Get all pods in the current namespace |
-| ```$ kubectl get pods -A -o wide``` | Detailed output of all pods in all namespaces |
-| ```$ kubectl get pods --show-labels``` | Get all pods in the current namespace and show their labels |
-| ```$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}``` | Gets only the pod IP from the pod ```my-pod``` |
-| ```$ kubectl get pods --field-selector status.phase=Running``` | Get all pods where status.phase equals Running |
-| ```$ kubectl get svc -A -o wide``` | Detailed output of all services in all namespaces |
-| ```$ kubectl apply -f obj.yaml``` | Creates the object(s) in the given yaml file |
-| ```$ kubectl edit <resource-name> <obj-name>``` | Interactively edits the object of the given resource type |
-| ```$ kubectl delete -f obj.yaml``` | Deletes the object(s) in the given yaml file |
-| ```$ kubectl delete <resource-name> <obj-name>``` | Delets an object of the given resource type |
-| ```$ kubectl label pods bar color=red``` | Adds the label ```color=red``` to the pod named ```bar``` |
-| ```$ kubectl label pods bar -color``` | Removes the ```color``` label from the pod named ```bar``` |
-| ```$ kubectl logs <pod-name>``` | Get The logs of a given pod |
-| ```$ kubectl exec -it <pod-name> -- bash``` | Execute the ```bash``` command inside the first container of the pod. Use ```--container``` to specify the container |
-| ```$ kubectl cp <pod-name>:/path/to/remote/file /path/to/local/file``` | Copy files to and from a container |
-| ```$ kubectl port-forward kuard 8080:8080``` | Forward from local machine port 8080 to container port 8080 |
-| ```$ kubectl delete rs/x --cascase=false``` | Delete ReplicaSet ```x``` without deleting the associated pods |
+| Command                                                                                                     | Description                                                                                                          |
+|-------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| ```$ kubectl diff -f service/```                                                                            | Show what changes would be applied to live objects                                                                   |
+| ```$ kubectl get componentstatuses```                                                                       | Show status of the Kuberentes components                                                                             |
+| ```$ kubectl get nodes     ```                                                                              | List kubernetes nodes                                                                                                |       
+| ```$ kubectl get nodes -o wide```                                                                           | Detailed output of all nodes                                                                                         |
+| ```$ kubectl describe nodes MyNode```                                                                       | Describe the node with name MyNode                                                                                   |
+| ```$ kubectl config set-context my-context --namespace=mystuff```                                           | Creates (but does not use) the context ```my-context``` which uses the namespace ```mystuff``` per default           |
+| ```$ kubectl config use-context my-context```                                                               | Uses the context ```my-context```                                                                                    |
+| ```$ kubectl describe <resource-name> <obj-name>```                                                         | Describes an object of a given resource type                                                                         |
+| ```$ kubectl get pods```                                                                                    | Get all pods in the current namespace                                                                                |
+| ```$ kubectl get pods -A -o wide```                                                                         | Detailed output of all pods in all namespaces                                                                        |
+| ```$ kubectl get pods --show-labels```                                                                      | Get all pods in the current namespace and show their labels                                                          |
+| ```$ kubectl get pods my-pod -o jsonpath --template={.status.podIP}```                                      | Gets only the pod IP from the pod ```my-pod```                                                                       |
+| ```$ kubectl get pods --field-selector status.phase=Running```                                              | Get all pods where status.phase equals Running                                                                       |
+| ```$ kubectl get svc -A -o wide```                                                                          | Detailed output of all services in all namespaces                                                                    |
+| ```$ kubectl apply -f obj.yaml```                                                                           | Creates the object(s) in the given yaml file                                                                         |
+| ```$ kubectl edit <resource-name> <obj-name>```                                                             | Interactively edits the object of the given resource type                                                            |
+| ```$ kubectl delete -f obj.yaml```                                                                          | Deletes the object(s) in the given yaml file                                                                         |
+| ```$ kubectl delete <resource-name> <obj-name>```                                                           | Delets an object of the given resource type                                                                          |
+| ```$ kubectl label pods bar color=red```                                                                    | Adds the label ```color=red``` to the pod named ```bar```                                                            |
+| ```$ kubectl label pods bar -color```                                                                       | Removes the ```color``` label from the pod named ```bar```                                                           |
+| ```$ kubectl logs <pod-name>```                                                                             | Get The logs of a given pod                                                                                          |
+| ```$ kubectl exec -it <pod-name> -- bash```                                                                 | Execute the ```bash``` command inside the first container of the pod. Use ```--container``` to specify the container |
+| ```$ kubectl cp <pod-name>:/path/to/remote/file /path/to/local/file```                                      | Copy files to and from a container                                                                                   |
+| ```$ kubectl port-forward kuard 8080:8080```                                                                | Forward from local machine port 8080 to container port 8080                                                          |
+| ```$ kubectl delete rs/x --cascase=false```                                                                 | Delete ReplicaSet ```x``` without deleting the associated pods                                                       |
+| ```$ kubectl get secrets/secret-name --template="{{index .data \"credentials.json\" pipe base64decode}}"``` | Get secret content (containing `.` in key name)                        |
+
 
 FQDN for namespace: `<service-name>.<namespace-name>.svc.cluster.local
 
@@ -71,6 +73,11 @@ In some cases when the node is unreachable, the API server is unable to communic
 The decision to delete the pods cannot be communicated to the kubelet until communication with the API server is re-established. 
 In the meantime, the pods that are scheduled for deletion may continue to run on the partitioned node.
 The node controller checks the state of each node every --node-monitor-period seconds.
+
+### Node Taints
+
+node.kubernetes.io/unreachable=NoSchedule
+node.kubernetes.io/unreachable=NoExecute
 
 ## Images
 
