@@ -21,3 +21,4 @@ Operation System Performance
    + http://highscalability.com/blog/2015/5/27/a-toolkit-to-measure-basic-system-performance-and-os-jitter.html
    + http://highscalability.com/blog/2015/4/8/the-black-magic-of-systematically-reducing-linux-os-jitter.html
    + https://www.kernel.org/doc/Documentation/kernel-per-CPU-kthreads.txt
+ * Even async file IO sys calls can sometimes block

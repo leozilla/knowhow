@@ -8,7 +8,7 @@ Performance
  * [Memory](memory.md)
  * [Scalability](scalability.md)
  * [Monitoring](monitoring.md)
- * [Benchmarks](benchmarks.md)
+ * [Benchmarks](testing.md)
  * [Microbenchmarks](microbench.md)
  * [System](system.md)
 
@@ -34,7 +34,7 @@ And, when done right, they get error handling code and data off hot paths which 
 * Service Time
 * Response Time
 
-# [Benchmarks](benchmarks.md)
+# [Benchmarks](testing.md)
 
 # Design
 

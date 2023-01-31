@@ -14,6 +14,7 @@ Java
 * Profiling C1,C2,C3?
 * JMM
 * GC (Object allocation super cheap just one or two pointer move)
+* Can take up to 20-30 min for JVM to really become hot - consider this when doing perf testing
 
 ## Optimizations
 
@@ -335,7 +336,7 @@ void logSomething() {
 https://youtu.be/vZngvuXk7PM?t=795
 
 Tools:
- * jHiccup [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2568)
+ * [jHiccup](https://github.com/giltene/jHiccup) [1](https://youtu.be/teYzwaWmi-8?list=WL&t=2568)
 
 Causes for pauses:
  * IO delays (seeks and writes)

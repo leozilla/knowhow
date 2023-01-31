@@ -1,4 +1,4 @@
-Benchmark
+Testing
 =========
 
  * Constant rate
@@ -17,7 +17,7 @@ Benchmark
     + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html]
  * [Dont aggregate percentiles](https://www.circonus.com/2018/11/the-problem-with-percentiles-aggregation-brings-aggravation/)
  * Dont average an average stat
-
+ 
 # Setup
 
 See: [Performance Methodology I], [Performance Methodology II]
@@ -31,13 +31,21 @@ A **proper test environment**:
  
 ## Steps
 
+Pre-testing:
+- define perf goals/requirements
+- have a baseline or otherwise establish one
+
  1. Install + configure app to same specs as production
  2. Setup monitoring
  3. Kill everything on the system which is not running in production or better yet test on production system (not necessarily in production)
  4. Spike test to ensure correctness
- 5. Actual test
+ 5. Actual test - (when working with java run for at least 30 minutes for JVM to become hot)
  6. Collect and validate data
  7. Repeat
+
+# Testing in prod
+
+- Start with testing just a single node in the cluster
 
 # Guidelines and Problems
 
