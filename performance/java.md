@@ -1,6 +1,7 @@
 Java
 ====
 
++ Always disable OS swapping!
 * Indirections = cache misses -> arrays rock
 * Async APIs needed
 * JDK NIO still too much blocking, garbage for selector key set
@@ -97,6 +98,7 @@ Point in execution where it is save to observe a threads state. All threads must
    + Honest profiler (richard warburton)
    + Lightweight Java Profiler (google)
    + jHiccup
+   + [async-profiler](https://github.com/jvm-profiling-tools/async-profiler)
  
 ### Java Mission Control
 
@@ -105,10 +107,82 @@ Point in execution where it is save to observe a threads state. All threads must
 ## Memory
  
 ![MemoryLayout](http://www.pointsoftware.ch/wp-content/uploads/2012/11/Cookbook_JVMArguments_2_MemoryModel.png)
- 
+
+Most input comes from [this video](https://www.youtube.com/watch?v=c755fFv1Rnk&t=12s)
+
+Sources of memory consumption:
+- Heap
+- Class Loading
+- JIT compiler
+- Threads
+
+JVM reserved/committed memory is basically what the OS calls virtual/resident memory. 
+
+*reserved*: memory the JVM has already reserved and is allowed to use (but might not be able to use if sys runs oo physical memory) 
+*committed*: memory the JVM claims to use atm
+
+Memory can be allocated in 2 ways:
+- via system allocator: per default `malloc`
+- allocated directly from the OS via `mmap`
+
 ### Heap
 
+```-Xms``` means initial size, not minimal size. Heap can still shrink bellow this unless explicitly disabled.
+
+```-Xmx4G``` does only limit, but does not limit native memory consumption or off heap memory which can be large
+Effects of ```-XX:UseContainerSupport```: 
+ - Default heap size (JVM ergonomics)
+ - Visible number of CPUs
+
+Heap is allowed to grow and shrink and also JVM is allowed to free virtual memory (give mem back to OS), this typically happens after full GC.
+The resizing ration can be controlled by ```-XX:MinHeapFreeRatio=N``` and ```-XX:MaxHeapFreeRatio=N```.
+Use ```-XX:-AdaptiveSizePolicy``` if u dont want the heap to resize.
+
+The data structures and memory used for GC is stored on the heap!
+
+GC memory overhead:
+- Mark bitmap (marks visited objs)
+- Mark stacks
+- Remembered set (probably the biggest one) - cannot be sized directly but only indirectly via ```-XX:G1HeapRegionSize```
+
 ### Off-Heap
+
+### Class metadata
+
+Metaspace:
+- classes
+- methods
+- constant pools
+- symbols
+- annotations
+
+Metaspace is unlimited by default.
+
+### Important config params
+
+* Let JVM respect cgroup limits ```-XX:UseContainerSupport```
+* Set initial heap size as a percentage of total memory ```-XX:InitialRAMPercentage=N```
+* Set maximum heap size as a percentage of total memory ```-XX:MaxRAMPercentage=N```
+* Allocate physical memory immediately ```-XX:+AlwaysPreTouch``` - interessting for low latency sensitive apps
+* ```-XX:-DisableExplicitGC```
+* Limit metasapce size via ```-XX:MaxMetaspaceSize=N```, ```-XX:CompressedClassSpaceSize```, ```-XX:MinMetaspaceFreeRatio=N``` and ```-XX:MaxMetaspaceFreeRatio=N```
+* ```-XX:MetaspaceSize=N``` defines the high water mark when GC should run on metaspace
+
+### Tools
+
+Check virtual and resident memory usage  
+```top -o %MEM```
+
+Complete memory map for each address (*anonymous* is usually java heap memory)   
+```pmap -X $PID```
+
+Tracking of native memory usage of JVM - attention high overhead! But tracks only memory allocated by the JVM and not 3rd party library JNI allocations etc
+See: https://docs.oracle.com/javase/8/docs/technotes/guides/vm/nmt-8.html  
+```java -XX:NativeMemoryTracking```
+
+Analyzing metaspace and class loading issues  
+```jcmd PID VM.classloader_stats```
+```jcmd PID GC.class_stats```
  
 ## GC
 
@@ -228,8 +302,10 @@ Flags to print statistics about pauses:
  
 # Videos
 
-Name | Recorded | Speaker | Rating | Description |
------| ---------|---------|--------|-------------|
-[JVM Mechanics](https://www.youtube.com/watch?v=E9i9NJeXGmM) | Silicon Valley JUG 2015 | Azul | 9 |  | 
-[JVM Mechanics 2](https://www.infoq.com/presentations/JVM-Mechanics) | QCon 2012 | Jil Tene | | |
+Name | Recorded | Speaker         | Rating | Description            |
+-----| ---------|-----------------|--------|------------------------|
+[JVM Mechanics](https://www.youtube.com/watch?v=E9i9NJeXGmM) | Silicon Valley JUG 2015 | Azul            | 9 |                        | 
+[JVM Mechanics 2](https://www.infoq.com/presentations/JVM-Mechanics) | QCon 2012 | Jil Tene        | |                        |
 [How to Lie (to Yourself) about Performance](https://youtu.be/teYzwaWmi-8?list=WL) | Devoxx Poland 2016 | Douglas Hawkins | 8 | JIT, CO, Sampling Bias |
+[Performance Testing Java Applications](https://www.youtube.com/watch?v=4qxfVuK50Jk) | Devox 2022 | Pratik Patel    | 8 | JHiccup, Azul          |
+[Memory footprint of a Java process](https://www.youtube.com/watch?v=c755fFv1Rnk&t=12s) | Devox 2022 | Andrei Pangin                | 10 | Java memory deep dive  |

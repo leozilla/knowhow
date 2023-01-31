@@ -14,7 +14,9 @@ Benchmark
     + [The Art of Java Benchmarking]
     + [JMH the lesser of two evils]
     + [OpenJDK MicroBenchmarks](https://wiki.openjdk.java.net/display/HotSpot/MicroBenchmarks)
-    + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html)
+    + [Anatomy of a flawed benchmark](http://www.ibm.com/developerworks/java/library/j-jtp02225/index.html]
+ * [Dont aggregate percentiles](https://www.circonus.com/2018/11/the-problem-with-percentiles-aggregation-brings-aggravation/)
+ * Dont average an average stat
 
 # Setup
 
