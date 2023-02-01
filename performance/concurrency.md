@@ -62,7 +62,7 @@ Matt Welsh: [Retrospective on SEDA](http://matt-welsh.blogspot.co.at/2010/07/ret
 
  * Locking (Mutex, Semaphore)
  * Lock free
-
+ 
 ## Thread Models
 
  * http://www.cs.indiana.edu/classes/b534-plal/ClassNotes/thread-design-patterns4.pdf
@@ -78,6 +78,10 @@ Matt Welsh: [Retrospective on SEDA](http://matt-welsh.blogspot.co.at/2010/07/ret
 ## Memory Barriers
 
 https://mechanical-sympathy.blogspot.co.at/2011/07/memory-barriersfences.html
+
+## Techniques
+
+ * Lock stripping to avoid coarse grained locks (see javas* ConcurrentHashMap*)
 
 # Java
 

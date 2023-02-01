@@ -26,6 +26,7 @@ Named error handling although it includes fault tolerance, fault prevention, err
 * http://highscalability.com/blog/2013/2/27/42-monster-problems-that-attack-as-loads-increase.html
 * [Rust Error Handling](https://doc.rust-lang.org/book/error-handling.html)
 * [Zen of erlang](http://ferd.ca/the-zen-of-erlang.html)
+* Graceful degradation when load > capacity
 
 ## What is an Error
 

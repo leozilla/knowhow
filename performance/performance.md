@@ -43,6 +43,8 @@ And, when done right, they get error handling code and data off hot paths which 
    + [Batching-and-Low-Latency](https://vanilla-java.github.io/2016/07/09/Batching-and-Low-Latency.html)
    + [How-can-batching-requests-actually-reduce-latency](http://highscalability.com/blog/2013/12/4/how-can-batching-requests-actually-reduce-latency.html)
    + [Smart batching](https://mechanical-sympathy.blogspot.co.at/2011/10/smart-batching.html)
+* Little's law
+* Law of diminishing returns
 
 # Typical performance numbers
 
