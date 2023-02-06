@@ -1,0 +1,130 @@
+{{- $name := include "cart.name" . -}}
+{{- $fullname := include "cart.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullname }}
+  labels:
+{{ include "cart.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{- include "cart.labels" . | indent 8 }}
+        serving: "true"
+      annotations:
+        {{- include "cart.prometheus-annotations" . | indent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{- if .Values.images.registry -}}{{ .Values.images.registry }}/{{- end -}}{{ .Values.images.cart.image }}:{{ .Values.images.cart.tag }}"
+          imagePullPolicy: {{ .Values.images.cart.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: remoting
+              containerPort: 2552
+              protocol: TCP
+            - name: management
+              containerPort: 8558
+            - name: jmx
+              containerPort: {{ .Values.jmx.port }}
+            - name: metrics
+              containerPort: {{ .Values.prometheus.server.port }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: "/ready"
+              port: management
+            periodSeconds: 10
+            failureThreshold: 10
+            initialDelaySeconds: 20
+          livenessProbe:
+            httpGet:
+              path: "/alive"
+              port: management
+            periodSeconds: 10
+            failureThreshold: 10
+            initialDelaySeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: common-service-config
+            - configMapRef:
+                name: {{ $name }}-config
+          env:
+            - name: SERVICE_NAME
+              value: {{ $fullname }}
+            - name: CLUSTER_BOOTSTRAP_CONTACT_POINT_NR
+              value: "1"
+            - name: JAVA_OPTS
+              value: "-Xms{{ .Values.cart.heap.min }} -Xmx{{ .Values.cart.heap.max }} -Dconfig.file=application-conf/prod-application.conf -Dlogger.file=logging-conf/{{ .Values.logging.configFileName }} -Dcom.sun.management.jmxremote.port={{ .Values.jmx.port }} -Dcom.sun.management.jmxremote.rmi.port={{ .Values.jmx.port }}"
+            - name: PLAY_HTTP_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: common-service-secret
+                  key: play.http.secretKey
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: common-service-secret
+                  key: postgres.user
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: common-service-secret
+                  key: postgres.password
+          volumeMounts:
+            - name: heap-dumps
+              mountPath: /tmp/heapdumps
+            - name: application-config
+              # will overwrite anything previously in this dir!
+              # https://github.com/kubernetes/kubernetes/issues/50345
+              mountPath: /opt/docker/application-conf
+            - name: log4j2-config
+              # will overwrite anything previously in this dir!
+              # https://github.com/kubernetes/kubernetes/issues/50345
+              mountPath: /opt/docker/logging-conf
+            - name: jmx-secrets-for-user
+              mountPath: /opt/docker/jmx-secrets
+      initContainers:
+        - name: init-service
+          image: busybox:1.28
+          # JMX requires the password file to have 0400 permissions
+          command: ['sh', '-c', 'cp /jmx-secrets-readonly/* /jmx-secrets/ && chmod 0400 /jmx-secrets/jmxremote.password']
+          volumeMounts:
+            - name: jmx-secrets-for-user
+              mountPath: /jmx-secrets
+            - name: jmx-secrets-from-readonly-secret
+              mountPath: /jmx-secrets-readonly
+      volumes:
+        - name: application-config
+          configMap:
+            name: {{ $name }}-application-config
+        - name: heap-dumps
+          hostPath:
+            # requires the given path to have the correct permissions
+            path: /var/tmp/myapp/heapdumps
+            type: DirectoryOrCreate
+        - name: log4j2-config
+          configMap:
+            name: {{ $name }}-log4j2-config
+            items:
+              - key: {{ .Values.logging.configFileName }}
+                path: {{ .Values.logging.configFileName }}
+        # mount empty directory which is writable, so we can perform the chmod command on files in it
+        - name: jmx-secrets-for-user
+          emptyDir: {}
+        # mount the secret in another directory, secret mounts are always readonly so we must copy it first before we can chmod
+        - name: jmx-secrets-from-readonly-secret
+          secret:
+            secretName: common-service-jmx-secret
+      securityContext:
+        runAsUser: 1001

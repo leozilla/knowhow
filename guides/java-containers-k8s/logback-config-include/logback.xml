@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- debug="false" uses the ch.qos.logback.core.status.NopStatusListener which disables all logback output (even warn and error)
+     so if u have problems then set debug="true" which uses the ch.qos.logback.core.status.OnConsoleStatusListener
+-->
+<configuration debug="false" scan="true" scanPeriod="15 seconds">
+
+  <!-- COMMON SECTION -->
+  <!-- no common config used here -->
+
+
+  <!-- APPLICATION SPECIFIC SECTION -->
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
+  <logger name="akka" level="INFO" />
+  <logger name="akka.event.slf4j" level="WARN" />
+  <logger name="akka.stream.alpakka" level="WARN" />
+  <logger name="akka.actor.ActorSystemImpl" level="WARN" />
+
+  <logger name="com.myapp" level="INFO"/>
+  <logger name="com.myapp.acquisition.brain.google.analytics.reporting.purchases" level="INFO"/>
+  <logger name="com.myapp.acquisition.brain.google.analytics.reporting.purchases.Entrypoint" level="DEBUG"/>
+  <logger name="com.myapp.acquisition.brain.google.analytics.reporting.core.AkkaApplicationConfig" level="DEBUG"/>
+  <!-- set level="TRACE" if u want juls FINEST logging -->
+  <logger name="com.google.api.client.http" level="INFO"/>
+  <!-- turn this on if u need DEBUG logging for accessing secrets -->
+  <logger name="smarter.ecommerce.commons.gcloud.secretmanager" level="OFF" />
+
+
+  <!-- ENVIRONMENT SPECIFIC SECTION -->
+  <!-- when run via docker the MY_APP_APP_CONFIG_HOME env var is set -->
+  <!-- when run via sbt it will fallback to 'build/app-config' -->
+  <if condition='property("MY_APP_DEBUG").contains("true")'>
+    <then> <!-- Enable DEBUG logging (usually done on k3d) -->
+      <logger name="com.myapp" level="DEBUG" />
+    </then>
+  </if>
+
+  <if condition='property("MY_APP_CLOUD").contains("gcloud")'>
+    <then> <!-- Google Cloud Appender (when running on gcloud) -->
+      <include file="${MY_APP_APP_CONFIG_HOME}/logging/logback-included-gcloud-appender.xml"/>
+    </then>
+    <else> <!-- Console Appender (for any other env) -->
+      <include file="${MY_APP_APP_CONFIG_HOME:-build/app-config}/logging/logback-included-console-pattern-appender.xml"/>
+    </else>
+  </if>
+
+  <root level="INFO">
+    <appender-ref ref="${LOGBACK_ROOT_APPENDER_NAME}" />
+  </root>
+
+
+  <!-- CONFIG OVERRIDE SECTION -->
+  <!-- allow to override logging config (must be at the end of the file to allow to override everything configured above) -->
+  <include optional="true" file="${MY_APP_APP_CONFIG_HOME}/logging/mnt/logback-override.xml"/>
+
+</configuration>

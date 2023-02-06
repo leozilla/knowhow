@@ -10,7 +10,7 @@ object Packaging {
   // the directories inside the container
   private object ContainerDirs {
     val AppInstallDir = "/opt" // use same install location for cloudflow and none cloudflow apps
-    val AppConfigDir = "/etc/retailhub" // directory containing application config files
+    val AppConfigDir = "/etc/myapp" // directory containing application config files
     val AppConfigJmxDir = s"$AppConfigDir/jmx"
   }
 
@@ -42,7 +42,6 @@ object Packaging {
     dockerCommands := dockerCommands.value.flatMap {
       case useDaemonUserCmd@Cmd("USER", DockerUserId0) =>
         Seq(
-          Cmd("COPY", PackageMappingKeys.Logging, ContainerDirs.AppConfigLoggingDir),
           Cmd("COPY", PackageMappingKeys.Jmx, ContainerDirs.AppConfigJmxDir),
           ExecCmd("RUN", Jmx.passwdFileChownCmd(DockerUserId): _*),
           ExecCmd("RUN", Jmx.passwdFileChmodCmd: _*),
