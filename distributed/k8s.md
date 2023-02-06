@@ -272,6 +272,7 @@ https://www.openservicebrokerapi.org/
 ## Best Practices
 
  * Configuration files should be stored in version control before being pushed to the cluster.
+ * Put both template eg: [helm](https://helm.sh/) and final rendered k8s manifests into version control 
  * Put object descriptions in annotations, to allow better introspection.
  * Define and use labels that identify semantic attributes of your application or Deployment, such as
    `{ app: myapp, tier: frontend, phase: test, deployment: v3 }`
