@@ -57,6 +57,16 @@ A container exits when its main process exits.
 [Best practices (google)]: https://cloud.google.com/solutions/best-practices-for-building-containers
 [Performance Improvements]: https://stackify.com/docker-performance-improvement-tips-and-tricks/
 
+# Best practices
+
+1. Minimize the size of the docker build context by using the `.dockerignore` file
+2. Make use of the image layer cache
+3. Ensure OS signals are correctly handled
+4. Pin down versions
+5. Use multi stage builds
+6. Install only what is needed
+7. Dont run the container as *root*
+
 # Books
 
 Name | Author | Rating | Description |

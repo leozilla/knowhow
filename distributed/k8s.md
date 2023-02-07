@@ -322,3 +322,4 @@ In those cases, the `kubelet` can reclaim the starved resource by failing one or
 
 ## Cluster Networking
 
+- PodAutoScaler based on CPU is often too aggresive
