@@ -2,11 +2,20 @@
 
 Guidelines for running JVM processes inside containers/kubernetes.
 
+## Container Image
+
+Refer to: [Docker Best Practices](../../os/linux/docker.md) for general image best practices
+
+#### Prefer a custom JRE
+
+[distroless java](https://github.com/GoogleContainerTools/distroless/tree/main/java)
+[jlink](https://docs.oracle.com/javase/9/tools/jlink.htm)
+
 ## Runtime
 
 #### 1. Don't over-commit on heap memory relative to container memory limits
 
-Example: container memory limit = 4GB
+Example: container memory limit = 4GBga
 
 Depending on the app, use about 40-70% for heap memory. eg: `-Xmx` between `1200M-2800M` or better yet use `-XX:MinRAMPercentage=40` and `-XX:MaxRAMPercentage=70`.
 The reason for this is that the JVM itself uses quite some memory, and some java libs might also use a lot of off-heap memory.
@@ -291,10 +300,6 @@ Examples:
 - Shipping logs (eg: [fluentd](https://github.com/fluent/fluentd-kubernetes-daemonset) daemon)
 - k8s [Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 
 - Config update (eg: checking an HTTP endpoint and updating the *ConfigMap* when a new config is available)
-
-## Container Image
-
-Refer to: [Docker Best Practices](../../os/linux/docker.md)
 
 ## Testing
 
