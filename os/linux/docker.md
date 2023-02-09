@@ -59,13 +59,88 @@ A container exits when its main process exits.
 
 # Best practices
 
-1. Minimize the size of the docker build context by using the `.dockerignore` file
-2. Make use of the image layer cache
-3. Ensure OS signals are correctly handled
-4. Pin down versions
-5. Use multi stage builds
-6. Install only what is needed
-7. Dont run the container as *root*
+### 1. Minimize the docker build context 
+ 
+This can be done 
+- by excluding files via the `.dockerignore` file, see: [.dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+- by controlling the *PATH/URL* which is passed to the `docker build` command, see: []()
+
+Reducing the build context has the following advantages:
+- sending the context from the docker client to the docker daemon can be much faster
+- you dont accidentally add unwanted files into the docker image (eg: log, tmp or even credential files)
+
+See: [Build context](https://docs.docker.com/build/building/context/)
+
+### 2. Make image builds deterministic
+
+Always specify a version, and avoid using `latest` or any other mutable version or tag.
+
+This includes 2 things:
+- always use the same base image
+- always use the same version of software installed in the image
+
+About the base image:  
+
+Avoid `FROM maven` or `FROM maven:3.6.3`.
+
+Use the most specific tag `FROM maven:3.6.3-jdk-11-slim`
+or even better use `FROM maven:3.6.3-jdk-11-slim@sha256:68ce1cd457891f48d1e137c7d6a4493f60843e84c9e2634e3df1d3d5b381d36c`
+
+About specifying versions:  
+
+Avoid `apk add --no-cache git`
+
+Use `apk add --no-cache git=2.8.6-r0`
+
+### 3. Use multi stage builds
+
+The simplest and often the best way to reduce the layers in the final image and overall image size is to use [Multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
+
+### 4. Use a small base images
+
+Good starting points are [alpine](https://www.alpinelinux.org/), [distroless](https://github.com/GoogleContainerTools/distroless) or images tagged as *slim*.
+
+### 5. Install only what is needed
+
+Make the image is small as feasible/practical.
+
+Examples:
+- Use flag `apt-get --no-install-recommends xxx`
+- Remove cache of your apt manager after installation
+- Group together `RUN` commands to reduce image layers
+
+Good practice:
+```
+RUN apt-get update \
+ && apt-get -y install --no-install-recommends xxx
+ && rm -rf /var/lib/apt/lists/*
+```
+
+### 6. Make use of the image layer cache
+
+See: [Optimizing builds with cache](https://docs.docker.com/build/cache/)
+
+Order layers in a way that things that change often are put last in the image.
+
+Pseudo example:
+```
+FROM scratch
+
+RUN add changes-rarely
+RUN add changes-sometimes
+RUN add changes-often
+```
+
+Avoid wildcards in `ADD` or `COPY` commands cos they break the image cache.
+Use `COPY sample-runner /deployment/app` instead of `COPY *-runner /deployment/`.
+
+#### 7. Ensure OS signals are correctly handled
+
+
+### 8. Dont run the container as *root*
+
+Use/create a *daemon*  user with minimal privileges which runs your container. Never run your container as *root*.
+
 
 # Books
 
