@@ -6,14 +6,18 @@ Guidelines for running JVM processes inside containers/kubernetes.
 
 Refer to: [Docker Best Practices](../../os/linux/docker.md) for general image best practices
 
-#### Prefer a custom JRE
+#### 1. Prefer a custom JRE
 
-[distroless java](https://github.com/GoogleContainerTools/distroless/tree/main/java)
-[jlink](https://docs.oracle.com/javase/9/tools/jlink.htm)
+Instead of using a full JDK which includes tools like `javac`, use a base image which contains just the JRE or better yet a custom built JRE
+containing only those modules/tools that you need.
+
+- [distroless java](https://github.com/GoogleContainerTools/distroless/tree/main/java)
+- [Creating custom JRE](https://access.redhat.com/documentation/ru-ru/openjdk/11/html/using_jlink_to_customize_java_runtime_environment/creating-custom-jre)
+- [jlink](https://docs.oracle.com/javase/9/tools/jlink.htm)
 
 ## Runtime
 
-#### 1. Don't over-commit on heap memory relative to container memory limits
+#### 2. Don't over-commit on heap memory relative to container memory limits
 
 Example: container memory limit = 4GBga
 
@@ -22,19 +26,19 @@ The reason for this is that the JVM itself uses quite some memory, and some java
 Especially networking or storage libs use a lot of off-heap memory, eg: netty, lucene, fst, ehcache ...
 Those libs are found in most modern DB systems, eg: kafka, cassandra, elastic-search ...  
 
-#### 2. Prefer `-XX:MinRAMPercentage` and `-XX:MaxRAMPercentage` over `-Xms` and `-Xmx`
+#### 3. Prefer `-XX:MinRAMPercentage` and `-XX:MaxRAMPercentage` over `-Xms` and `-Xmx`
 
 Using a relative rather than absolute way of configuring heap size allows to change the memory size only in one place -> the container memory limit, 
 and the JVM heap size will adjust accordingly.
 
-#### 3. Be aware that containers that exceed memory limits might get killed
+#### 4. Be aware that containers that exceed memory limits might get killed
 
 Example: container memory limit = 4GB
 
 If u start your JVM with ```-Xmx12G``` its very likely that your process will get [OOM killed by k8s] or the [Linux OOM killer]. 
 The time when the process gets killed is rather nondeterministic, it can be on memory allocation request or only at a later point in time when the system runs short on physical memory.
 
-#### 4. Explicitly specify GC and memory pool sizes, dont rely on JVM ergonomics
+#### 5. Explicitly specify GC and memory pool sizes, dont rely on JVM ergonomics
 
 Always configure GC and heap size. If those things are not configured, the JVM will choose some defaults.
 
@@ -44,20 +48,20 @@ Its not a good idea to rely on JVM ergonomics, for 2 reasons:
 
 See [JVM default ergonomics](https://learn.microsoft.com/en-us/azure/developer/java/containers/overview)
 
-#### 5. Enable `-XX:+HeapDumpOnOutOfMemoryError` to take a heap dump on `OutOfMemoryError`
+#### 6. Enable `-XX:+HeapDumpOnOutOfMemoryError` to take a heap dump on `OutOfMemoryError`
 
 A very common source for `OutOfMemoryError` is a memory leak. Having a heap dump will almost always allow you to find this leak.
 Keep in mind that taking a heap dump of a full heap will often take several minutes!
 
 Here are some examples how to handle heap dump files in k8s: https://danlebrero.com/2018/11/20/how-to-do-java-jvm-heapdump-in-kubernetes/
 
-#### 6. Take extra caution when taking heap dumps of large heaps
+#### 7. Take extra caution when taking heap dumps of large heaps
 
 Keep in mind that full GC pauses or taking heap dumps might exceed health check timeouts. (eg: k8s liveness and readiness probes)
 
 Rough estimate for taking heap dumps of a full! heap. 1GB = 10-60sec pause, depending on compute resources.
 
-#### 7. Experiment with the granularity of JVMs in micro service architectures
+#### 8. Experiment with the granularity of JVMs in micro service architectures
 
 The JVM has quite some CPU and especially memory overhead. Startup times are often rather slow and the JVM needs a couple of minutes for code to run efficiently.
 Its especially bad in rapidly scalable systems which create and tear down containers a lot.
@@ -70,7 +74,7 @@ It should still be easy to separate them into their own JVM.
 
 ## Config
 
-#### Use environment variables
+#### 9. Use environment variables
 
 Env vars play very well with docker and k8s.
 Make sure existing config files support env var substitution.
@@ -87,7 +91,7 @@ my-app {
 }
 ```
 
-#### 5. Store config in *ConfigMaps* and credentials in *Secrets*
+#### 10. Store config in *ConfigMaps* and credentials in *Secrets*
 
 *ConfigMaps* are a great way of getting configuration injected in your container. 
 There are several ways of creating *ConfigMaps* and there are several ways of mounting *ConfigMaps* and making the config values accessible in your java app.
@@ -103,7 +107,7 @@ Examples for this are:
 - `<include>` in logback or log4j2 config files, see example [logback.xml](logback-config-include/logback.xml)
 - `include` feature of [Typesafe config]
 
-#### 6. Use a powerful application config file format
+#### 11. Use a powerful application config file format
 
 Java property files, YAML or JSON files are not very powerful config formats. They lack important features.
 
@@ -121,7 +125,7 @@ Check out [Typesafe config]
 
 ## Logging
 
-#### 7. Log environment and app info on app startup
+#### 12. Log environment and app info on app startup
 
 Its very helpful to log the following information when your app starts:
 - `Runtime.getRuntime().availableProcessors()` - to check if the JVM sees only those CPUs which are available for the container
@@ -133,7 +137,7 @@ Its very helpful to log the following information when your app starts:
 
 Libraries like [sbt-buildinfo](https://github.com/sbt/sbt-buildinfo) are very helpful here.
 
-#### 7. Log important process lifecycle events
+#### 13. Log important process lifecycle events
 
 Its a good idea to add a `ShutdownHook` which produces some log message, as the very first thing in your `main` method. 
 If you see this log message you know that the JVM is in the shutdown process.
@@ -154,7 +158,7 @@ Signal.handle(new Signal("TERM"), signalHandler);
 Signal.handle(new Signal("STOP"), signalHandler);
 ```
 
-#### 8. Include context into log messages
+#### 14. Include context into log messages
 
 - Thread name
 - Logger name
@@ -164,22 +168,22 @@ Signal.handle(new Signal("STOP"), signalHandler);
 
 Refer to the [OpenTelemetry Spec](https://opentelemetry.io/docs/reference/specification/logs/data-model/)
 
-#### 9. Make logging config updatable at runtime
+#### 15. Make logging config updatable at runtime
 
 Its immensely helpfully to turn on more verbose logging levels while your app is running.
 Both `log4j2` and `logback` support hot config reload.
 
 Again, use *ConfigMaps* to store the logging config and mount them as writable. See example [deployment.yaml](log4j2-hot-reload/deployment.yaml)
 
-#### 10. Turn on GC logging
+#### 16. Turn on GC logging
 
-#### 11. Logging via *stdout*/*stderr*
+#### 17. Logging via *stdout*/*stderr*
 
 Prefer to output your logging information to *stdout*/*stderr*. This allows for the greatest interoperability.
 
 ## Stability
 
-#### Make good use of liveness, readiness and startup probes
+#### 18. Make good use of liveness, readiness and startup probes
 
 Use startup probes if app startup is known to take long and it becomes unpractical to define readiness and liveness probes to handle those startup delays.
 See: [Protect slow starting containers with startup probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes)
@@ -203,12 +207,12 @@ Bad practices include:
 - Probes that have significant overhead on the system
 - Probes that are slow
 
-#### 5. Ensure health check timeouts are longer than expected process pauses
+#### 19. Ensure health check timeouts are longer than expected process pauses
 
 Full GC pauses or taking heap dumps might exceed health check timeouts. (eg: k8s liveness and readiness probes)
 Consider those pauses when configuring timeouts and grace periods. 
 
-#### Ensure fast app startup and shutdown times
+#### 20. Ensure fast app startup and shutdown times
 
 Its always good to have fast startup times, but fast shutdown times can be of equal importance. Slow shutdown of one service can delay the startup of new versions or replicas.
 
@@ -216,26 +220,21 @@ For startup there is a tradeoff between what you do already at startup and what 
 The biggest impact on startup time is usually the amount of class files which get loaded, its therefor good to remove all classpath dependencies which are not needed.
 There are also other things which effect/reduce startup times, eg: JIT compiler settings, Class data sharing, AOT compilation.
 
-#### Use logical names and URLs for resources
+#### 21. Use logical names and URLs for resources
 
 Use URLs and DNS names for network resources incl. storage resources.
 Using URLs instead of `java.nio.file.Path` in your code can become quite handy when switching from file based directories to cloud based object stores.
 It can make configuration more uniform and sometimes even allows to make env changes w/o changing code.
 
-#### Use the same container image for all environments
+#### 22. Use the same container image for all environments
 
 Its best to use a single image for both, *dev*, *stage* and *prod* instead of having env specific images.
 
 Tools which are needed in *dev* or *stage* should either be put in separate images or if security policies allow it, they should be included in the single image which is used in all environments.
 
-#### Make stateful app dependencies explicit
+#### 23. Prefer one process per container
 
-Examples:
-- Make the location of filesystem resources configurable
-
-#### Prefer one process per container
-
-#### Make sure the JVM is container aware
+#### 24. Make sure the JVM is container aware
 
 Check the java version and ensure it supports/respects container CPU and memory limits.
 Some old java versions require to use *-XX:+UnlockExperimentalVMOptions* and *-XX:+UseCGroupMemoryLimitForHeap*.  
@@ -244,7 +243,7 @@ Container aware versions include:
 - Java 1.8.0_191 or later
 - Java 11 or later
 
-#### Handle OS signals correctly
+#### 25. Handle OS signals correctly
 
 When running an application in docker, the first application will run with a process ID of 1 (PID=1). 
 The Linux kernel handles processes with a PID of 1 in a special way.
@@ -255,29 +254,29 @@ See also [Docker and the PID 1 zombie reaping problem](https://blog.phusion.nl/2
 There are various solutions for this, one is to use a minimal init system for your container eg: [dumb-init](https://github.com/Yelp/dumb-init)
 or use a dedicated docker image build tool for java apps eg: [jib](https://github.com/GoogleContainerTools/jib)
 
-#### Explicitly specify config parameters via command line arguments, dont rely on JVM ergonomics
+#### 26. Explicitly specify config parameters via command line arguments, dont rely on JVM ergonomics
 
 ## Security
 
-#### Run app/container as daemon user
+#### 27. Run app/container as daemon user
 
-#### Only expose ports that are required
+#### 28. Only expose ports that are required
 
-Dont put `EXPOSE` command in your image definition, some users might not need some ports to be exposed.
+Dont put `EXPOSE` commands in your image definition, some users might not need some ports to be exposed.
 Let users of the image allow themself what ports to expose when running the container.
 
 Some ports dont need to be exposed at all, they might only be used for debugging purposes when running a shell in the container.
 
 ## Tooling
 
-#### 12. Dont include tools in app image, create a dedicated image and run it as standalone container
+#### 29. Dont include debugging tools in the app image
 
 Instead of putting tools in the app container image itself, create a dedicated (java) tooling image.
 Run the tooling image on demand as a one shot container. 
 
-#### 13. JMX
+#### 30. JMX
 
-#### 14. Describe container metadata
+#### 31. Describe container metadata
 
 Make use of k8s labels and annotations, consider adding the following:
 - semantic version of application
@@ -287,7 +286,7 @@ Make use of k8s labels and annotations, consider adding the following:
 
 See: [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/)
 
-#### Implement admin, mgmt tasks as separate jobs or one shot containers
+#### 32. Implement admin, mgmt tasks as separate jobs or one shot containers
 
 Following the single responsibility or separation of concerns design philosophy, 
 its a good idea to separate tasks that are not part of the app business logic into their own image.
@@ -303,7 +302,7 @@ Examples:
 
 ## Testing
 
-#### Allow for pluggable dependency implementations
+#### 33. Allow for pluggable dependency implementations
 
 Changing to more easily usable dependencies can greatly simplify (local) testing. 
 Using just local files instead of more heavyweight systems (eg: AWS localstack, GCP BigQuery) can greatly speed up development iterations. 
@@ -313,7 +312,7 @@ Example: In the prod system your app uses a kafka compacted topic for receiving 
 If you have abstracted the config backend, it should be possible to change the implementation to receive the config from the file system instead of kafka.
 But keep in mind that you should still have a good set of integration tests, and that you should use the real/prod config impl when testing on *dev* and *stage* env. 
 
-#### Provide automation for running your app locally in the container
+#### 34. Provide automation for running your app locally in the container
 
 Most developers only test their app by running it via the build tool (eg `./mvnw spring-boot:run` or `sbt run`) because this is available out of the box.
 But this has the following important downsides:
@@ -335,7 +334,7 @@ docker run \
   -c=thomas.muster -d=2021-01-01
 ```
 
-#### Allow for running your system locally in a lightweight k8s env
+#### 35. Allow for running your system locally in a lightweight k8s env
 
 If your whole system is not too large in size (eg: compute resources), it can help to have automation in place to run everything in minikube or k3d.
 (If correctly configured) both minikube and k3d behave very closely to GKE or other managed k8s offerings.

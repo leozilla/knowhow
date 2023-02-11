@@ -63,7 +63,7 @@ A container exits when its main process exits.
  
 This can be done 
 - by excluding files via the `.dockerignore` file, see: [.dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
-- by controlling the *PATH/URL* which is passed to the `docker build` command, see: []()
+- by controlling the *PATH/URL* which is passed to the `docker build` command, see: [Build context](https://docs.docker.com/build/building/context)
 
 Reducing the build context has the following advantages:
 - sending the context from the docker client to the docker daemon can be much faster
@@ -74,35 +74,31 @@ See: [Build context](https://docs.docker.com/build/building/context/)
 ### 2. Make image builds deterministic
 
 Always specify a version, and avoid using `latest` or any other mutable version or tag.
-
-This includes 2 things:
-- always use the same base image
-- always use the same version of software installed in the image
-
-About the base image:  
+- specify the tag or image digest of the base image
+- specify the version of software installed in the image
 
 Avoid `FROM maven` or `FROM maven:3.6.3`.
 
 Use the most specific tag `FROM maven:3.6.3-jdk-11-slim`
 or even better use `FROM maven:3.6.3-jdk-11-slim@sha256:68ce1cd457891f48d1e137c7d6a4493f60843e84c9e2634e3df1d3d5b381d36c`
 
-About specifying versions:  
-
 Avoid `apk add --no-cache git`
 
-Use `apk add --no-cache git=2.8.6-r0`
+Use `apk add --no-cache git=2.8.6-r0` to always install `git` in version `2.8.6-r0`.
 
 ### 3. Use multi stage builds
 
-The simplest and often the best way to reduce the layers in the final image and overall image size is to use [Multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
+The simplest and often the best way to reduce the layers in the final image and overall image size is to use [multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
 
-### 4. Use a small base images
+### 4. Use a small base image
 
 Good starting points are [alpine](https://www.alpinelinux.org/), [distroless](https://github.com/GoogleContainerTools/distroless) or images tagged as *slim*.
+When working with java apps, take a look at [Creating custom JRE](https://access.redhat.com/documentation/ru-ru/openjdk/11/html/using_jlink_to_customize_java_runtime_environment/creating-custom-jre).
 
 ### 5. Install only what is needed
 
-Make the image is small as feasible/practical.
+Only include things which are mandatory for running your application. Group image commands together to reduce the number of image layers.
+Instead of including debugging tools in your app container, put them into a standalone container and "connect" them to your app container.
 
 Examples:
 - Use flag `apt-get --no-install-recommends xxx`
@@ -134,8 +130,9 @@ RUN add changes-often
 Avoid wildcards in `ADD` or `COPY` commands cos they break the image cache.
 Use `COPY sample-runner /deployment/app` instead of `COPY *-runner /deployment/`.
 
-#### 7. Ensure OS signals are correctly handled
+### 7. Ensure OS signals are correctly handled
 
+Ensure that OS signals are correctly forwarded to your application.
 
 ### 8. Dont run the container as *root*
 
