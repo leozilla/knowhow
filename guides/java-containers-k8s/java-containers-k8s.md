@@ -19,7 +19,7 @@ containing only those modules/tools that you need.
 
 #### 2. Don't over-commit on heap memory relative to container memory limits
 
-Example: container memory limit = 4GBga
+Example: container memory limit = 4GB
 
 Depending on the app, use about 40-70% for heap memory. eg: `-Xmx` between `1200M-2800M` or better yet use `-XX:MinRAMPercentage=40` and `-XX:MaxRAMPercentage=70`.
 The reason for this is that the JVM itself uses quite some memory, and some java libs might also use a lot of off-heap memory.
