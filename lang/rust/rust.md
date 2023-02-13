@@ -12,3 +12,7 @@
 - [warp](https://github.com/seanmonstar/warp)
 - [tide](https://github.com/http-rs/tide)
 - [rocket](https://rocket.rs/)
+
+### gRPC
+
+- [tonic](https://github.com/hyperium/tonic)

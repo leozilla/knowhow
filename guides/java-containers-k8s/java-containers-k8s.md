@@ -121,7 +121,7 @@ Use file formats like [HOCON](https://github.com/lightbend/config/blob/main/HOCO
 - Includes
 - Compatibility with well known formats like JSON
 
-Check out [Typesafe config]
+Check out [Typesafe config](https://github.com/lightbend/config)
 
 ## Logging
 
@@ -319,7 +319,7 @@ But this has the following important downsides:
 - Problems/bugs which happen when running the app in the container are caught only later (sometimes a lot later). 
   It can take a lot more time when analyzing this problems when running the app in a cloud env instead of locally.
   Finding an fixing those problems on the local machine is usually much easier.
-- If u run your app within the container you will immediately see some things which you need to make parameterizable/configurable.
+- If u run your app locally within the container you will immediately see some things which you need to make parameterizable/configurable.
 
 If u have logic in your container (eg: startup scripts) you want to test this often and have an easy way to test it.
 Try to get rid of any code outside of the container, eg: shell commands in k8s jobs before starting the container.
